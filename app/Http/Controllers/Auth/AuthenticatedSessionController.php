@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -24,11 +25,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+    $request->validate([
+        'email' => ['required', 'string', 'email'],
+        'password' => ['required', 'string'],
+    ]);
 
+    // Try to login as a regular user first
+    if (Auth::guard('web')->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        Auth::guard('seller')->logout(); // Ensure seller guard is logged out
         $request->session()->regenerate();
+        return redirect()->intended('/dashboard');
+    }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+    // Only try seller if user login failed
+    if (Auth::guard('seller')->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        Auth::guard('web')->logout(); // Ensure user guard is logged out
+        $request->session()->regenerate();
+        return redirect()->intended('/sellerdashboard');
+    }
+
+    // If neither, return error
+    return back()->withErrors([
+        'email' => __('auth.failed'),
+    ]);
     }
 
     /**

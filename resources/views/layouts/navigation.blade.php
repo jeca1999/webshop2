@@ -4,17 +4,19 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <h1 class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" > 3ELLLE</h1>
-                    </a>
-                </div>
+               <div class="shrink-0 flex items-center">
+    <a href="{{ url('/') }}">
+        <h1 class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"> 3ELLLE</h1>
+    </a>
+</div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                   
+
+                    <x-nav-link :href="route('sellerdashboard')" :active="request()->routeIs('sellerdashboard')">
+                    {{ __('Dashboard') }}
+                </x-nav-link>
                 </div>
             </div>
 
@@ -34,9 +36,17 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        @if(Auth::guard('web')->check())
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endif
+
+                        @if(Auth::guard('seller')->check())
+                            <x-dropdown-link :href="route('seller.profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

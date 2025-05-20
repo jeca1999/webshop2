@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SellerProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,8 +18,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth:seller')->prefix('seller')->name('seller.')->group(function () {
+    Route::get('/profile', [SellerProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [SellerProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [SellerProfileController::class, 'destroy'])->name('profile.destroy');
+});
 Route::get('welcome', function () {  return view('welcome');})->name('welcome');
 Route::get('/shop', function () {  return view('shop');})->name('shop');
 Route::get('/prototype', function () {  return view('prototype');})->name('prototype');
 Route::get('/comission', function () {  return view('comission');})->name('comission');
 require __DIR__.'/auth.php';
+
+
+Route::get('/sellerdashboard', function () {
+    return view('sellerdashboard');
+})->middleware('auth:seller')->name('sellerdashboard');
