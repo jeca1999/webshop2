@@ -31,7 +31,7 @@ class SellerProfileController extends Controller
             $seller->password = Hash::make($request->password);
         }
 
-        $seller->save(); // ✅ save() recognized now
+        $seller->save(); 
 
         return back()->with('status', 'Profile updated!');
     }
