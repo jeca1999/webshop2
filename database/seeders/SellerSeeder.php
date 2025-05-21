@@ -14,7 +14,7 @@ class SellerSeeder extends Seeder
      */
     public function run(): void
     {
-        Seller::create([
+        Seller::updateOrCreate([
             'email' => '3ELLEFRITZ@gmail.com',
             'password' => Hash::make('Fritzelle'),
             'role' => 'seller',
