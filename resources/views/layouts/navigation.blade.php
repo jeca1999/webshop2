@@ -12,11 +12,27 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                   
-
-                    <x-nav-link :href="route('sellerdashboard')" :active="request()->routeIs('sellerdashboard')">
-                    {{ __('Dashboard') }}
-                </x-nav-link>
+                    @if(Auth::guard('seller')->check())
+                        <x-nav-link :href="route('seller.dashboard')" :active="request()->routeIs('seller.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('seller.products')" :active="request()->routeIs('seller.products')">
+                            {{ __('Products') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('seller.messages')" :active="request()->routeIs('seller.messages')">
+                            {{ __('Messages') }}
+                        </x-nav-link>
+                    @elseif(Auth::guard('web')->check())
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+                            {{ __('Cart') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
+                            {{ __('Orders') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

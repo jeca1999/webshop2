@@ -72,117 +72,11 @@
 
 <!-- MATS -->
 <section class="relative h-screen overflow-hidden dark:text-white">
-  <div id="mats-slider" class="flex transition-transform duration-500 h-full">
+  <h2 class="text-2xl font-bold text-center mb-6 mt-10">Mats</h2>
 
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-gray-700 flex items-center justify-center">
-        <span class="text-4xl">Mat 1</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Mat 1 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$19.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-gray-600 flex items-center justify-center">
-        <span class="text-4xl">Mat 2</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Mat 2 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$24.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-gray-600 flex items-center justify-center">
-        <span class="text-4xl">Mat 3</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Mat 3 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$24.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-gray-600 flex items-center justify-center">
-        <span class="text-4xl">Mat 4</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Mat 4 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$24.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-gray-600 flex items-center justify-center">
-        <span class="text-4xl">Mat 5</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Mat 5 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$24.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-gray-600 flex items-center justify-center">
-        <span class="text-4xl">Mat 6</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Mat 6 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$24.99</p>
-    </div>
-  
-  </div>
-
-  <!-- Pagination  -->
-  <div id="mats-dots" class="absolute bottom-10 w-full flex justify-center space-x-4"></div>
 </section>
 
-<!-- Shirts/Hoodies Intro -->
-<div class="flex flex-col items-center justify-center mt-10 h-screen">
-     <h2 class="text-center text-5xl dark:text-white mb-5">Shirts/Hoodies</h2>
-     <p class="text-3xl dark:text-white">High quality and comfy shirts and hoodies customised in your design!</p>
-</div>
-
-<!-- SHIRTS/HOODIES -->
-<section class="relative h-screen overflow-hidden dark:text-white">
-  <div id="shirts-slider" class="flex transition-transform duration-500 h-full">
-  
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-blue-700 flex items-center justify-center">
-        <span class="text-4xl">Shirt 1</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Shirt 1 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$29.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-blue-600 flex items-center justify-center">
-        <span class="text-4xl">Hoodie 1</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Hoodie 1 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$39.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-blue-600 flex items-center justify-center">
-        <span class="text-4xl">Shirt 2</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Shirt 2 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$39.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-blue-600 flex items-center justify-center">
-        <span class="text-4xl"> Hoodie 2 </span>
-      </div>
-      <h2 class="text-2xl font-bold ">Hoodie 2 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$39.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-blue-600 flex items-center justify-center">
-        <span class="text-4xl">Shirt 3</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Shirt 3 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$39.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-blue-600 flex items-center justify-center">
-        <span class="text-4xl">Hoodie 3</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Hoodie 3 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$39.99</p>
-    </div>
-   
-  </div>
-
-  <!-- Pagination -->
-  <div id="shirts-dots" class="absolute bottom-10 w-full flex justify-center space-x-4"></div>
-</section>
-
-<!-- Mats Intro -->
+<!-- Pins Intro -->
 <div class="flex flex-col items-center justify-center mt-10 h-screen">
      <h2 class="text-center text-5xl dark:text-white mb-5">Pins</h2>
      <p class="text-3xl dark:text-white">Have your own pin collections of your favorite characters!</p>
@@ -190,103 +84,18 @@
 
 <!-- PINS  -->
 <section class="relative h-screen overflow-hidden dark:text-white">
-  <div id="pins-slider" class="flex transition-transform duration-500 h-full">
-   
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-green-700 flex items-center justify-center">
-        <span class="text-4xl">Pin 1</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Pin 1 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$9.99</p>
-    </div>
-    <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-green-600 flex items-center justify-center">
-        <span class="text-4xl">Pin 2</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Pin 2 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$11.99</p>
-    </div>
-     <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-green-600 flex items-center justify-center">
-        <span class="text-4xl">Pin 3</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Pin 3 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$11.99</p>
-    </div>
-     <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-green-600 flex items-center justify-center">
-        <span class="text-4xl">Pin 4</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Pin 4 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$11.99</p>
-    </div>
-     <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-green-600 flex items-center justify-center">
-        <span class="text-4xl">Pin 5</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Pin 5 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$11.99</p>
-    </div>
-     <div class="min-w-full flex flex-col items-center justify-center">
-      <div class="w-full h-3/4 bg-green-600 flex items-center justify-center">
-        <span class="text-4xl">Pin 6</span>
-      </div>
-      <h2 class="text-2xl font-bold ">Pin 6 Name</h2>
-      <p class="text-lg text-gray-400 mb-2">$11.99</p>
-    </div>
-  
-  </div>
-
-  <!-- Pagination -->
-  <div id="pins-dots" class="absolute bottom-10 w-full flex justify-center space-x-4"></div>
+  <h2 class="text-2xl font-bold text-center mb-6 mt-10">Pins</h2>
+ 
 </section>
 
-
-<script>
-function createSlider(sliderId, dotsId, totalSlides) {
-  const slider = document.getElementById(sliderId);
-  const dotsContainer = document.getElementById(dotsId);
-
-  let currentSlide = 0;
-
-  function goToSlide(index) {
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    Array.from(dotsContainer.children).forEach(dot => dot.classList.remove('bg-white'));
-    dotsContainer.children[index].classList.add('bg-white');
-  }
-
-  // Create pagination dots dynamically (sakit sa ulo)
-  for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement('div');
-    dot.className = "w-3 h-3 bg-gray-500 rounded-full cursor-pointer transition-all";
-    dot.addEventListener('click', () => {
-      currentSlide = i;
-      goToSlide(currentSlide);
-    });
-    dotsContainer.appendChild(dot);
-  }
-
-  goToSlide(0); // Initialize at first slide
-}
-
-// Initialize sliders
-createSlider('mats-slider', 'mats-dots', 6);
-createSlider('shirts-slider', 'shirts-dots', 6);
-createSlider('pins-slider', 'pins-dots', 6);
-</script>
-
-
 <!-- Info Section -->
-<div class="flex flex-col items-center justify-center min-h-screen dark:text-white gap-y-10">
-  
+<div class="flex flex-col items-center justify-center min-h-screen dark:text-white gap-y-10 mt-10">
   <!-- Top Section: 3ELLLE + Socials + Policies -->
   <div class="flex justify-center gap-x-56">
-    
     <div class="flex flex-col gap-4">
       <h2 class="text-xl font-bold">3ELLLE</h2>
       <p>Turning Imagination into Art</p>
     </div>
-
     <div class="flex flex-col gap-2">
       <h2 class="mb-4 font-bold text-xl">Socials</h2>
       <a href="https://www.instagram.com/3ellle/" target="_blank">Instagram</a>
@@ -294,7 +103,6 @@ createSlider('pins-slider', 'pins-dots', 6);
       <a href="https://www.tumblr.com/3ellle" target="_blank">Tumblr</a>
       <a href="https://www.pinterest.com/3ellle" target="_blank">Pinterest</a>
     </div>
-
     <div class="flex flex-col gap-2">
       <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
       <a href="#">Find my order</a>
@@ -302,9 +110,7 @@ createSlider('pins-slider', 'pins-dots', 6);
       <a href="#">Privacy and Policy</a>
       <a href="#">Terms of service</a>
     </div>
-
   </div>
-
   <!-- Newsletter -->
   <div class="flex flex-col items-center mt-11">
     <h2 class="mb-4 font-bold text-xl">Newsletter</h2>
@@ -314,13 +120,12 @@ createSlider('pins-slider', 'pins-dots', 6);
       <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Subscribe</button>
     </form>
   </div>
-
 </div>
 
-  </footer>
+  <footer>
       
         <h2 class="dark:text-white text-center"> Copyright 3ELLLE 2025</h2>
-    </body>
+  </footer>
     
  </body>
 </html>

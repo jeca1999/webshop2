@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
 
 
 class SellerProfileController extends Controller
@@ -27,11 +27,15 @@ class SellerProfileController extends Controller
         ]);
 
         $seller->email = $request->email;
-        if ($request->password) {
-            $seller->password = Hash::make($request->password);
+
+        if ($request->filled('password')) {
+            $seller->password = $request->password; // The mutator will hash it
         }
 
-        $seller->save(); // ✅ save() recognized now
+        $seller->save();
+
+        // Re-authenticate seller if email was changed
+        Auth::guard('seller')->login($seller);
 
         return back()->with('status', 'Profile updated!');
     }
