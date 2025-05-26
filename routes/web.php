@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerProfileController;
-use App\Models\Product;
+
 
 //returns to index page
 Route::get('/', function () {
