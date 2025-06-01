@@ -124,5 +124,93 @@
   </footer>
       
         <h2 class="dark:text-white text-center"> Copyright 3ELLLE 2025</h2>
+
+        <!-- Floating Messaging Icon -->
+        <div class="fixed bottom-5 right-5">
+            @auth
+                <a href="{{ route('messages') }}" class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700">
+                    💬
+                </a>
+            @else
+                <a href="{{ route('register') }}" class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700"
+                   onclick="alert('Please register or log in first to use the messaging feature!');">
+                    💬
+                </a>
+            @endauth
+        </div>
+
+        <div id="messaging-icon" class="fixed bottom-4 right-4 bg-blue-600 text-white p-4 rounded-full shadow-lg cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.806 9-8.5S16.97 3.25 12 3.25 3 7.056 3 11.75c0 1.61.53 3.11 1.44 4.35L3 20.25l4.5-1.5c1.11.5 2.34.75 3.5.75z" />
+    </svg>
+</div>
+
+<div id="messaging-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">Message Seller</h3>
+            <button id="close-messaging-modal" class="text-gray-500 hover:text-gray-700">&times;</button>
+        </div>
+        <div id="messages-container" class="h-64 overflow-y-auto border border-gray-300 rounded-lg p-4 mb-4">
+            <!-- Messages will be dynamically loaded here -->
+        </div>
+        <form id="message-form" action="{{ route('send.message') }}" method="POST">
+            @csrf
+            <textarea name="message" id="message-input" rows="3" required
+                class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Type your message here..."></textarea>
+            <button type="submit"
+                class="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                Send
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const messagingIcon = document.getElementById('messaging-icon');
+        const messagingModal = document.getElementById('messaging-modal');
+        const closeMessagingModal = document.getElementById('close-messaging-modal');
+
+        messagingIcon.addEventListener('click', function () {
+            messagingModal.classList.remove('hidden');
+        });
+
+        closeMessagingModal.addEventListener('click', function () {
+            messagingModal.classList.add('hidden');
+        });
+
+        // Fetch and display messages dynamically
+        async function fetchMessages() {
+            const response = await fetch('{{ route('fetch.messages') }}');
+            const messages = await response.json();
+            const messagesContainer = document.getElementById('messages-container');
+            messagesContainer.innerHTML = '';
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'mb-2 p-2 rounded-lg bg-blue-100 dark:bg-blue-800';
+                messageElement.textContent = message.content;
+                messagesContainer.appendChild(messageElement);
+            });
+        }
+
+        fetchMessages();
+
+        // Handle form submission
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('message-input');
+        messageForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(messageForm);
+            await fetch(messageForm.action, {
+                method: 'POST',
+                body: formData,
+            });
+            messageInput.value = '';
+            fetchMessages();
+        });
+    });
+</script>
     </body>
 </html>

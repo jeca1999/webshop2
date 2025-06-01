@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $products = Product::where('seller_id', auth('seller')->id())->get();
+        return view('products', compact('products'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -76,4 +82,26 @@ class ProductController extends Controller
         $product->update($data);
         return redirect()->route('seller.products')->with('success', 'Product updated successfully!');
     }
+
+public function shop()
+{
+    $products = Product::where('is_approved', true)
+        ->orderBy('category')
+        ->orderBy('subcategory')
+        ->get()
+        ->groupBy(['category', 'subcategory']);
+
+    return view('shop', compact('products'));
+}
+public function prototype()
+{
+    $products = Product::where('is_approved', true)
+        ->orderBy('category')
+        ->orderBy('subcategory')
+        ->get()
+        ->groupBy(['category', 'subcategory']);
+
+    
+    return view('prototype', compact('products'));
+}
 }

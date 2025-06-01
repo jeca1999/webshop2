@@ -30,7 +30,7 @@
                             <input id="hidden-product-image-input" name="image" type="file" accept="image/png, image/jpeg" class="hidden" />
                             <div class="mb-6 relative w-full">
                                 <input type="text" name="name" id="product-name" required
-                                    class="peer block w-full pt-10 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0"
+                                    class="peer block w-full pt-10 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" " />
                                 <label for="product-name"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -39,7 +39,7 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <textarea name="description" id="product-description" required rows="3"
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base resize-none border-l-0 border-t-0 border-r-0"
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base resize-none border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" "></textarea>
                                 <label for="product-description"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <input type="number" name="price" id="product-price" required step="0.01" min="0"
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0"
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" " />
                                 <label for="product-price"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <input type="text" name="size" id="product-size" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0"
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" " />
                                 <label for="product-size"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -67,9 +67,9 @@
                             <div class="mb-6 relative w-full">
                                 <select name="category" id="product-category" required
                                     class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
-                                    <option value="shop" class="text-black">{{ __('Shop') }}</option>
-                                    <option value="prototype" class="text-black">{{ __('Prototype') }}</option>
-                                    <option value="comissions" class="text-black">{{ __('Comissions') }}</option>
+                                    <option value="shop" class="text-white">{{ __('Shop') }}</option>
+                                    <option value="prototype" class="text-white">{{ __('Prototype') }}</option>
+                                    <option value="comissions" class="text-white">{{ __('Comissions') }}</option>
                                 </select>
                                 <label for="product-category"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -79,10 +79,7 @@
                             <div class="mb-6 relative w-full">
                                 <select name="subcategory" id="product-subcategory" required
                                     class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
-                                    <option value="" disabled selected hidden class="text-black"></option>
-                                    <option value="paintings" class="text-black">Paintings</option>
-                                    <option value="sculptures" class="text-black">Sculptures</option>
-                                    <option value="prints" class="text-black">Prints</option>
+                                    <option value="" disabled selected hidden class="text-white"></option>
                                 </select>
                                 <label for="product-subcategory"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -186,9 +183,9 @@
       <div>
         <label for="edit-product-category" class="block mb-1 text-sm font-medium text-white">Category</label>
         <select name="category" id="edit-product-category" class="w-full rounded-md bg-gray-800 border border-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="shop" class="text-white">Shop</option>
-          <option value="prototype" class="text-white">Prototype</option>
-          <option value="comissions" class="text-white">Comissions</option>
+          <option value="shop" class="text-black dark">Shop</option>
+          <option value="prototype" class="text-black">Prototype</option>
+          <option value="comissions" class="text-black">Comissions</option>
         </select>
       </div>
       <div>
@@ -216,15 +213,6 @@
 .animate-fade-in {
   animation: fade-in 0.2s ease;
 }
-
-
-#product-subcategory { color: white; }
-#product-subcategory option { color: black; }
-#product-subcategory:focus { color: white; }
-
-#product-category { color: white; }
-#product-category option { color: black; }
-#product-category:focus { color: white; }
 </style>
 <script src="/js/products.js"></script>
 @if(session('success'))

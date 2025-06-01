@@ -24,31 +24,34 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
+{
     $request->validate([
         'email' => ['required', 'string', 'email'],
         'password' => ['required', 'string'],
     ]);
 
-    // Try to login as a regular user first
-    if (Auth::guard('web')->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-        Auth::guard('seller')->logout(); // Ensure seller guard is logged out
+    $credentials = $request->only('email', 'password');
+    $remember = $request->boolean('remember');
+
+    // 🔁 Try seller FIRST
+    if (Auth::guard('seller')->attempt($credentials, $remember)) {
+        Auth::guard('web')->logout();
         $request->session()->regenerate();
-        return redirect()->intended('/dashboard');
+        return redirect('/seller/dashboard');
     }
 
-    // Only try seller if user login failed
-    if (Auth::guard('seller')->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-        Auth::guard('web')->logout(); // Ensure user guard is logged out
+    // Then try regular user
+    if (Auth::guard('web')->attempt($credentials, $remember)) {
+        Auth::guard('seller')->logout();
         $request->session()->regenerate();
-        return redirect()->intended('/sellerdashboard');
+        return redirect('/dashboard');
     }
 
-    // If neither, return error
     return back()->withErrors([
         'email' => __('auth.failed'),
     ]);
-    }
+}
+
 
     /**
      * Destroy an authenticated session.
@@ -56,6 +59,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+            Auth::guard('seller')->logout();
 
         $request->session()->invalidate();
 
