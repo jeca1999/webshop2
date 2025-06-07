@@ -159,22 +159,103 @@
     <div class="bg-gray-300 w-56 h-20 flex items-center justify-center rounded-md text-black">Coupon 2 </div>
   </div>
 </div>
-<div>
-  <!-- Paintings -->
+
+<!-- Deduplication array for all sections -->
+@php $shownIds = []; @endphp
+<!-- Paintings -->
 <div class="relative h-screen py-10 dark:text-white flex flex-col justify-between overflow-hidden">
   <h2 class="text-2xl font-bold text-center mb-6 mt-10">Paintings</h2>
+  <div class="flex flex-wrap justify-center gap-8">
+    @foreach($products as $groupedProducts)
+      @php
+        $first = $groupedProducts[0] ?? null;
+      @endphp
+      @if($first && $first->category === 'shop' && $first->subcategory === 'paintings')
+        @foreach($groupedProducts as $product)
+          @if(!in_array($product->id, $shownIds))
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+              @if($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+              @else
+                <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+                  <span class="text-4xl">🖼️</span>
+                </div>
+              @endif
+              <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
+              <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
+              <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
+            </div>
+            @php $shownIds[] = $product->id; @endphp
+          @endif
+        @endforeach
+      @endif
+    @endforeach
+  </div>
 </div>
 
 <!-- Sketches -->
 <div class="relative h-screen py-10 dark:text-white flex flex-col justify-between overflow-hidden">
   <h2 class="text-2xl font-bold text-center mb-6 mt-10">Sketches</h2>
- 
+  <div class="flex flex-wrap justify-center gap-8">
+    @foreach($products as $groupedProducts)
+      @php
+        $first = $groupedProducts[0] ?? null;
+      @endphp
+      @if($first && $first->category === 'shop' && $first->subcategory === 'sketches')
+        @foreach($groupedProducts as $product)
+          @if(!in_array($product->id, $shownIds))
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+              @if($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+              @else
+                <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+                  <span class="text-4xl">🖼️</span>
+                </div>
+              @endif
+              <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
+              <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
+              <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
+            </div>
+            @php $shownIds[] = $product->id; @endphp
+          @endif
+        @endforeach
+      @endif
+    @endforeach
+  </div>
 </div>
 
 <!-- Digital Arts --> 
 <div class="relative h-screen py-10 dark:text-white flex flex-col justify-between overflow-hidden">
   <h2 class="text-2xl font-bold text-center mb-6 mt-10">Digital Arts</h2>
-  
+  <div class="flex flex-wrap justify-center gap-8">
+    @foreach($products as $groupedProducts)
+      @php
+        $first = $groupedProducts[0] ?? null;
+      @endphp
+      @if($first && $first->category === 'shop' && $first->subcategory === 'digital arts')
+        @foreach($groupedProducts as $product)
+          @if(!in_array($product->id, $shownIds))
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+              @if($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+              @else
+                <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+                  <span class="text-4xl">🖼️</span>
+                </div>
+              @endif
+              <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
+              <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
+              <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
+            </div>
+            @php $shownIds[] = $product->id; @endphp
+          @endif
+        @endforeach
+      @endif
+    @endforeach
+  </div>
 </div>
 
 <!-- Info Section -->

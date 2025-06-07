@@ -18,5 +18,7 @@ class Product extends Model
     'category',
     'subcategory',
     'is_approved',
+    'size',
+    'seller_id',
     ];
 }

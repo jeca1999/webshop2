@@ -20,17 +20,16 @@
                                             d="M8 32V40a4 4 0 004 4h24a4 4 0 004-4V32M32 16l-8-8-8 8M24 8v24" />
                                     </svg>
                                     <span class="text-gray-600 dark:text-gray-300 mb-2 z-10 pointer-events-none">Drag & drop an image here, or click to select</span>
-                                    <input id="product-image-input" name="image" type="file" accept="image/png, image/jpeg" class="hidden" />
-                                    <img id="preview-image" class="absolute inset-0 w-full h-full object-contain m-auto rounded z-20 hidden bg-white/80" />
+                                    <input id="product-image-input" name="image" type="file" accept="image/png, image/jpeg" />
+                                    <img id="preview-image" class="absolute inset-0 w-full h-full object-cover m-auto rounded z-20 hidden bg-white/80" />
                                 </div>
                             </div>
                         </div>
-                        <form id="image-upload-form" action="{{ route('seller.products') }}" method="POST" enctype="multipart/form-data" class="w-full md:w-1/2 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
+                        <form id="image-upload-form" action="{{ route('seller.products.store') }}" method="POST" enctype="multipart/form-data" class="w-full md:w-1/2 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
                             @csrf
-                            <input id="hidden-product-image-input" name="image" type="file" accept="image/png, image/jpeg" class="hidden" />
                             <div class="mb-6 relative w-full">
                                 <input type="text" name="name" id="product-name" required
-                                    class="peer block w-full pt-10 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
+                                    class="peer block w-full pt-10 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" " />
                                 <label for="product-name"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -39,7 +38,7 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <textarea name="description" id="product-description" required rows="3"
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base resize-none border-l-0 border-t-0 border-r-0 text-white"
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base resize-none border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" "></textarea>
                                 <label for="product-description"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -48,7 +47,7 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <input type="number" name="price" id="product-price" required step="0.01" min="0"
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" " />
                                 <label for="product-price"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -57,7 +56,7 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <input type="text" name="size" id="product-size" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
                                     placeholder=" " />
                                 <label for="product-size"
                                     class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
@@ -66,23 +65,23 @@
                             </div>
                             <div class="mb-6 relative w-full">
                                 <select name="category" id="product-category" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
-                                    <option value="shop" class="text-white">{{ __('Shop') }}</option>
-                                    <option value="prototype" class="text-white">{{ __('Prototype') }}</option>
-                                    <option value="comissions" class="text-white">{{ __('Comissions') }}</option>
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
+                                    <option value="shop" class="text-black bg-white">{{ __('Shop') }}</option>
+                                    <option value="prototype" class="text-black bg-white">{{ __('Prototype') }}</option>
+                                    <option value="comissions" class="text-black bg-white">{{ __('Comissions') }}</option>
                                 </select>
                                 <label for="product-category"
-                                    class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                    class="absolute left-3 top-1 text-gray-500 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
                                     {{ __('Category') }}
                                 </label>
                             </div>
                             <div class="mb-6 relative w-full">
                                 <select name="subcategory" id="product-subcategory" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
-                                    <option value="" disabled selected hidden class="text-white"></option>
+                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
+                                    <option value="" disabled selected hidden class="text-black bg-white"></option>
                                 </select>
                                 <label for="product-subcategory"
-                                    class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                    class="absolute left-3 top-1 text-gray-500 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
                                     {{ __('Subcategory') }}
                                 </label>
                             </div>
@@ -118,12 +117,18 @@
                     data-product-category="{{ $product->category }}"
                     data-product-image="{{ $product->image ? asset('storage/' . $product->image) : '' }}">
                     @if($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700" />
+                        <img src="{{ asset('storage/' . ltrim($product->image, '/')) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700" />
                     @else
-                        <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+                        <div class="w-16 h-16 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
                             <span class="text-4xl">🖼️</span>
                         </div>
                     @endif
+                    <div class="text-xs text-left bg-yellow-100 text-yellow-800 rounded p-2 mt-1 w-full break-all">
+                        <strong>Debug:</strong><br>
+                        <span>DB path: <code>{{ $product->image }}</code></span><br>
+                        <span>URL: <code>{{ asset('storage/' . ltrim($product->image ?? '', '/')) }}</code></span><br>
+                        <span>Exists: <code>{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image ?? '') ? 'yes' : 'no' }}</code></span>
+                    </div>
                     <h4 class="text-lg font-semibold mb-2">{{ $product->name }}</h4>
                     <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
@@ -213,8 +218,87 @@
 .animate-fade-in {
   animation: fade-in 0.2s ease;
 }
+
+/* Force light mode and black text for dropdowns */
+select#product-category, select#product-subcategory, select#edit-product-category, select#edit-product-subcategory {
+  background-color: transparent !important;
+  color: #fff !important;
+  border-color: #ccc !important;
+  box-shadow: none !important;
+  border-bottom-width: 2px !important;
+  border-left: 0 !important;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  padding-top: 1.25rem !important;
+  padding-bottom: 0.5rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+select#product-category option, select#product-subcategory option,
+select#edit-product-category option, select#edit-product-subcategory option {
+  background: #222 !important;
+  color: #fff !important;
+}
+.dark select#product-category, .dark select#product-subcategory,
+.dark select#edit-product-category, .dark select#edit-product-subcategory {
+  background-color: transparent !important;
+  color: #fff !important;
+}
 </style>
 <script src="/js/products.js"></script>
+<script>
+// Dynamic subcategory logic
+const subcategories = {
+  shop: ['paintings', 'sketches', 'digital arts'],
+  prototype: ['mats', 'pins'],
+  comissions: []
+};
+
+function updateSubcategories(categorySelectId, subcategorySelectId) {
+  const cat = document.getElementById(categorySelectId).value;
+  const subcatSelect = document.getElementById(subcategorySelectId);
+  subcatSelect.innerHTML = '';
+  if (subcategories[cat]) {
+    subcategories[cat].forEach(sub => {
+      const opt = document.createElement('option');
+      opt.value = sub;
+      opt.textContent = sub.charAt(0).toUpperCase() + sub.slice(1);
+      opt.style.color = '#111';
+      opt.style.background = '#fff';
+      subcatSelect.appendChild(opt);
+    });
+  } else {
+    const opt = document.createElement('option');
+    opt.value = '';
+    opt.textContent = 'No subcategories';
+    opt.style.color = '#111';
+    opt.style.background = '#fff';
+    subcatSelect.appendChild(opt);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // For create form
+  const catSel = document.getElementById('product-category');
+  const subcatSel = document.getElementById('product-subcategory');
+  if (catSel && subcatSel) {
+    catSel.addEventListener('change', function() {
+      updateSubcategories('product-category', 'product-subcategory');
+    });
+    updateSubcategories('product-category', 'product-subcategory');
+  }
+  // For edit modal
+  const editCatSel = document.getElementById('edit-product-category');
+  const editSubcatSel = document.getElementById('edit-product-subcategory');
+  if (editCatSel && editSubcatSel) {
+    editCatSel.addEventListener('change', function() {
+      updateSubcategories('edit-product-category', 'edit-product-subcategory');
+    });
+    // Optionally, update on modal open with current value
+    updateSubcategories('edit-product-category', 'edit-product-subcategory');
+  }
+});
+</script>
 @if(session('success'))
     <div class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-out">
         {{ session('success') }}

@@ -70,9 +70,13 @@ Route::get('/seller/messages', function () {
     })->middleware('auth:seller')->name('seller.messages');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.delete');
 Route::delete('/seller/products/{product}', [ProductController::class, 'destroy'])->name('seller.products.delete');
+Route::post('/seller/products', [ProductController::class, 'store'])->middleware('auth:seller')->name('seller.products.store');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::post('/seller/products', [ProductController::class, 'store'])->name('seller.products.store');
 Route::get('/client/dashboard', function () {
     return view('dashboard');
     
 })->middleware(['auth', 'verified'])->name('client.dashboard');
+
+Route::get('/test-approved-products', function () {
+    return App\Models\Product::where('is_approved', true)->get();
+});

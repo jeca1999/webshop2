@@ -14,6 +14,15 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+
+        <style>
+          /* Force dropdowns to use light mode and black text */
+          .force-light select,
+          .force-light select option {
+            color: #111 !important;
+            background: #fff !important;
+          }
+        </style>
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18]  p-6 lg:p-8 items-center lg:justify-center min-h-screen  scroll-smooth ">
         <!--header--> 
@@ -70,10 +79,36 @@
      <p class="text-3xl dark:text-white">Get our art works printed on high quality mats!</p>
 </div>
 
+<!-- Deduplication array for all sections -->
+@php
+// Flatten the grouped products array for display
+$flatProducts = collect($products)->flatten(2);
+$shownIds = [];
+@endphp
+
 <!-- MATS -->
 <section class="relative h-screen overflow-hidden dark:text-white">
   <h2 class="text-2xl font-bold text-center mb-6 mt-10">Mats</h2>
-
+  <div class="flex flex-wrap justify-center gap-8">
+    @foreach($flatProducts as $product)
+      @if(isset($product->subcategory) && strtolower($product->subcategory) === 'mats' && !in_array($product->id, $shownIds))
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+          @if($product->image)
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+          @else
+            <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+              <span class="text-4xl">🖼️</span>
+            </div>
+          @endif
+          <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
+          <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
+          <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
+        </div>
+        @php $shownIds[] = $product->id; @endphp
+      @endif
+    @endforeach
+  </div>
 </section>
 
 <!-- Pins Intro -->
@@ -85,7 +120,26 @@
 <!-- PINS  -->
 <section class="relative h-screen overflow-hidden dark:text-white">
   <h2 class="text-2xl font-bold text-center mb-6 mt-10">Pins</h2>
- 
+  <div class="flex flex-wrap justify-center gap-8">
+    @foreach($flatProducts as $product)
+      @if(isset($product->subcategory) && strtolower($product->subcategory) === 'pins' && !in_array($product->id, $shownIds))
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+          @if($product->image)
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+          @else
+            <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+              <span class="text-4xl">🖼️</span>
+            </div>
+          @endif
+          <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
+          <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
+          <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
+        </div>
+        @php $shownIds[] = $product->id; @endphp
+      @endif
+    @endforeach
+  </div>
 </section>
 
 <!-- Info Section -->
@@ -112,13 +166,12 @@
     </div>
   </div>
   <!-- Newsletter -->
-  <div class="flex flex-col items-center mt-11">
+  <div class="flex flex-col items-center mt-11 force-light" style="color-scheme: light;">
     <h2 class="mb-4 font-bold text-xl">Newsletter</h2>
     <p class="text-center max-w-md">Subscribe to our newsletter for the latest updates on new artworks.</p>
-    <form action="" method="POST" class="flex flex-col gap-2 mt-4 w-full max-w-sm">
-      <input type="email" name="email" placeholder="Enter your email" required class="border border-gray-300 rounded-md p-2">
-      <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Subscribe</button>
-    </form>
+    <form action="#" method="POST" class="mt-4">
+      <input type="email" name="email" placeholder="Enter your email" required class="px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
+      <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Subscribe</button>
   </div>
 </div>
 
