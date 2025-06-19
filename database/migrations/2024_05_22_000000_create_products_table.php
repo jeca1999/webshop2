@@ -1,5 +1,4 @@
 <?php
-// database/migrations/2024_05_22_000000_create_products_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +13,13 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 2);
-            $table->string('size')->nullable(); // Make size nullable
+            $table->string('size')->nullable();
             $table->string('category');
+            $table->string('subcategory')->nullable(); // Optional subcategory
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('seller_id');
+            $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade');
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
-
-            $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
         });
     }
 

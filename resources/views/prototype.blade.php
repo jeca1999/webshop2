@@ -92,18 +92,14 @@ $shownIds = [];
   <div class="flex flex-wrap justify-center gap-8">
     @foreach($flatProducts as $product)
       @if(isset($product->subcategory) && strtolower($product->subcategory) === 'mats' && !in_array($product->id, $shownIds))
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+        <div class="w-64 cursor-pointer" onclick="showProductModal(@json($product))">
           @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
           @else
-            <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+            <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
               <span class="text-4xl">🖼️</span>
             </div>
           @endif
-          <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
-          <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
-          <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
         </div>
         @php $shownIds[] = $product->id; @endphp
       @endif
@@ -123,24 +119,52 @@ $shownIds = [];
   <div class="flex flex-wrap justify-center gap-8">
     @foreach($flatProducts as $product)
       @if(isset($product->subcategory) && strtolower($product->subcategory) === 'pins' && !in_array($product->id, $shownIds))
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center w-64">
+        <div class="w-64 cursor-pointer" onclick="showProductModal(@json($product))">
           @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-24 object-contain rounded mb-2 bg-white border border-gray-200 dark:border-gray-700" />
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
           @else
-            <div class="w-32 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
+            <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
               <span class="text-4xl">🖼️</span>
             </div>
           @endif
-          <h4 class="text-lg font-semibold mb-2 text-black dark:text-white">{{ $product->name }}</h4>
-          <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
-          <p class="text-xl font-bold text-black dark:text-white mb-2">{{ $product->price }} €</p>
         </div>
         @php $shownIds[] = $product->id; @endphp
       @endif
     @endforeach
   </div>
 </section>
+
+<!-- Product Modal -->
+<div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-lg w-full relative flex flex-col items-center">
+    <button onclick="closeProductModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl">&times;</button>
+    <img id="modal-image" src="" alt="Product Image" class="w-full h-64 object-cover rounded mb-4" />
+    <h2 id="modal-name" class="text-2xl font-bold mb-2 text-center"></h2>
+    <p id="modal-description" class="mb-2 text-center"></p>
+    <p id="modal-size" class="mb-2 text-center text-gray-500"></p>
+    <p id="modal-price" class="mb-4 text-center text-xl font-bold"></p>
+    <div class="flex gap-4 justify-center">
+      <button class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add to Cart</button>
+      <button class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">Place Order</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showProductModal(product) {
+  document.getElementById('product-modal').classList.remove('hidden');
+  document.getElementById('product-modal').classList.add('flex');
+  document.getElementById('modal-image').src = '/storage/' + product.image;
+  document.getElementById('modal-name').textContent = product.name;
+  document.getElementById('modal-description').textContent = product.description;
+  document.getElementById('modal-size').textContent = 'Size: ' + product.size;
+  document.getElementById('modal-price').textContent = product.price + ' €';
+}
+function closeProductModal() {
+  document.getElementById('product-modal').classList.add('hidden');
+  document.getElementById('product-modal').classList.remove('flex');
+}
+</script>
 
 <!-- Info Section -->
 <div class="flex flex-col items-center justify-center min-h-screen dark:text-white gap-y-10 mt-10">
@@ -153,9 +177,9 @@ $shownIds = [];
     <div class="flex flex-col gap-2">
       <h2 class="mb-4 font-bold text-xl">Socials</h2>
       <a href="https://www.instagram.com/3ellle/" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@3ellle" target="_blank">Tiktok</a>
+      <a href="https://www.tiktok.com/@3ellle" target="_blank">facebook</a>
       <a href="https://www.tumblr.com/3ellle" target="_blank">Tumblr</a>
-      <a href="https://www.pinterest.com/3ellle" target="_blank">Pinterest</a>
+      <a href="https://www.pinterest.com/3ellle" target="_blank">X</a>
     </div>
     <div class="flex flex-col gap-2">
       <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>

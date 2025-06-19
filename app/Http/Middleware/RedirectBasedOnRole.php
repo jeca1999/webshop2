@@ -17,13 +17,13 @@ class RedirectBasedOnRole
     public function handle(Request $request, Closure $next): Response
     {
         // If logged in as user (client)
-        if (Auth::guard('web')->check()) {
-            return redirect()->route('dashboard');
+        if (Auth::guard('web')->check() && Auth::user()->role === 'client') {
+            return redirect()->route('client.dashboard');
         }
 
         // If logged in as seller
-        if (Auth::guard('seller')->check()) {
-            return redirect()->route('sellerdashboard');
+        if (Auth::guard('seller')->check() && Auth::guard('seller')->user()->role === 'seller') {
+            return redirect()->route('seller.dashboard');
         }
 
         // If not authenticated, continue (or redirect to login)

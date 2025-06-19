@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::table('products', function (Blueprint $table) {
-        $table->boolean('is_approved')->default(false);
-    });
+        Schema::table('sellers', function (Blueprint $table) {
+            $table->string('email')->unique()->after('id');
+        });
     }
 
     /**
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('sellers', function (Blueprint $table) {
             //
         });
     }

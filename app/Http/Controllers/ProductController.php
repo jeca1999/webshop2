@@ -106,7 +106,7 @@ class ProductController extends Controller
     {
         $products = Product::where('is_approved', true)
             ->orderBy('category')
-            ->orderBy('subcategory')
+            
             ->get()
             ->groupBy(function ($product) {
                 return [
@@ -122,7 +122,7 @@ class ProductController extends Controller
     {
         $products = Product::where('is_approved', true)
             ->orderBy('category')
-            ->orderBy('subcategory')
+            
             ->get()
             ->groupBy(function ($product) {
                 return [

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 
 //returns to index page
@@ -79,4 +80,9 @@ Route::get('/client/dashboard', function () {
 
 Route::get('/test-approved-products', function () {
     return App\Models\Product::where('is_approved', true)->get();
+});
+
+Route::get('/test-query', function () {
+    $products = Product::where('is_approved', 1)->orderBy('category')->orderBy('subcategory')->get();
+    return response()->json($products);
 });

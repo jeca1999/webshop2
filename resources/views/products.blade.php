@@ -11,85 +11,87 @@
 
                 <div class="flex flex-col md:flex-row gap-x-12 p-6">
                     <div class="flex flex-col md:flex-row w-full">
-                        <div class="flex flex-col items-center justify-center w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-300 dark:border-gray-700 md:pr-8">
-                            <div class="mb-4 text-white">{{ __("Product Image") }}</div>
-                            <div class="flex justify-center w-full">
-                                <div id="drop-area" class="flex flex-col items-center justify-center w-96 h-96 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-gray-50 dark:bg-gray-700 relative overflow-hidden">
-                                    <svg class="w-12 h-12 text-gray-400 mb-2 z-10 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 48 48">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 32V40a4 4 0 004 4h24a4 4 0 004-4V32M32 16l-8-8-8 8M24 8v24" />
-                                    </svg>
-                                    <span class="text-gray-600 dark:text-gray-300 mb-2 z-10 pointer-events-none">Drag & drop an image here, or click to select</span>
-                                    <input id="product-image-input" name="image" type="file" accept="image/png, image/jpeg" />
-                                    <img id="preview-image" class="absolute inset-0 w-full h-full object-cover m-auto rounded z-20 hidden bg-white/80" />
+                        <form id="image-upload-form" action="{{ route('seller.products.store') }}" method="POST" enctype="multipart/form-data" class="w-full flex flex-col md:flex-row items-center md:items-start md:pl-8 mt-8 md:mt-0">
+                            @csrf
+                            <div class="flex flex-col items-center justify-center w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-300 dark:border-gray-700 md:pr-8">
+                                <div class="mb-4 text-white">{{ __("Product Image") }}</div>
+                                <div class="flex justify-center w-full">
+                                    <div id="drop-area" class="flex flex-col items-center justify-center w-96 h-96 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-gray-50 dark:bg-gray-700 relative overflow-hidden">
+                                        <svg class="w-12 h-12 text-gray-400 mb-2 z-10 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 32V40a4 4 0 004 4h24a4 4 0 004-4V32M32 16l-8-8-8 8M24 8v24" />
+                                        </svg>
+                                        <span class="text-gray-600 dark:text-gray-300 mb-2 z-10 pointer-events-none">Drag & drop an image here, or click to select</span>
+                                        <input id="product-image-input" name="image" type="file" accept="image/png, image/jpeg" />
+                                        <img id="preview-image" class="absolute inset-0 w-full h-full object-cover m-auto rounded z-20 hidden bg-white/80" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <form id="image-upload-form" action="{{ route('seller.products.store') }}" method="POST" enctype="multipart/form-data" class="w-full md:w-1/2 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
-                            @csrf
-                            <div class="mb-6 relative w-full">
-                                <input type="text" name="name" id="product-name" required
-                                    class="peer block w-full pt-10 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
-                                    placeholder=" " />
-                                <label for="product-name"
-                                    class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
-                                    {{ __('Product Name') }}
-                                </label>
-                            </div>
-                            <div class="mb-6 relative w-full">
-                                <textarea name="description" id="product-description" required rows="3"
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base resize-none border-l-0 border-t-0 border-r-0 text-white"
-                                    placeholder=" "></textarea>
-                                <label for="product-description"
-                                    class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
-                                    {{ __('Description') }}
-                                </label>
-                            </div>
-                            <div class="mb-6 relative w-full">
-                                <input type="number" name="price" id="product-price" required step="0.01" min="0"
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
-                                    placeholder=" " />
-                                <label for="product-price"
-                                    class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
-                                    {{ __('Price') }}
-                                </label>
-                            </div>
-                            <div class="mb-6 relative w-full">
-                                <input type="text" name="size" id="product-size" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
-                                    placeholder=" " />
-                                <label for="product-size"
-                                    class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
-                                    {{ __('Size') }}
-                                </label>
-                            </div>
-                            <div class="mb-6 relative w-full">
-                                <select name="category" id="product-category" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
-                                    <option value="shop" class="text-black bg-white">{{ __('Shop') }}</option>
-                                    <option value="prototype" class="text-black bg-white">{{ __('Prototype') }}</option>
-                                    <option value="comissions" class="text-black bg-white">{{ __('Comissions') }}</option>
-                                </select>
-                                <label for="product-category"
-                                    class="absolute left-3 top-1 text-gray-500 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
-                                    {{ __('Category') }}
-                                </label>
-                            </div>
-                            <div class="mb-6 relative w-full">
-                                <select name="subcategory" id="product-subcategory" required
-                                    class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
-                                    <option value="" disabled selected hidden class="text-black bg-white"></option>
-                                </select>
-                                <label for="product-subcategory"
-                                    class="absolute left-3 top-1 text-gray-500 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
-                                    {{ __('Subcategory') }}
-                                </label>
-                            </div>
-                            <div class="flex justify-center md:justify-start">
-                                <button type="submit"
-                                    class="px-10 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                    {{ __('Add') }}
-                                </button>
+                            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
+                                <div class="mb-6 relative w-full">
+                                    <input type="text" name="name" id="product-name" required
+                                        class="peer block w-full pt-10 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
+                                        placeholder=" " />
+                                    <label for="product-name"
+                                        class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                        {{ __('Product Name') }}
+                                    </label>
+                                </div>
+                                <div class="mb-6 relative w-full">
+                                    <textarea name="description" id="product-description" required rows="3"
+                                        class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base resize-none border-l-0 border-t-0 border-r-0 text-white"
+                                        placeholder=" "></textarea>
+                                    <label for="product-description"
+                                        class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                        {{ __('Description') }}
+                                    </label>
+                                </div>
+                                <div class="mb-6 relative w-full">
+                                    <input type="number" name="price" id="product-price" required step="0.01" min="0"
+                                        class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
+                                        placeholder=" " />
+                                    <label for="product-price"
+                                        class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                        {{ __('Price') }}
+                                    </label>
+                                </div>
+                                <div class="mb-6 relative w-full">
+                                    <input type="text" name="size" id="product-size" required
+                                        class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base border-l-0 border-t-0 border-r-0 text-white"
+                                        placeholder=" " />
+                                    <label for="product-size"
+                                        class="absolute left-3 top-1 text-gray-500 dark:text-gray-400 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                        {{ __('Size') }}
+                                    </label>
+                                </div>
+                                <div class="mb-6 relative w-full">
+                                    <select name="category" id="product-category" required
+                                        class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
+                                        <option value="shop" class="text-black bg-white">{{ __('Shop') }}</option>
+                                        <option value="prototype" class="text-black bg-white">{{ __('Prototype') }}</option>
+                                        <option value="comissions" class="text-black bg-white">{{ __('Comissions') }}</option>
+                                    </select>
+                                    <label for="product-category"
+                                        class="absolute left-3 top-1 text-gray-500 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                        {{ __('Category') }}
+                                    </label>
+                                </div>
+                                <div class="mb-6 relative w-full">
+                                    <select name="subcategory" id="product-subcategory" required
+                                        class="peer block w-full pt-5 px-3 pb-2 bg-transparent border-b-2 border-white focus:outline-none focus:border-blue-500 text-base appearance-none border-l-0 border-t-0 border-r-0 text-white">
+                                        <option value="" disabled selected hidden class="text-black bg-white"></option>
+                                    </select>
+                                    <label for="product-subcategory"
+                                        class="absolute left-3 top-1 text-gray-500 text-sm transition-all peer-placeholder-shown:translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-3 pointer-events-none">
+                                        {{ __('Subcategory') }}
+                                    </label>
+                                </div>
+                                <div class="flex justify-center md:justify-start">
+                                    <button type="submit"
+                                        class="px-10 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                        {{ __('Add') }}
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -123,12 +125,7 @@
                             <span class="text-4xl">🖼️</span>
                         </div>
                     @endif
-                    <div class="text-xs text-left bg-yellow-100 text-yellow-800 rounded p-2 mt-1 w-full break-all">
-                        <strong>Debug:</strong><br>
-                        <span>DB path: <code>{{ $product->image }}</code></span><br>
-                        <span>URL: <code>{{ asset('storage/' . ltrim($product->image ?? '', '/')) }}</code></span><br>
-                        <span>Exists: <code>{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image ?? '') ? 'yes' : 'no' }}</code></span>
-                    </div>
+                   
                     <h4 class="text-lg font-semibold mb-2">{{ $product->name }}</h4>
                     <p class="text-gray-700 dark:text-gray-300 mb-2">{{ $product->description }}</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Size: {{ $product->size }}</p>
