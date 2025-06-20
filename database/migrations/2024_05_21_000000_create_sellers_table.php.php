@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->id(); // BIGINT UNSIGNED
-            $table->string('name');
             $table->timestamps();
         });
     }

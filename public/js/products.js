@@ -5,7 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const preview = document.getElementById('preview-image');
 
     if (dropArea && input && preview) {
-        dropArea.addEventListener('click', () => input.click());
+        // Only trigger input click if the click is directly on the drop area (not any child)
+        dropArea.addEventListener('click', (e) => {
+            if (e.target === dropArea) {
+                input.click();
+            }
+        });
+
+        // Prevent bubbling from input to drop area
+        input.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
 
         dropArea.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -115,11 +125,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Custom modal logic
+    // Modal variables
     const modal = document.getElementById('edit-product-modal');
-    const closeModal = document.getElementById('close-edit-modal');
-    const cancelModal = document.getElementById('cancel-edit-modal');
+    const closeModalBtn = document.getElementById('close-edit-modal');
+    const cancelModalBtn = document.getElementById('cancel-edit-modal');
     const editForm = document.getElementById('edit-product-form');
+    const editSubcategorySelect = document.getElementById('edit-product-subcategory');
+
+    // Custom modal logic
     document.querySelectorAll('.edit-product-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -132,17 +145,30 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('edit-product-category').value = card.dataset.productCategory;
             // Set form action
             editForm.action = `/seller/products/${card.dataset.productId}`;
-            modal.classList.add('active');
+            // Show modal by removing 'hidden' and adding 'flex'
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            if (editSubcategorySelect && card.dataset.productSubcategory) {
+                updateEditSubcategories(card.dataset.productSubcategory);
+                editSubcategorySelect.value = card.dataset.productSubcategory;
+            } else if (editSubcategorySelect) {
+                updateEditSubcategories();
+            }
         });
     });
-    function hideModal() { modal.classList.remove('active'); }
-    closeModal.addEventListener('click', hideModal);
-    cancelModal.addEventListener('click', hideModal);
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) hideModal();
-    });
+    function hideModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+    if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
+    if (cancelModalBtn) cancelModalBtn.addEventListener('click', hideModal);
+    if (modal) {
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) hideModal();
+        });
+    }
     document.addEventListener('keydown', function(e) {
-        if (modal.classList.contains('active') && e.key === 'Escape') hideModal();
+        if (!modal.classList.contains('hidden') && e.key === 'Escape') hideModal();
     });
 
     // --- Subcategory logic for add form ---
@@ -151,8 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const subcategories = {
         shop: [
             { value: 'paintings', label: 'Paintings' },
-            { value: 'scketches', label: 'Scketches' },
-            { value: 'digitl_aarts', label: 'Digital Aarts' }
+            { value: 'sketches', label: 'Sketches' },
+            { value: 'digital arts', label: 'Digital Arts' }
         ],
         prototype: [
             { value: 'mats', label: 'Mats' },
@@ -186,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Subcategory logic for edit modal ---
     const editCategorySelect = document.getElementById('edit-product-category');
-    const editSubcategorySelect = document.getElementById('edit-product-subcategory');
     function updateEditSubcategories(selectedValue = '') {
         if (!editCategorySelect || !editSubcategorySelect) return;
         const cat = editCategorySelect.value;
@@ -210,27 +235,4 @@ document.addEventListener('DOMContentLoaded', function () {
             updateEditSubcategories();
         }
     }
-
-    // When opening modal, set subcategory value if present
-    document.querySelectorAll('.edit-product-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const card = this.closest('.product-card');
-            document.getElementById('edit-product-id').value = card.dataset.productId;
-            document.getElementById('edit-product-name').value = card.dataset.productName;
-            document.getElementById('edit-product-description').value = card.dataset.productDescription;
-            document.getElementById('edit-product-price').value = card.dataset.productPrice;
-            document.getElementById('edit-product-size').value = card.dataset.productSize;
-            document.getElementById('edit-product-category').value = card.dataset.productCategory;
-            // Set form action
-            editForm.action = `/seller/products/${card.dataset.productId}`;
-            modal.classList.add('active');
-            if (editSubcategorySelect && card.dataset.productSubcategory) {
-                updateEditSubcategories(card.dataset.productSubcategory);
-                editSubcategorySelect.value = card.dataset.productSubcategory;
-            } else if (editSubcategorySelect) {
-                updateEditSubcategories();
-            }
-        });
-    });
 });

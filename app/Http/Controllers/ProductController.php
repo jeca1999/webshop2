@@ -88,9 +88,23 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0|max:999999.99',
             'size' => 'required|string|max:255',
             'category' => 'required|in:shop,prototype,comissions',
+            'subcategory' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    $valid = [
+                        'shop' => ['paintings', 'sketches', 'digital arts'],
+                        'prototype' => ['mats', 'pins'],
+                        'comissions' => [],
+                    ];
+                    $cat = $request->category;
+                    if (!isset($valid[$cat]) || !in_array($value, $valid[$cat])) {
+                        $fail('Invalid subcategory for the selected category.');
+                    }
+                }
+            ],
             'image' => 'nullable|image|mimes:jpeg,png|max:2048',
         ]);
-        $data = $request->only(['name', 'description', 'price', 'size', 'category']);
+        $data = $request->only(['name', 'description', 'price', 'size', 'category', 'subcategory']);
         if ($request->hasFile('image')) {
             // Delete old image
             if ($product->image) {
@@ -106,16 +120,34 @@ class ProductController extends Controller
     {
         $products = Product::where('is_approved', true)
             ->orderBy('category')
-            
-            ->get()
-            ->groupBy(function ($product) {
-                return [
-                    'category' => $product->category,
-                    'subcategory' => $product->subcategory ?? 'Uncategorized',
-                ];
-            });
+            ->get();
 
-        return view('shop', compact('products'));
+        // Calculate units sold for each product
+        $productIds = $products->pluck('id');
+        $orders = \App\Models\Order::whereNotNull('products')->get();
+        $unitsSoldMap = [];
+        foreach ($orders as $order) {
+            foreach ($order->products as $p) {
+                if (in_array($p['id'], $productIds->all())) {
+                    if (!isset($unitsSoldMap[$p['id']])) $unitsSoldMap[$p['id']] = 0;
+                    $unitsSoldMap[$p['id']] += $p['qty'];
+                }
+            }
+        }
+        // Attach units_sold to each product
+        foreach ($products as $product) {
+            $product->units_sold = $unitsSoldMap[$product->id] ?? 0;
+        }
+
+        // Group for display as before
+        $grouped = $products->groupBy(function ($product) {
+            return [
+                'category' => $product->category,
+                'subcategory' => $product->subcategory ?? 'Uncategorized',
+            ];
+        });
+
+        return view('shop', ['products' => $grouped]);
     }
 
     public function prototype()

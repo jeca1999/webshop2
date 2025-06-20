@@ -3,9 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerProfileController;
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 
 //returns to index page
@@ -48,35 +49,129 @@ Route::get('/sellerdashboard', fn () => view('sellerdashboard'))
     ->name('seller.dashboard.alt');
 
 Route::get('/cart', function () {
-    return view('cart');
+    $cart = session('cart', []);
+    $products = [];
+    if (!empty($cart)) {
+        $products = \App\Models\Product::whereIn('id', array_keys($cart))->get();
+    }
+    return view('cart', compact('cart', 'products'));
 })->name('cart');
 
 Route::get('/orders', function () {
-    return view('orders');
+    $orders = [];
+    if (auth()->check()) {
+        $orders = \App\Models\Order::where('user_id', auth()->id())->latest()->get();
+    }
+    return view('orders', compact('orders'));
 })->name('orders');
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/send-message', [MessageController::class, 'sendMessage'])->name('send.message');
-    Route::get('/fetch-messages', [MessageController::class, 'fetchMessages'])->name('fetch.messages');
-    Route::get('/fetch-inbox', [MessageController::class, 'fetchInbox'])->name('fetch.inbox');
+    Route::post('/cart/add', function (\Illuminate\Http\Request $request) {
+        $cart = session('cart', []);
+        $productId = $request->input('product_id');
+        if ($productId) {
+            $cart[$productId] = ($cart[$productId] ?? 0) + 1;
+            session(['cart' => $cart]);
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 400);
+    })->name('cart.add');
+    Route::post('/cart/remove', function (\Illuminate\Http\Request $request) {
+        $cart = session('cart', []);
+        $ids = explode(',', $request->input('selected_ids', ''));
+        foreach ($ids as $id) {
+            unset($cart[$id]);
+        }
+        session(['cart' => $cart]);
+        return redirect()->route('cart');
+    })->middleware('auth')->name('cart.remove');
+    Route::post('/profile/check-out', function (\Illuminate\Http\Request $request) {
+        $validated = $request->validate([
+            'country' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'postal_code' => 'required|string|max:20',
+            'city' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'shipping_method' => 'required|string|max:255',
+            'card_number' => 'required|string|min:12|max:19',
+            'expiration_date' => 'required|string',
+            'security_code' => 'required|string|min:3|max:4',
+            'name_on_card' => 'required|string|max:255',
+        ]);
+
+        $cart = session('cart', []);
+        $ids = explode(',', $request->input('selected_ids', ''));
+        $selectedCart = array_intersect_key($cart, array_flip($ids));
+
+        foreach ($ids as $id) {
+            if (!isset($selectedCart[$id])) {
+                $selectedCart[$id] = 1;
+            }
+        }
+
+        $products = [];
+        if (!empty($selectedCart)) {
+            $products = Product::whereIn('id', array_keys($selectedCart))->get();
+        }
+
+        // Format products for order storage
+        $productsData = $products->map(function ($product) use ($selectedCart) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => $selectedCart[$product->id],
+                'price' => $product->price
+            ];
+        })->toArray();
+
+        // Create the order
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'products' => $productsData,
+            'address' => implode(', ', [
+                $validated['address'],
+                $validated['city'],
+                $validated['region'],
+                $validated['postal_code'],
+                $validated['country']
+            ]),
+            'mode_of_payment' => 'Credit Card',
+            'status' => 'Received'
+        ]);
+
+        // Clear the selected items from cart
+        foreach ($ids as $id) {
+            unset($cart[$id]);
+        }
+        session(['cart' => $cart]);
+
+        // Return with success message
+        return back()->with('success', 'Order placed successfully!');
+    })->middleware('auth')->name('cart.checkout.selected');
+    Route::get('/profile/check-out', function (\Illuminate\Http\Request $request) {
+        $cart = session('cart', []);
+        $products = [];
+        $selectedIds = collect(explode(',', $request->query('selected_ids', '')))->filter();
+        if ($selectedIds->isNotEmpty()) {
+            // Only show selected products
+            $products = \App\Models\Product::whereIn('id', $selectedIds)->get();
+            // Build a temporary cart for display
+            $cart = $products->pluck('id')->mapWithKeys(fn($id) => [$id => 1])->toArray();
+        } elseif (!empty($cart)) {
+            $products = \App\Models\Product::whereIn('id', array_keys($cart))->get();
+        }
+        return view('profile.check-out', ['cart' => $cart, 'products' => $products]);
+    })->middleware('auth')->name('cart.checkout');
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/seller/products', [ProductController::class, 'index'])->middleware('auth:seller')->name('seller.products');
-Route::get('/messages', function () {
-        return view('messages');
-    })->name('messages');
-Route::get('/seller/messages', function () {
-        return view('messages');
-    })->middleware('auth:seller')->name('seller.messages');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.delete');
 Route::delete('/seller/products/{product}', [ProductController::class, 'destroy'])->name('seller.products.delete');
 Route::post('/seller/products', [ProductController::class, 'store'])->middleware('auth:seller')->name('seller.products.store');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::get('/client/dashboard', function () {
-    return view('dashboard');
-    
-})->middleware(['auth', 'verified'])->name('client.dashboard');
 
 Route::get('/test-approved-products', function () {
     return App\Models\Product::where('is_approved', true)->get();
@@ -86,3 +181,8 @@ Route::get('/test-query', function () {
     $products = Product::where('is_approved', 1)->orderBy('category')->orderBy('subcategory')->get();
     return response()->json($products);
 });
+
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
+Route::view('/returns-refunds', 'returns-refunds')->name('returns-refunds');
+Route::view('/find-order', 'find-order')->name('find-order');

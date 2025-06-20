@@ -1,78 +1,54 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>3ELLLE - Prototypes</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-        <!-- Styles / Scripts -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @endif
-
-        <style>
-          /* Force dropdowns to use light mode and black text */
-          .force-light select,
-          .force-light select option {
-            color: #111 !important;
-            background: #fff !important;
-          }
-        </style>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18]  p-6 lg:p-8 items-center lg:justify-center min-h-screen  scroll-smooth ">
-        <!--header--> 
-        <header class="w-100%  text-sm mb-6 not-has-[nav]:hidden lg:flex  lg:items-center justify-between lg:gap-10 position sticky top-0">
-            <h1 class="text-3xl font-bold text-center lg:text-left dark:text-white">3ELLLE</h1>
-       
-          <div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3ELLLE - Prototypes</title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
+    <style>
+      body { font-family: 'Instrument Sans', sans-serif; }
+      .force-light select, .force-light select option { color: #111 !important; background: #fff !important; }
+      .hidden, [x-cloak] {
+        display: none !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+      }
+    </style>
+</head>
+<body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
+        <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
+        <div class="flex gap-2">
             @if (Route::has('login'))
-
-                
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal justify-center"
-                        >
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                    
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Log in</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Register</a>
+                    @endif
+                @endauth
             @endif
+        </div>
+    </header>
+    <!-- Navigation -->
+    <nav class="flex flex-wrap items-center justify-center gap-6 py-3 bg-white dark:bg-black border-y border-red-500">
+        <a href="{{route('welcome')}}" class="hover:text-red-500 transition">Home</a>
+        <a href="{{route('shop')}}" class="hover:text-red-500 transition">Shop</a>
+        <a href="{{route('prototype')}}" class="hover:text-red-500 transition">Prototypes</a>
+        <a href="{{route('comission')}}" class="hover:text-red-500 transition">Commissions</a>
+    </nav>
+    <!-- Intro -->
+    <section class="flex flex-col items-center justify-center text-center py-10 px-4 bg-white dark:bg-black">
+        <h1 class="text-4xl font-bold mb-4 text-black dark:text-white">Prototypes</h1>
+        <p class="text-lg md:text-xl max-w-2xl text-black dark:text-white">Discover our exclusive line of prototype products featuring original artwork. Each piece is a first-edition print, unique, and made to showcase our designs in new forms. Own a piece of our creative journey!</p>
+    </section>
 
-        </header>
-         <nav class="flex items-center justify-center gap-20 dark:text-white  position sticky top-0">
-                   <a href="{{route('welcome')}}">Home</a>
-                    <a href="{{route('shop')}}">Shop</a>
-                    <a href="{{route('prototype')}}">Prototypes</a>
-                    <a href="{{route('comission')}}">Comissions</a>
-                </nav>
-
-<div class="flex flex-col items-center justify-center mt-10 h-screen">
-    <img src="" alt="img for Prototype" class="w-96 h-64 object-cover rounded-lg shadow-lg ">
-    <h1 class="text-4xl font-bold text-center dark:text-white">Prototypes</h1> 
-    <p class="dark:text-white text-center mt-10">Discover our exclusive line of prototype products featuring original artwork. Each piece is a first-edition print,unique, and made to showcase our designs in new forms. Own a  piece of our creative journey!
-</p>
-</div>
 <!-- Mats Intro -->
 <div class="flex flex-col items-center justify-center mt-10 h-screen">
      <h2 class="text-center text-5xl dark:text-white mb-5">Mats</h2>
@@ -91,10 +67,11 @@ $shownIds = [];
   <h2 class="text-2xl font-bold text-center mb-6 mt-10">Mats</h2>
   <div class="flex flex-wrap justify-center gap-8">
     @foreach($flatProducts as $product)
-      @if(isset($product->subcategory) && strtolower($product->subcategory) === 'mats' && !in_array($product->id, $shownIds))
-        <div class="w-64 cursor-pointer" onclick="showProductModal(@json($product))">
+      @php if (in_array($product->id, $shownIds)) continue; @endphp
+      @if(isset($product->subcategory) && strtolower(trim($product->subcategory)) === 'mats' && isset($product->category) && strtolower(trim($product->category)) === 'prototype' && (!isset($product->is_approved) || $product->is_approved))
+        <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
           @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-contain" />
           @else
             <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
               <span class="text-4xl">🖼️</span>
@@ -119,9 +96,9 @@ $shownIds = [];
   <div class="flex flex-wrap justify-center gap-8">
     @foreach($flatProducts as $product)
       @if(isset($product->subcategory) && strtolower($product->subcategory) === 'pins' && !in_array($product->id, $shownIds))
-        <div class="w-64 cursor-pointer" onclick="showProductModal(@json($product))">
+        <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
           @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-contain" />
           @else
             <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
               <span class="text-4xl">🖼️</span>
@@ -144,13 +121,24 @@ $shownIds = [];
     <p id="modal-size" class="mb-2 text-center text-gray-500"></p>
     <p id="modal-price" class="mb-4 text-center text-xl font-bold"></p>
     <div class="flex gap-4 justify-center">
-      <button class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add to Cart</button>
-      <button class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">Place Order</button>
+      <button class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 add-to-cart">Add to Cart</button>
+      <button class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 place-order">Place Order</button>
     </div>
   </div>
 </div>
 
+@php $isLoggedIn = auth()->check(); @endphp
 <script>
+const isLoggedIn = @json($isLoggedIn);
+let currentProduct = null;
+
+document.querySelectorAll('.product-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    currentProduct = JSON.parse(this.getAttribute('data-product'));
+    showProductModal(currentProduct);
+  });
+});
+
 function showProductModal(product) {
   document.getElementById('product-modal').classList.remove('hidden');
   document.getElementById('product-modal').classList.add('flex');
@@ -158,12 +146,45 @@ function showProductModal(product) {
   document.getElementById('modal-name').textContent = product.name;
   document.getElementById('modal-description').textContent = product.description;
   document.getElementById('modal-size').textContent = 'Size: ' + product.size;
-  document.getElementById('modal-price').textContent = product.price + ' €';
+  document.getElementById('modal-price').textContent = '₱' + Number(product.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
 function closeProductModal() {
   document.getElementById('product-modal').classList.add('hidden');
   document.getElementById('product-modal').classList.remove('flex');
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('#product-modal .add-to-cart').onclick = async function() {
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+      return;
+    }
+    if (!currentProduct) return;
+    // Add to cart via AJAX
+    const res = await fetch('/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+      },
+      body: JSON.stringify({ product_id: currentProduct.id })
+    });
+    if (res.ok) {
+      window.location.href = '/cart';
+    } else {
+      alert('Failed to add to cart.');
+    }
+  };
+  document.querySelector('#product-modal .place-order').onclick = function() {
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+      return;
+    }
+    if (!currentProduct) return;
+    // Redirect to checkout GET page with selected product ID as query param
+    window.location.href = '/profile/check-out?selected_ids=' + encodeURIComponent(currentProduct.id);
+  };
+});
 </script>
 
 <!-- Info Section -->
@@ -176,26 +197,27 @@ function closeProductModal() {
     </div>
     <div class="flex flex-col gap-2">
       <h2 class="mb-4 font-bold text-xl">Socials</h2>
-      <a href="https://www.instagram.com/3ellle/" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@3ellle" target="_blank">facebook</a>
-      <a href="https://www.tumblr.com/3ellle" target="_blank">Tumblr</a>
-      <a href="https://www.pinterest.com/3ellle" target="_blank">X</a>
+      <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" class="hover:text-red-500">X (Twitter)</a>
+      <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" class="hover:text-red-500">Instagram</a>
+      <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
+      <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
     </div>
     <div class="flex flex-col gap-2">
       <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-      <a href="#">Find my order</a>
-      <a href="#">Returns and refunds</a>
-      <a href="#">Privacy and Policy</a>
-      <a href="#">Terms of service</a>
+      <a href="{{ route('find-order') }}" class="hover:text-red-500">Find my order</a>
+      <a href="{{ route('returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
+      <a href="{{ route('privacy-policy') }}" class="hover:text-red-500">Privacy Policy</a>
+      <a href="{{ route('terms-of-service') }}" class="hover:text-red-500">Terms of Service</a>
     </div>
   </div>
   <!-- Newsletter -->
-  <div class="flex flex-col items-center mt-11 force-light" style="color-scheme: light;">
+  <div class="flex flex-col items-center mt-11">
     <h2 class="mb-4 font-bold text-xl">Newsletter</h2>
     <p class="text-center max-w-md">Subscribe to our newsletter for the latest updates on new artworks.</p>
-    <form action="#" method="POST" class="mt-4">
-      <input type="email" name="email" placeholder="Enter your email" required class="px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-      <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Subscribe</button>
+    <form action="" method="POST" class="flex flex-col gap-2 mt-4 w-full max-w-sm">
+      <input type="email" name="email" placeholder="Enter your email" required class="border border-gray-300 rounded-md p-2">
+      <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Subscribe</button>
+    </form>
   </div>
 </div>
 

@@ -19,9 +19,6 @@
                     <div id="inbox-container" class="h-96 overflow-y-auto border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900">
                         
                     </div>
-                    <div id="messages-container" class="h-96 overflow-y-auto border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900 mt-4">
-                        <!-- Messages will be dynamically loaded here -->
-                    </div>
                     <form id="message-form" action="{{ route('send.message') }}" method="POST" class="mt-4">
                         @csrf
                         <div class="flex items-center">
@@ -42,7 +39,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const inboxContainer = document.getElementById('inbox-container');
-            const messagesContainer = document.getElementById('messages-container');
             const notificationIndicator = document.getElementById('notification-indicator');
             const refreshInboxButton = document.getElementById('refresh-inbox');
             const messageForm = document.getElementById('message-form');
@@ -62,23 +58,8 @@
                 notificationIndicator.querySelector('span').classList.add('hidden');
             }
 
-            // Function to fetch and display messages
-            async function fetchMessages() {
-                const response = await fetch('{{ route('fetch.messages') }}');
-                const messages = await response.json();
-                messagesContainer.innerHTML = '';
-                messages.forEach(message => {
-                    const messageElement = document.createElement('div');
-                    messageElement.className = 'mb-2 p-2 rounded-lg bg-blue-100 dark:bg-blue-800';
-                    messageElement.textContent = message.content;
-                    messagesContainer.appendChild(messageElement);
-                });
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-
-            // Fetch inbox messages and regular messages on page load
+            // Fetch inbox messages on page load
             fetchInbox();
-            fetchMessages();
 
             // Refresh inbox on button click
             refreshInboxButton.addEventListener('click', fetchInbox);
@@ -92,11 +73,11 @@
                     body: formData,
                 });
                 messageInput.value = '';
-                fetchMessages();
+                fetchInbox();
             });
 
             // Poll for new messages every 5 seconds
-            setInterval(fetchMessages, 5000);
+            setInterval(fetchInbox, 5000);
 
             // Simulate new message notification
             setInterval(() => {

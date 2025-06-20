@@ -33,18 +33,21 @@ class AuthenticatedSessionController extends Controller
     $credentials = $request->only('email', 'password');
     $remember = $request->boolean('remember');
 
-    // 🔁 Try seller FIRST
-    if (Auth::guard('seller')->attempt($credentials, $remember)) {
-        Auth::guard('web')->logout();
-        $request->session()->regenerate();
-        return redirect('/seller/dashboard');
-    }
+    // Check if email exists in sellers table
+    $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
 
-    // Then try regular user
-    if (Auth::guard('web')->attempt($credentials, $remember)) {
-        Auth::guard('seller')->logout();
-        $request->session()->regenerate();
-        return redirect('/dashboard');
+    if ($isSeller) {
+        if (Auth::guard('seller')->attempt($credentials, $remember)) {
+            Auth::guard('web')->logout();
+            $request->session()->regenerate();
+            return redirect('/seller/dashboard');
+        }
+    } else {
+        if (Auth::guard('web')->attempt($credentials, $remember)) {
+            Auth::guard('seller')->logout();
+            $request->session()->regenerate();
+            return redirect('/dashboard');
+        }
     }
 
     return back()->withErrors([
