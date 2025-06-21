@@ -24,9 +24,8 @@
         <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
         <div class="flex gap-2 flex-wrap">
             @auth
-                @if (!auth()->user()->hasRole('seller'))
-                    <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
-                @endif
+                {{-- Remove role check, just show dashboard link for all users --}}
+                <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
             @else
                 <a href="{{ route('login') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Log in</a>
                 @if (Route::has('register'))

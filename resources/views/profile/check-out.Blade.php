@@ -95,14 +95,14 @@
                 <h3 class="text-xl font-semibold mb-4 text-[#1b1b18] dark:text-white">Product List</h3>
                 @if(!empty($cart) && count($products))
                     <div class="overflow-y-auto" style="max-height: 340px;">
-                        <table class="w-full text-left mb-4">
+                        <table class="w-full text-left mb-4 checkout-product-list">
                             <thead>
                                 <tr>
-                                    <th class="py-2">Image</th>
-                                    <th class="py-2">Product</th>
-                                    <th class="py-2">Quantity</th>
-                                    <th class="py-2">Price</th>
-                                    <th class="py-2">Total</th>
+                                    <th class="py-2 dark:text-white">Image</th>
+                                    <th class="py-2 dark:text-white">Product</th>
+                                    <th class="py-2 dark:text-white">Quantity</th>
+                                    <th class="py-2 dark:text-white">Price</th>
+                                    <th class="py-2 dark:text-white">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,10 +115,10 @@
                                                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-contain rounded">
                                             @endif
                                         </td>
-                                        <td class="py-2">{{ $product->name }}</td>
-                                        <td class="py-2">{{ $cart[$product->id] }}</td>
-                                        <td class="py-2">{{ $product->price }} €</td>
-                                        <td class="py-2">{{ number_format($lineTotal, 2) }} €</td>
+                                        <td class="py-2 dark:text-white">{{ $product->name }}</td>
+                                        <td class="py-2 dark:text-white">{{ $cart[$product->id] }}</td>
+                                        <td class="py-2 dark:text-white">{{ $product->price }} €</td>
+                                        <td class="py-2 dark:text-white">{{ number_format($lineTotal, 2) }} €</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -141,4 +141,16 @@
             <a href="#" class="text-blue-500 hover:underline">Terms of Service</a>
         </footer>
     </div>
+    <style>
+        .dark .checkout-product-list th,
+        .dark .checkout-product-list td {
+            color: #fff !important;
+        }
+        .dark .checkout-product-list tbody tr td {
+            color: #fff !important;
+        }
+        .dark .checkout-product-list td .text-[#1b1b18] {
+            color: #fff !important;
+        }
+    </style>
 </x-app-layout>

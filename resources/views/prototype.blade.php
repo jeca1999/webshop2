@@ -18,6 +18,7 @@
         opacity: 0 !important;
       }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col">
     <!-- Header -->

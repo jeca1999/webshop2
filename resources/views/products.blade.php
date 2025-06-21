@@ -258,8 +258,8 @@ input[type="number"],
 textarea,
 select {
   border-bottom: 1px solid #222 !important; 
-  color: #222 !important;
-  background: transparent;
+  color: inherit !important;
+  background: transparent !important;
 }
 .dark input[type="text"],
 .dark input[type="number"],
@@ -267,6 +267,7 @@ select {
 .dark select {
   border-bottom: 1px solid #fff !important; 
   color: #fff !important;
+  background: transparent !important;
 }
 input[type="text"]:focus,
 input[type="number"]:focus,

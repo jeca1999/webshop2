@@ -7,7 +7,6 @@ use App\Http\Controllers\ProductController;
 use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\EmailVerificationCodeController;
 
 
 //returns to index page
@@ -165,8 +164,6 @@ Route::middleware(['auth'])->group(function () {
         }
         return view('profile.check-out', ['cart' => $cart, 'products' => $products]);
     })->name('cart.checkout');
-    Route::get('/verify-code', [EmailVerificationCodeController::class, 'showForm'])->name('verification.code.form');
-    Route::post('/verify-code', [EmailVerificationCodeController::class, 'verify'])->name('verification.code.verify');
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
@@ -175,6 +172,7 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy'])->nam
 Route::delete('/seller/products/{product}', [ProductController::class, 'destroy'])->name('seller.products.delete');
 Route::post('/seller/products', [ProductController::class, 'store'])->middleware('auth:seller')->name('seller.products.store');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::patch('/seller/products/{product}', [ProductController::class, 'update'])->middleware('auth:seller')->name('seller.products.update');
 
 Route::get('/test-approved-products', function () {
     return App\Models\Product::where('is_approved', true)->get();

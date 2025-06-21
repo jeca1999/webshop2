@@ -2,4 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Make text in the product upload form white, including autofill and placeholder */
+#image-upload-form input,
+#image-upload-form textarea,
+#image-upload-form select,
+#product-category,
+#product-subcategory,
+#image-upload-form .peer,
+#product-category.peer,
+#product-subcategory.peer {
+  color: #fff !important;
+  border-color: #fff !important;
+  background-color: transparent !important;
+}
+#image-upload-form input::placeholder,
+#image-upload-form textarea::placeholder {
+  color: #fff !important;
+  opacity: 1;
+}
+#image-upload-form input:-webkit-autofill,
+#image-upload-form textarea:-webkit-autofill,
+#image-upload-form select:-webkit-autofill {
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+#image-upload-form input:focus,
+#image-upload-form textarea:focus,
+#image-upload-form select:focus,
+#product-category:focus,
+#product-subcategory:focus,
+#image-upload-form .peer:focus,
+#product-category.peer:focus,
+#product-subcategory.peer:focus {
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: 0 1px 0 0 #fff !important;
+  background-color: transparent !important;
+}
+
 
