@@ -109,7 +109,7 @@
                     @if($product->category === $cat)
                         <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center product-card cursor-pointer relative group min-w-0 w-full max-w-xs mx-auto transition-transform duration-200 hover:scale-105">
                             @if($product->image)
-                                <img src="{{ asset('storage/' . ltrim($product->image, '/')) }}" alt="{{ $product->name }}" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-cover rounded mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700" />
+                                <img src="{{ asset('storage/' . ltrim($product->image, '/')) }}" alt="{{ $product->name }}" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-cover object-center rounded mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700" />
                             @else
                                 <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded mb-2 text-gray-400 border border-gray-200 dark:border-gray-700">
                                     <span class="text-4xl">🖼️</span>
