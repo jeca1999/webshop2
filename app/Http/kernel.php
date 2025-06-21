@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // Register your custom middleware here:
         'redirect.role' => \App\Http\Middleware\RedirectBasedOnRole::class,
+        'email.verified.code' => \App\Http\Middleware\EnsureEmailIsVerified::class,
     ];
 }
 

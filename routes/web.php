@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\EmailVerificationCodeController;
 
 
 //returns to index page
@@ -17,10 +18,10 @@ Route::get('/', function () {
 //bridge client to client dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 //bridge client to client profile
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -84,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
         }
         session(['cart' => $cart]);
         return redirect()->route('cart');
-    })->middleware('auth')->name('cart.remove');
+    })->name('cart.remove');
     Route::post('/profile/check-out', function (\Illuminate\Http\Request $request) {
         $validated = $request->validate([
             'country' => 'required|string|max:255',
@@ -149,7 +150,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Return with success message
         return back()->with('success', 'Order placed successfully!');
-    })->middleware('auth')->name('cart.checkout.selected');
+    })->name('cart.checkout.selected');
     Route::get('/profile/check-out', function (\Illuminate\Http\Request $request) {
         $cart = session('cart', []);
         $products = [];
@@ -163,7 +164,9 @@ Route::middleware(['auth'])->group(function () {
             $products = \App\Models\Product::whereIn('id', array_keys($cart))->get();
         }
         return view('profile.check-out', ['cart' => $cart, 'products' => $products]);
-    })->middleware('auth')->name('cart.checkout');
+    })->name('cart.checkout');
+    Route::get('/verify-code', [EmailVerificationCodeController::class, 'showForm'])->name('verification.code.form');
+    Route::post('/verify-code', [EmailVerificationCodeController::class, 'verify'])->name('verification.code.verify');
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
