@@ -23,16 +23,16 @@
     <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
         <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
         <div class="flex gap-2 flex-wrap">
-            @if (Route::has('login'))
-                @auth
+            @auth
+                @if (!auth()->user()->hasRole('seller'))
                     <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Log in</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Register</a>
-                    @endif
-                @endauth
-            @endif
+                @endif
+            @else
+                <a href="{{ route('login') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Log in</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:text-red-500 hover:border-red-500 hover:shadow-[0_0_8px_2px_rgba(239,68,68,0.7)] transition">Register</a>
+                @endif
+            @endauth
         </div>
     </header>
     <!-- Navigation -->
@@ -56,6 +56,8 @@
     <section class="flex flex-col items-center justify-center text-center pt-12 sm:pt-20 pb-10 sm:pb-16 px-2 sm:px-4 bg-white dark:bg-black">
         <h1 class="font-bold text-3xl sm:text-5xl text-black dark:text-white mb-8 sm:mb-14">Welcome to 3ELLLE official shop</h1>
     </section>
+    <br><br><br>
+
     <!-- Content Section -->
     <div class="flex flex-col items-center justify-center min-h-[50vh] dark:text-white px-2 sm:px-0 my-10 sm:my-20">
         <h2 class="font-bold text-2xl sm:text-3xl text-center mb-6">Meet 3ELLLE</h2>

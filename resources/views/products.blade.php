@@ -273,19 +273,6 @@ select#product-category:focus,
 select#product-subcategory:focus {
   border-bottom: 2px solid #3b82f6 !important;
 }
-
-/* Product upload form: always use white text for inputs on dark bg */
-#image-upload-form input[type="text"],
-#image-upload-form input[type="number"],
-#image-upload-form textarea,
-#image-upload-form select {
-  color: #fff !important;
-}
-#image-upload-form input::placeholder,
-#image-upload-form textarea::placeholder {
-  color: #bbb !important;
-  opacity: 1;
-}
 </style>
 <script src="/js/products.js"></script>
 @if(session('success'))
