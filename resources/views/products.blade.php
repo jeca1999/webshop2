@@ -107,7 +107,16 @@
             <div id="{{ $cat }}-products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 text-center text-gray-900 dark:text-gray-100">
                 @forelse($products as $product)
                     @if($product->category === $cat)
-                        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center product-card cursor-pointer relative group min-w-0 w-full max-w-xs mx-auto transition-transform duration-200 hover:scale-105">
+                        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center product-card cursor-pointer relative group min-w-0 w-full max-w-xs mx-auto transition-transform duration-200 hover:scale-105"
+                            data-product-id="{{ $product->id }}"
+                            data-product-name="{{ $product->name }}"
+                            data-product-description="{{ $product->description }}"
+                            data-product-price="{{ $product->price }}"
+                            data-product-size="{{ $product->size }}"
+                            data-product-category="{{ $product->category }}"
+                            data-product-subcategory="{{ $product->subcategory }}"
+                            data-product-image="{{ $product->image ? asset('storage/' . ltrim($product->image, '/')) : '' }}"
+                            data-product-orientation="{{ $product->image ? (getimagesize(public_path('storage/' . ltrim($product->image, '/')))[0] < getimagesize(public_path('storage/' . ltrim($product->image, '/')))[1] ? 'portrait' : 'landscape') : 'landscape' }}">
                             @if($product->image)
                                 <img src="{{ asset('storage/' . ltrim($product->image, '/')) }}" alt="{{ $product->name }}" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-cover object-center rounded mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700" />
                             @else
@@ -187,6 +196,9 @@
               <div>
                 <label for="edit-product-image" class="block mb-1 text-sm font-medium">Image</label>
                 <input type="file" name="image" id="edit-product-image" accept="image/png, image/jpeg" class="w-full text-gray-300" />
+              </div>
+              <div class="flex flex-col items-center">
+                <img id="modal-product-image" class="block mx-auto rounded mb-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 object-contain" style="max-height:80vh; max-width:90vw; width:auto; height:auto; display:none;" />
               </div>
               <div class="flex justify-end gap-3 pt-2">
                 <button type="button" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 text-white" id="cancel-edit-modal">Cancel</button>

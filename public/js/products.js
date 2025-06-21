@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelModalBtn = document.getElementById('cancel-edit-modal');
     const editForm = document.getElementById('edit-product-form');
     const editSubcategorySelect = document.getElementById('edit-product-subcategory');
+    const modalProductImage = document.getElementById('modal-product-image');
 
     // Custom modal logic
     document.querySelectorAll('.edit-product-link').forEach(link => {
@@ -153,6 +154,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 editSubcategorySelect.value = card.dataset.productSubcategory;
             } else if (editSubcategorySelect) {
                 updateEditSubcategories();
+            }
+            // Show product image in modal
+            if (modalProductImage && card.dataset.productImage) {
+                modalProductImage.src = card.dataset.productImage;
+                modalProductImage.style.display = 'block';
+                // Always use object-contain and reset sizing for best fit
+                modalProductImage.classList.remove('w-full', 'h-96', 'object-cover');
+                modalProductImage.classList.add('object-contain');
+                modalProductImage.style.width = 'auto';
+                modalProductImage.style.height = 'auto';
+                modalProductImage.style.maxWidth = '90vw';
+                modalProductImage.style.maxHeight = '80vh';
+            } else if (modalProductImage) {
+                modalProductImage.src = '';
+                modalProductImage.style.display = 'none';
             }
         });
     });

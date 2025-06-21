@@ -1,0 +1,99 @@
+// ERD for webshop2 (dbdiagram.io / DBML format)
+
+Table users {
+  id BIGINT [pk]
+  name VARCHAR
+  email VARCHAR [unique]
+  password VARCHAR
+  // ...
+}
+
+Table products {
+  id BIGINT [pk]
+  name VARCHAR
+  description TEXT
+  price DECIMAL
+  image VARCHAR
+  category VARCHAR
+  subcategory VARCHAR
+  is_approved BOOLEAN
+  // ...
+}
+
+Table orders {
+  id BIGINT [pk]
+  user_id BIGINT [ref: > users.id]
+  total DECIMAL
+  status VARCHAR
+  // ...
+}
+
+Table order_items {
+  id BIGINT [pk]
+  order_id BIGINT [ref: > orders.id]
+  product_id BIGINT [ref: > products.id]
+  quantity INT
+  price DECIMAL
+  // ...
+}
+
+Table sellers {
+  id BIGINT [pk]
+  name VARCHAR
+  email VARCHAR
+  password VARCHAR
+  role VARCHAR
+  // ...
+}
+
+Table migrations {
+  id INT [pk]
+  migration VARCHAR
+  batch INT
+}
+
+Table jobs {
+  id BIGINT [pk]
+  queue VARCHAR
+  payload LONGTEXT
+  attempts TINYINT
+  reserved_at INT
+  available_at INT
+  created_at INT
+}
+
+Table failed_jobs {
+  id BIGINT [pk]
+  uuid VARCHAR
+  connection TEXT
+  queue TEXT
+  payload LONGTEXT
+  exception LONGTEXT
+  failed_at TIMESTAMP
+}
+
+Table cache {
+  key STRING [pk]
+  value BLOB
+  expiration INT
+}
+
+Table password_resets {
+  email VARCHAR [pk]
+  token VARCHAR
+  created_at TIMESTAMP
+}
+
+Table personal_access_tokens {
+  id BIGINT [pk]
+  tokenable_type VARCHAR
+  tokenable_id BIGINT
+  name VARCHAR
+  token VARCHAR
+  abilities TEXT
+  last_used_at TIMESTAMP
+  created_at TIMESTAMP
+  updated_at TIMESTAMP
+}
+
+

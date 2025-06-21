@@ -71,7 +71,7 @@ $shownIds = [];
       @if(isset($product->subcategory) && strtolower(trim($product->subcategory)) === 'mats' && isset($product->category) && strtolower(trim($product->category)) === 'prototype' && (!isset($product->is_approved) || $product->is_approved))
         <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
           @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-contain" />
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
           @else
             <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
               <span class="text-4xl">🖼️</span>
@@ -98,7 +98,7 @@ $shownIds = [];
       @if(isset($product->subcategory) && strtolower($product->subcategory) === 'pins' && !in_array($product->id, $shownIds))
         <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
           @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-contain" />
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
           @else
             <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
               <span class="text-4xl">🖼️</span>
@@ -112,10 +112,10 @@ $shownIds = [];
 </section>
 
 <!-- Product Modal -->
-<div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70">
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-lg w-full relative flex flex-col items-center">
+<div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70" onclick="if(event.target === this) closeProductModal()">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-lg w-full relative flex flex-col items-center" onclick="event.stopPropagation()">
     <button onclick="closeProductModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl">&times;</button>
-    <img id="modal-image" src="" alt="Product Image" class="w-full h-64 object-cover rounded mb-4" />
+    <img id="modal-image" src="" alt="Product Image" class="object-contain rounded mb-4 max-w-full max-h-[80vh] mx-auto" style="width:auto;height:auto;display:block;" />
     <h2 id="modal-name" class="text-2xl font-bold mb-2 text-center"></h2>
     <p id="modal-description" class="mb-2 text-center"></p>
     <p id="modal-size" class="mb-2 text-center text-gray-500"></p>
@@ -142,7 +142,36 @@ document.querySelectorAll('.product-card').forEach(function(card) {
 function showProductModal(product) {
   document.getElementById('product-modal').classList.remove('hidden');
   document.getElementById('product-modal').classList.add('flex');
-  document.getElementById('modal-image').src = '/storage/' + product.image;
+  const modalImg = document.getElementById('modal-image');
+  modalImg.src = '/storage/' + product.image;
+  modalImg.alt = product.name;
+  // Reset classes and styles
+  modalImg.className = 'object-contain rounded mb-4 max-w-full max-h-[80vh] mx-auto';
+  modalImg.style.width = 'auto';
+  modalImg.style.height = 'auto';
+  // Wait for image to load to get natural size
+  modalImg.onload = function() {
+    const w = modalImg.naturalWidth;
+    const h = modalImg.naturalHeight;
+    if (w && h) {
+      if (w > h) {
+        // Landscape
+        modalImg.className = 'object-contain rounded mb-4 w-full h-auto max-w-[90vw] max-h-[80vh] mx-auto';
+        modalImg.style.width = '';
+        modalImg.style.height = '';
+      } else if (h > w) {
+        // Portrait
+        modalImg.className = 'object-contain rounded mb-4 h-96 w-auto max-h-[80vh] max-w-full mx-auto';
+        modalImg.style.width = '';
+        modalImg.style.height = '';
+      } else {
+        // Square
+        modalImg.className = 'object-contain rounded mb-4 w-96 h-96 max-w-full max-h-[80vh] mx-auto';
+        modalImg.style.width = '';
+        modalImg.style.height = '';
+      }
+    }
+  };
   document.getElementById('modal-name').textContent = product.name;
   document.getElementById('modal-description').textContent = product.description;
   document.getElementById('modal-size').textContent = 'Size: ' + product.size;
