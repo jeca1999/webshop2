@@ -80,3 +80,7 @@ Special thanks to **NETRIRIX** for inspiration and content used in this project.
 -   X (Twitter): [@netririx](https://x.com/netririx)
 -   Instagram: [@netririx](https://instagram.com/netririx)
 -   YouTube: [NETRIRIX](https://www.youtube.com/@netririx)
+
+### Icon Credits
+
+Icons used in this project are sourced from their respective creators and are used under their respective licenses. Please refer to the icon provider's website for more information. If you are using a specific icon set (e.g., [Font Awesome](https://fontawesome.com/), [Heroicons](https://heroicons.com/)), please review and comply with their license terms.
