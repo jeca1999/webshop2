@@ -89,10 +89,10 @@
   
         <div class="flex flex-col gap-2">
           <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-          <a href="{{ route('find-order') }}" class="hover:text-red-500">Find my order</a>
-          <a href="{{ route('returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
-          <a href="{{ route('privacy-policy') }}" class="hover:text-red-500">Privacy Policy</a>
-          <a href="{{ route('terms-of-service') }}" class="hover:text-red-500">Terms of Service</a>
+          <a href="{{ url('/support/find-order') }}" class="hover:text-red-500">Find my order</a>
+          <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
+          <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500">Privacy Policy</a>
+          <a href="{{ url('/policies/terms') }}" class="hover:text-red-500">Terms of Service</a>
         </div>
   
       </div>

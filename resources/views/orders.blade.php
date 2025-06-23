@@ -11,7 +11,10 @@
                     @foreach($orders as $order)
                         <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-                                <div class="font-bold text-lg dark:text-white">Order #{{ $order->id }}</div>
+                                <div>
+                                    <div class="font-bold text-lg dark:text-white">Order #{{ $order->id }}</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-300">Order Code: <span class="font-mono">{{ $order->order_code }}</span></div>
+                                </div>
                                 <div class="text-sm text-gray-500 dark:text-white">Placed: {{ $order->created_at->format('Y-m-d H:i') }}</div>
                             </div>
                             <div class="mb-2">

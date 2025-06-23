@@ -189,32 +189,38 @@
   
         <div class="flex flex-col gap-2">
           <h2 class="mb-4 font-bold text-xl">Socials</h2>
-          <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" class="hover:text-red-500">X (Twitter)</a>
-          <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" class="hover:text-red-500">Instagram</a>
-          <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
-          <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
+          <div class="flex gap-4">
+            <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" title="X (Twitter)" class="hover:text-red-500 glow-x">
+              <svg width="28" height="28" fill="currentColor" viewBox="0 0 32 32"><path d="M19.48 13.4 28.06 4h-2.13l-7.6 8.4L12.1 4H4.5l9.02 13.2L4.5 28h2.13l8.01-8.85 6.6 8.85h7.6l-9.36-14.6Zm-2.84 3.13-.93-1.32L6.1 5.5h4.5l5.1 7.2.93 1.32 9.7 13.8h-4.5l-5.1-7.2Z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" title="Instagram" class="hover:text-red-500 glow-instagram">
+              <svg width="28" height="28" fill="currentColor" viewBox="0 0 32 32"><path d="M16 11.6A4.4 4.4 0 1 0 16 20.4 4.4 4.4 0 1 0 16 11.6zm0 7.2A2.8 2.8 0 1 1 16 13.2a2.8 2.8 0 0 1 0 5.6zm5.6-7.44a1.04 1.04 0 1 1-2.08 0 1.04 1.04 0 0 1 2.08 0zM28 9.6a7.2 7.2 0 0 0-1.92-5.08A7.2 7.2 0 0 0 21 2.6C19.2 2.08 12.8 2.08 11 2.6A7.2 7.2 0 0 0 5.92 4.52 7.2 7.2 0 0 0 4 9.6C3.48 11.4 3.48 17.6 4 19.4a7.2 7.2 0 0 0 1.92 5.08A7.2 7.2 0 0 0 11 29.4c1.8.52 8.2.52 10 0a7.2 7.2 0 0 0 5.08-1.92A7.2 7.2 0 0 0 28 22.4c.52-1.8.52-8.2 0-10zm-2.4 12.8a4.8 4.8 0 0 1-2.72 2.72c-1.88.75-6.36.58-8.88.58s-7 .17-8.88-.58A4.8 4.8 0 0 1 6.4 22.4c-.75-1.88-.58-6.36-.58-8.88s-.17-7 .58-8.88A4.8 4.8 0 0 1 9.6 6.4c1.88-.75 6.36-.58 8.88-.58s7-.17 8.88.58a4.8 4.8 0 0 1 2.72 2.72c.75 1.88.58 6.36.58 8.88s.17 7-.58 8.88z"/></svg>
+            </a>
+            <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" title="Tumblr" class="hover:text-red-500 glow-tumblr">
+              <svg width="28" height="28" fill="currentColor" viewBox="0 0 32 32"><path d="M21.5 25.7c-1.1.5-2.1.8-3.3.8-2.7 0-4.5-1.4-4.5-4.1v-7.2h6.2V12h-6.2V6.7h-3.1c-.1 0-.2.1-.2.2-.2 2.1-1.1 5.8-4.9 7.3v2.4h2.5v7.3c0 4.1 3 6.1 7.5 6.1 1.7 0 3.1-.2 4.2-.6l-.7-2.7z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" title="Facebook" class="hover:text-red-500 glow-blue">
+              <svg width="28" height="28" fill="currentColor" viewBox="0 0 32 32"><path d="M29 0H3C1.3 0 0 1.3 0 3v26c0 1.7 1.3 3 3 3h13V20h-4v-5h4v-3.7c0-4 2.4-6.3 6-6.3 1.7 0 3.3.1 3.7.2v4.3h-2.6c-2 0-2.4.9-2.4 2.3V15h5l-1 5h-4v12h7c1.7 0 3-1.3 3-3V3c0-1.7-1.3-3-3-3z"/></svg>
+            </a>
+          </div>
         </div>
   
         <div class="flex flex-col gap-2">
           <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-          <a href="{{ route('find-order') }}" class="hover:text-red-500 text-black dark:text-white">Find my order</a>
-          <a href="{{ route('returns-refunds') }}" class="hover:text-red-500 text-black dark:text-white">Returns and refunds</a>
-          <a href="{{ route('privacy-policy') }}" class="hover:text-red-500 text-black dark:text-white">Privacy Policy</a>
-          <a href="{{ route('terms-of-service') }}" class="hover:text-red-500 text-black dark:text-white">Terms of Service</a>
+          <a href="{{ url('/support/find-order') }}" class="hover:text-red-500 text-black dark:text-white">Find my order</a>
+          <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500 text-black dark:text-white">Returns and refunds</a>
+          <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500 text-black dark:text-white">Privacy Policy</a>
+          <a href="{{ url('/policies/terms') }}" class="hover:text-red-500 text-black dark:text-white">Terms of Service</a>
         </div>
   
       </div>
-  
-      <!-- Newsletter -->
-      <div class="flex flex-col items-center mt-11">
-        <h2 class="mb-4 font-bold text-xl">Newsletter</h2>
-        <p class="text-center max-w-md">Subscribe to our newsletter for the latest updates on new artworks.</p>
-        <form action="" method="POST" class="flex flex-col gap-2 mt-4 w-full max-w-sm">
-          <input type="email" name="email" placeholder="Enter your email" required class="border border-gray-300 rounded-md p-2">
-          <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Subscribe</button>
-        </form>
-      </div>
-  
+
+      <style>
+        .glow-blue { box-shadow: 0 0 8px 2px #3b82f6, 0 0 16px 4px #3b82f6; border-radius: 6px; }
+        .glow-x { box-shadow: 0 0 8px 2px #000, 0 0 16px 4px #000; border-radius: 6px; }
+        .glow-instagram { box-shadow: 0 0 8px 2px #ec4899, 0 0 16px 4px #ec4899; border-radius: 6px; }
+        .glow-tumblr { box-shadow: 0 0 8px 2px #1a365d, 0 0 16px 4px #1a365d; border-radius: 6px; }
+      </style>
     </div>
   
       <footer class="bg-white dark:bg-black py-8">

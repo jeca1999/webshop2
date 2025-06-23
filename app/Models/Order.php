@@ -15,6 +15,7 @@ class Order extends Model
         'address',
         'mode_of_payment',
         'status',
+        'order_code',
     ];
 
     protected $casts = [

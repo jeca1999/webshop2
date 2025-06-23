@@ -126,6 +126,11 @@ Route::middleware(['auth'])->group(function () {
             ];
         })->toArray();
 
+        // Generate a unique order code
+        do {
+            $orderCode = strtoupper(bin2hex(random_bytes(4)));
+        } while (Order::where('order_code', $orderCode)->exists());
+
         // Create the order
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -138,7 +143,8 @@ Route::middleware(['auth'])->group(function () {
                 $validated['country']
             ]),
             'mode_of_payment' => 'Credit Card',
-            'status' => 'Received'
+            'status' => 'Received',
+            'order_code' => $orderCode,
         ]);
 
         // Clear the selected items from cart
@@ -183,7 +189,8 @@ Route::get('/test-query', function () {
     return response()->json($products);
 });
 
-Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
-Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
-Route::view('/returns-refunds', 'returns-refunds')->name('returns-refunds');
-Route::view('/find-order', 'find-order')->name('find-order');
+// Support and policy pages
+Route::view('/support/find-order', 'support.find-order')->middleware(['auth'])->name('support.find-order');
+Route::view('/support/returns-refunds', 'support.returns-refunds')->middleware(['auth'])->name('support.returns-refunds');
+Route::view('/policies/privacy', 'policies.privacy')->name('policies.privacy');
+Route::view('/policies/terms', 'policies.terms')->name('policies.terms');
