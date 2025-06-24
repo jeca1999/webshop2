@@ -194,3 +194,8 @@ Route::view('/support/find-order', 'support.find-order')->middleware(['auth'])->
 Route::view('/support/returns-refunds', 'support.returns-refunds')->middleware(['auth'])->name('support.returns-refunds');
 Route::view('/policies/privacy', 'policies.privacy')->name('policies.privacy');
 Route::view('/policies/terms', 'policies.terms')->name('policies.terms');
+
+
+Route::get('/ping', function () {
+    return 'pong';
+});
