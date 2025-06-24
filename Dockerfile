@@ -29,4 +29,4 @@ RUN chmod -R 775 storage bootstrap/cache
 EXPOSE 8000
 
 # Start the app
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["sh", "-c", "npm run build && php artisan serve --host=0.0.0.0 --port=8000"]
