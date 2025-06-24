@@ -1,0 +1,16 @@
+{
+    "build": {
+      "builder": "Dockerfile"
+    },
+    "deploy": {
+      "startCommand": "php artisan serve --host=0.0.0.0 --port=8000"
+    },
+    "ports": [
+      {
+        "port": 8000,
+        "protocol": "http",
+        "public": true
+      }
+    ]
+  }
+  
