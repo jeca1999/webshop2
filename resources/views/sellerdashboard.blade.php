@@ -7,11 +7,6 @@
             <a href="{{ route('seller.products') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Products</a>
         </div>
     </header>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-black dark:text-white leading-tight text-center">
-            {{ __('Seller Dashboard') }}
-        </h2>
-    </x-slot>
     <div class="py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
             <div class="bg-white dark:bg-black overflow-hidden shadow-sm rounded-lg">
