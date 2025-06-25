@@ -127,6 +127,15 @@
                 </div>
             </div>
         </div>
+
+        <!-- DEBUG: Test Dropdown -->
+        <div class="relative mt-4">
+            <button id="test-dropdown-toggle" class="px-4 py-2 bg-blue-500 text-white rounded">Test Dropdown</button>
+            <div id="test-dropdown-menu" class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50 hidden">
+                <div class="px-4 py-2">Test Option 1</div>
+                <div class="px-4 py-2">Test Option 2</div>
+            </div>
+        </div>
     </div>
     @push('styles')
     <style>
@@ -178,12 +187,12 @@
       });
     </script>
     <script>
-    // Dropdown toggle logic (match products page, with DOMContentLoaded)
     document.addEventListener('DOMContentLoaded', function () {
+        // Existing dropdown
         const dropdownToggle = document.getElementById('profile-dropdown-toggle');
         const dropdownMenu = document.getElementById('profile-dropdown-menu');
-        console.log('Dropdown Toggle:', dropdownToggle);
-        console.log('Dropdown Menu:', dropdownMenu);
+        if (!dropdownToggle) console.error('profile-dropdown-toggle NOT FOUND');
+        if (!dropdownMenu) console.error('profile-dropdown-menu NOT FOUND');
         if (dropdownToggle && dropdownMenu) {
             dropdownToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -192,6 +201,22 @@
             document.addEventListener('click', function(e) {
                 if (!dropdownMenu.classList.contains('hidden')) {
                     dropdownMenu.classList.add('hidden');
+                }
+            });
+        }
+        // Test dropdown
+        const testToggle = document.getElementById('test-dropdown-toggle');
+        const testMenu = document.getElementById('test-dropdown-menu');
+        if (!testToggle) console.error('test-dropdown-toggle NOT FOUND');
+        if (!testMenu) console.error('test-dropdown-menu NOT FOUND');
+        if (testToggle && testMenu) {
+            testToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                testMenu.classList.toggle('hidden');
+            });
+            document.addEventListener('click', function(e) {
+                if (!testMenu.classList.contains('hidden')) {
+                    testMenu.classList.add('hidden');
                 }
             });
         }
