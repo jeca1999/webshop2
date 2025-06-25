@@ -182,6 +182,8 @@
     document.addEventListener('DOMContentLoaded', function () {
         const dropdownToggle = document.getElementById('profile-dropdown-toggle');
         const dropdownMenu = document.getElementById('profile-dropdown-menu');
+        console.log('Dropdown Toggle:', dropdownToggle);
+        console.log('Dropdown Menu:', dropdownMenu);
         if (dropdownToggle && dropdownMenu) {
             dropdownToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
