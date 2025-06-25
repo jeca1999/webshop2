@@ -43,5 +43,17 @@
             </form>
         </div>
     </div>
+    <style>
+    input[type="email"], input[type="password"] {
+        background-color: #fff;
+        border: 1px solid #d1d5db;
+        color: #222;
+    }
+    .dark input[type="email"], .dark input[type="password"] {
+        background-color: #111;
+        border: 1px solid #6b7280;
+        color: #fff;
+    }
+    </style>
 </x-app-layout>
 
