@@ -17,6 +17,29 @@
                 </div>
             </div>
         </header>
+        <script>
+        // Attach dropdown logic immediately after header
+        (function() {
+            const dropdownToggle = document.getElementById('profile-dropdown-toggle');
+            const dropdownMenu = document.getElementById('profile-dropdown-menu');
+            if (dropdownToggle && dropdownMenu) {
+                dropdownToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('hidden');
+                });
+                dropdownMenu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+                document.addEventListener('click', function(e) {
+                    if (!dropdownMenu.classList.contains('hidden')) {
+                        if (!dropdownMenu.contains(e.target) && !dropdownToggle.contains(e.target)) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            }
+        })();
+        </script>
 
         <nav class="w-full flex gap-4 flex-wrap justify-center mt-4 mb-8">
             <a href="{{ route('seller.dashboard') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Dashboard</a>
@@ -177,29 +200,6 @@
           }
         });
       });
-    </script>
-    <script>
-    // Ensure dropdown script runs after all DOM is loaded
-    setTimeout(function() {
-      const dropdownToggle = document.getElementById('profile-dropdown-toggle');
-      const dropdownMenu = document.getElementById('profile-dropdown-menu');
-      if (dropdownToggle && dropdownMenu) {
-        dropdownToggle.addEventListener('click', function(e) {
-          e.stopPropagation();
-          dropdownMenu.classList.toggle('hidden');
-        });
-        dropdownMenu.addEventListener('click', function(e) {
-          e.stopPropagation();
-        });
-        document.addEventListener('click', function(e) {
-          if (!dropdownMenu.classList.contains('hidden')) {
-            if (!dropdownMenu.contains(e.target) && !dropdownToggle.contains(e.target)) {
-              dropdownMenu.classList.add('hidden');
-            }
-          }
-        });
-      }
-    }, 200);
     </script>
     @endpush
 </x-app-layout>
