@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-black dark:text-white leading-tight text-center">
@@ -160,3 +163,4 @@
     </script>
     @endpush
 </x-app-layout>
+@endsection
