@@ -1,5 +1,6 @@
 <x-guest-layout>
-    <h1 class="text-3xl font-bold text-white">Login</h1>
+    <link rel="stylesheet" href="/css/auth-center.css">
+    <h1 class="text-3xl font-bold text-white center-auth-title">Login</h1>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -40,7 +41,7 @@
                 </a>
             @endif
             @if (Route::has('register'))
-                <a class="underline text-sm text-black dark:text-white hover:text-gray-900 dark:hover:text-gray-100 rounded-md ml-2" href="{{ route('register') }}">
+                <a class="underline text-sm text-black dark:text-white hover:text-gray-900 dark:hover:text-gray-100 rounded-md ml-2 center-auth-title" href="{{ route('register') }}">
                     {{ __('Register') }}
                 </a>
             @endif
