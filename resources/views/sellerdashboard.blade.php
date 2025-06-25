@@ -178,16 +178,20 @@
       });
     </script>
     <script>
-    // Dropdown toggle logic (match products page)
-    const dropdownToggle = document.getElementById('profile-dropdown-toggle');
-    const dropdownMenu = document.getElementById('profile-dropdown-menu');
-    dropdownToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        dropdownMenu.classList.toggle('hidden');
-    });
-    document.addEventListener('click', function(e) {
-        if (!dropdownMenu.classList.contains('hidden')) {
-            dropdownMenu.classList.add('hidden');
+    // Dropdown toggle logic (match products page, with DOMContentLoaded)
+    document.addEventListener('DOMContentLoaded', function () {
+        const dropdownToggle = document.getElementById('profile-dropdown-toggle');
+        const dropdownMenu = document.getElementById('profile-dropdown-menu');
+        if (dropdownToggle && dropdownMenu) {
+            dropdownToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('hidden');
+            });
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.classList.contains('hidden')) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
         }
     });
     </script>
