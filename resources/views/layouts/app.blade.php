@@ -16,8 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-black text-black dark:text-white">
-            <!-- @include('layouts.navigation') -->
-
+            <div class="w-full border-b border-red-500"></div>
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-black shadow">
