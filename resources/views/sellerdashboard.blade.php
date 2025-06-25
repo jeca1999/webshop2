@@ -179,26 +179,27 @@
       });
     </script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const dropdownToggle = document.getElementById('profile-dropdown-toggle');
-        const dropdownMenu = document.getElementById('profile-dropdown-menu');
-        if (dropdownToggle && dropdownMenu) {
-            dropdownToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('hidden');
-            });
-            dropdownMenu.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent closing when clicking inside the menu
-            });
-            document.addEventListener('click', function(e) {
-                if (!dropdownMenu.classList.contains('hidden')) {
-                    if (!dropdownMenu.contains(e.target) && !dropdownToggle.contains(e.target)) {
-                        dropdownMenu.classList.add('hidden');
-                    }
-                }
-            });
-        }
-    });
+    // Ensure dropdown script runs after all DOM is loaded
+    setTimeout(function() {
+      const dropdownToggle = document.getElementById('profile-dropdown-toggle');
+      const dropdownMenu = document.getElementById('profile-dropdown-menu');
+      if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('hidden');
+        });
+        dropdownMenu.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownMenu.classList.contains('hidden')) {
+            if (!dropdownMenu.contains(e.target) && !dropdownToggle.contains(e.target)) {
+              dropdownMenu.classList.add('hidden');
+            }
+          }
+        });
+      }
+    }, 200);
     </script>
     @endpush
 </x-app-layout>
