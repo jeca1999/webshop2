@@ -6,6 +6,11 @@
               <div class="flex gap-2 flex-wrap">
                   <a href="{{ route('seller.dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
                   <a href="{{ route('seller.products') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Products</a>
+                  <a href="{{ route('seller.profile.edit') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-blue-500 hover:text-white transition">Edit Profile</a>
+                  <form method="POST" action="{{ route('logout') }}" class="inline">
+                      @csrf
+                      <button type="submit" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-gray-700 hover:text-white transition">Logout</button>
+                  </form>
               </div>
           </header>
 
