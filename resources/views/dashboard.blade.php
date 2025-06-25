@@ -1,10 +1,11 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-black dark:text-white leading-tight text-center">
             {{ __('Customer Dashboard') }}
         </h2>
     </x-slot>
-    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <div class="py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
             <div class="bg-white dark:bg-black overflow-hidden shadow-sm rounded-lg">
@@ -116,4 +117,4 @@
       .glow-tumblr { box-shadow: 0 0 8px 2px #1a365d, 0 0 16px 4px #1a365d; }
     </style>
     @endpush
-</x-app-layout>
+@endsection
