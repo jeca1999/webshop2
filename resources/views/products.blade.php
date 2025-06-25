@@ -28,7 +28,7 @@
                   <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                       <div class="flex flex-col lg:flex-row gap-y-8 gap-x-12 p-4 sm:p-6 md:p-8">
                           <div class="flex flex-col lg:flex-row w-full">
-                              <form id="image-upload-form" action="{{ secure_url('seller/products') }}" method="POST" enctype="multipart/form-data" class="w-full flex flex-col lg:flex-row items-center lg:items-start lg:pl-8 mt-8 lg:mt-0 gap-y-8 gap-x-8">
+                              <form id="image-upload-form" action="{{ secure_url('seller/products') }}" method="POST" enctype="multipart/form-data" class="w-full flex flex-col lg:flex-row items-center lg:items-start lg:pl-8 mt-8 lg:mt-0 gap-y-8 gap-x-8 bg-black dark:bg-black rounded-lg">
                                   @csrf
                                   <div class="flex flex-col items-center justify-center w-full lg:w-1/2 border-b lg:border-b-0 lg:border-r border-gray-300 dark:border-gray-700 lg:pr-8 pb-8 lg:pb-0">
                                       <div class="mb-4 text-white text-center">{{ __("Product Image") }}</div>
