@@ -1,4 +1,5 @@
 <x-app-layout>
+    @extends('namespace::layouts.app')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-black dark:text-white leading-tight text-center">
             {{ __('Seller Dashboard') }}
