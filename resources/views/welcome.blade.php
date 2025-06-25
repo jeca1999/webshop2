@@ -41,6 +41,7 @@
         <a href="{{route('prototype')}}" class="hover:text-red-500 transition">Prototypes</a>
         <a href="{{route('comission')}}" class="hover:text-red-500 transition">Commissions</a>
     </nav>
+    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <!-- Home Hero Image -->
     <section class="w-full">
         <img 

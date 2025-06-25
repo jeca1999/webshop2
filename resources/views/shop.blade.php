@@ -43,6 +43,7 @@
         <a href="{{route('prototype')}}" class="hover:text-red-500 transition">Prototypes</a>
         <a href="{{route('comission')}}" class="hover:text-red-500 transition">Commissions</a>
     </nav>
+    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <!-- Hero Section -->
     <section class="flex flex-col md:flex-row items-center justify-between py-6 sm:py-10 px-2 sm:px-4 bg-white dark:bg-black">
         <div class="flex-1 flex flex-col items-center md:items-start">

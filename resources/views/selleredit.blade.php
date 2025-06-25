@@ -4,7 +4,7 @@
             {{ __('Seller Profile') }}
         </h2>
     </x-slot>
-
+    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <div class="py-12">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
             @if(session('status'))

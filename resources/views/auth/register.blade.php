@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

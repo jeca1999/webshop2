@@ -44,6 +44,7 @@
         <a href="{{route('prototype')}}" class="hover:text-red-500 transition">Prototypes</a>
         <a href="{{route('comission')}}" class="hover:text-red-500 transition">Commissions</a>
     </nav>
+    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <!-- Intro -->
     <section class="flex flex-col items-center justify-center text-center py-10 px-4 bg-white dark:bg-black">
         <h1 class="text-4xl font-bold mb-4 text-black dark:text-white">Prototypes</h1>

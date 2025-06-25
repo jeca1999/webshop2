@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
