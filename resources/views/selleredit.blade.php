@@ -20,7 +20,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="{{ route('seller.profile.update') }}">
+            <form method="POST" action="{{ secure_url('seller/profile') }}">
                 @csrf
                 @method('PATCH')
                 <div>
