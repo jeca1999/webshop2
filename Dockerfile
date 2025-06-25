@@ -13,26 +13,21 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy files
+# Copy application files
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install JS dependencies and build Vite assets
-RUN npm install && npm run build
+# Install JS dependencies and build assets
+RUN npm install
+RUN npm run build
 
 # Set permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Expose Laravel default port
+# Expose port 8000 for Laravel
 EXPOSE 8000
 
-# Start the app
-CMD ["sh", "-c", "npm run build && php artisan serve --host=0.0.0.0 --port=8000"]
-
-# Install frontend packages
-RUN npm install
-
-# Build the frontend assets (including Tailwind)
-RUN npm run build
+# Start Laravel server
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
