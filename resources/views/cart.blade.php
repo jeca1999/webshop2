@@ -65,7 +65,7 @@
                                 <button type="button" id="checkout-selected" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Checkout Selected</button>
                             </div>
                         </div>
-                        <form id="remove-form" method="POST" action="/cart/remove" style="display:none;">
+                        <form id="remove-form" method="POST" action="{{ url('/cart/remove', [], true) }}" style="display:none;">
                             @csrf
                             <input type="hidden" name="selected_ids" id="remove-ids">
                         </form>
