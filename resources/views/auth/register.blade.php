@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <link rel="stylesheet" href="/css/auth-center.css">
+    <link rel="stylesheet" href="{{ asset('css/auth-center.css') }}">
     <h1 class="text-3xl font-bold text-white center-auth-title">Register</h1>
     <form method="POST" action="{{ route('register') }}">
         @csrf
