@@ -23,9 +23,9 @@
               <a href="{{ route('seller.products') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Products</a>
           </nav>
 
-          <div class="py-6 sm:py-10 lg:py-12">
+          <div class="py-6 sm:py-10 lg:py-12 bg-black dark:bg-black">
               <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-                  <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                  <div class="bg-black dark:bg-black overflow-hidden shadow-sm sm:rounded-lg">
                       <div class="flex flex-col lg:flex-row gap-y-8 gap-x-12 p-4 sm:p-6 md:p-8">
                           <div class="flex flex-col lg:flex-row w-full">
                               <form id="image-upload-form" action="{{ secure_url('seller/products') }}" method="POST" enctype="multipart/form-data" class="w-full flex flex-col lg:flex-row items-center lg:items-start lg:pl-8 mt-8 lg:mt-0 gap-y-8 gap-x-8 bg-black dark:bg-black rounded-lg">
@@ -33,7 +33,7 @@
                                   <div class="flex flex-col items-center justify-center w-full lg:w-1/2 border-b lg:border-b-0 lg:border-r border-gray-300 dark:border-gray-700 lg:pr-8 pb-8 lg:pb-0">
                                       <div class="mb-4 text-white text-center">{{ __("Product Image") }}</div>
                                       <div class="flex justify-center w-full">
-                                          <div id="drop-area" class="flex flex-col items-center justify-center w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-96 h-64 sm:h-80 md:h-96 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-gray-50 dark:bg-gray-700 relative overflow-hidden">
+                                          <div id="drop-area" class="flex flex-col items-center justify-center w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-96 h-64 sm:h-80 md:h-96 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-black dark:bg-black relative overflow-hidden">
                                               <svg class="w-10 h-10 sm:w-12 sm:h-12 text-gray-400 mb-2 z-10 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 48 48">
                                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                       d="M8 32V40a4 4 0 004 4h24a4 4 0 004-4V32M32 16l-8-8-8 8M24 8v24" />
