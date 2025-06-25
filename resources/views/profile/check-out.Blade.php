@@ -30,7 +30,7 @@
                 @if (session('success'))
                     <div class="mb-4 text-green-600 font-semibold">{{ session('success') }}</div>
                 @endif
-                <form class="space-y-4" method="POST" action="{{ route('cart.checkout.selected') }}">
+                <form class="space-y-4" method="POST" action="{{ route('cart.checkout.selected', [], true) }}">
                     @csrf
                     <input type="hidden" name="selected_ids" value="{{ implode(',', array_keys($cart ?? [])) }}">
                     <div>
