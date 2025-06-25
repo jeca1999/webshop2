@@ -1,4 +1,3 @@
-@php dd('dashboard loaded'); @endphp
 @php dd(auth('seller')->check()); @endphp
 <x-app-layout>
     <!-- Header -->
