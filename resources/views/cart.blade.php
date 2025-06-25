@@ -18,16 +18,16 @@
         </div>
     </header>
     <nav class="w-full flex gap-4 flex-wrap justify-center mt-4 mb-8">
-        <a href="{{ url('/dashboard', [], true) }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Dashboard</a>
-        <a href="{{ url('/orders', [], true) }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Orders</a>
-        <a href="{{ url('/cart', [], true) }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Cart</a>
+        <a href="{{ url('/dashboard', [], true) }}" class="inline-block px-8 py-3 text-lg font-semibold text-white bg-black border border-white rounded-md leading-normal transition hover:text-red-500 hover:bg-white hover:border-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Dashboard</a>
+        <a href="{{ url('/orders', [], true) }}" class="inline-block px-8 py-3 text-lg font-semibold text-white bg-black border border-white rounded-md leading-normal transition hover:text-red-500 hover:bg-white hover:border-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Orders</a>
+        <a href="{{ url('/cart', [], true) }}" class="inline-block px-8 py-3 text-lg font-semibold text-white bg-black border border-white rounded-md leading-normal transition hover:text-red-500 hover:bg-white hover:border-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Cart</a>
     </nav>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if(!empty($cart) && count($products))
-                        <form id="cart-form">
+                        <form id="cart-form" class="rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <table class="w-full text-left">
                             <thead>
                                 <tr>
