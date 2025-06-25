@@ -134,7 +134,17 @@
                                   data-product-category="{{ $product->category }}"
                                   data-product-subcategory="{{ $product->subcategory }}"
                                   data-product-image="{{ $product->image ? asset('storage/' . ltrim($product->image, '/')) : '' }}"
-                                  data-product-orientation="{{ $product->image ? (getimagesize(public_path('storage/' . ltrim($product->image, '/')))[0] < getimagesize(public_path('storage/' . ltrim($product->image, '/')))[1] ? 'portrait' : 'landscape') : 'landscape' }}">
+                                  @php
+                                      $imagePath = public_path('storage/' . ltrim($product->image, '/'));
+                                      $orientation = 'landscape';
+                                      if ($product->image && file_exists($imagePath)) {
+                                          $size = getimagesize($imagePath);
+                                          if ($size && $size[0] < $size[1]) {
+                                              $orientation = 'portrait';
+                                          }
+                                      }
+                                  @endphp
+                                  data-product-orientation="{{ $orientation }}">
                                   @if($product->image)
                                       <img src="{{ asset('storage/' . ltrim($product->image, '/')) }}" alt="{{ $product->name }}" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-cover object-center rounded mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700" />
                                   @else
