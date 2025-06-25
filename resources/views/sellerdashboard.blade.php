@@ -1,9 +1,19 @@
 <x-app-layout>
+    <!-- Header -->
+    <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
+        <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
+        <div class="flex gap-2 flex-wrap">
+            <a href="{{ route('seller.dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
+            <a href="{{ route('seller.products') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Products</a>
+        </div>
+    </header>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-black dark:text-white leading-tight text-center">
             {{ __('Seller Dashboard') }}
         </h2>
     </x-slot>
+   
+    </nav>
     <div class="py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
             <div class="bg-white dark:bg-black overflow-hidden shadow-sm rounded-lg">
