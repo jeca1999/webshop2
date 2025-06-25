@@ -2,14 +2,25 @@
 
 @section('content')
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-black dark:text-white leading-tight text-center">
-            {{ __('Seller Dashboard') }}
-        </h2>
-    </x-slot>
-    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
-    <div class="py-8 md:py-12">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+    <!-- Header -->
+    <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
+        <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
+        <div class="flex gap-2 flex-wrap">
+            <a href="{{ route('seller.dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
+            <a href="{{ route('seller.products') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Products</a>
+        </div>
+    </header>
+    <!-- Navigation -->
+    <nav class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 py-3 bg-white dark:bg-black border-y border-red-500">
+        <a href="{{route('welcome')}}" class="hover:text-red-500 transition">Home</a>
+        <a href="{{route('shop')}}" class="hover:text-red-500 transition">Shop</a>
+        <a href="{{route('prototype')}}" class="hover:text-red-500 transition">Prototypes</a>
+        <a href="{{route('comission')}}" class="hover:text-red-500 transition">Commissions</a>
+    </nav>
+    <!-- Seller Dashboard Section -->
+    <section class="flex flex-col items-center justify-center text-center pt-12 sm:pt-20 pb-10 sm:pb-16 px-2 sm:px-4 bg-white dark:bg-black">
+        <h2 class="font-bold text-3xl sm:text-5xl text-black dark:text-white mb-8 sm:mb-14">Seller Dashboard</h2>
+        <div class="w-full max-w-7xl mx-auto">
             <div class="bg-white dark:bg-black overflow-hidden shadow-sm rounded-lg">
                 <div class="p-4 sm:p-6 md:p-8 text-black dark:text-white text-center text-2xl md:text-4xl">
                     {{ __("Welcome Back!") }}
@@ -20,8 +31,6 @@
                     @php
                         $sellerId = auth('seller')->id();
                         $products = \App\Models\Product::where('seller_id', $sellerId)->get();
-
-                        // Calculate total units sold for each product (all time)
                         $productIds = $products->pluck('id');
                         $orders = \App\Models\Order::whereNotNull('products')->get();
                         $unitsSoldMap = [];
@@ -57,11 +66,11 @@
                             }
                             $productStats[] = [
                                 'name' => $product->name,
-                                'units_sold' => $unitsSold, // Use all-time units sold
+                                'units_sold' => $unitsSold,
                                 'revenue' => $revenue
                             ];
                             $chartLabels[] = $product->name;
-                            $chartData[] = $unitsSold; // Show all-time units sold in the bar chart
+                            $chartData[] = $unitsSold;
                             $totalSales += $unitsSold;
                             $totalRevenue += $revenue;
                         }
@@ -111,7 +120,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     @push('styles')
     <style>
       @media (max-width: 640px) {
