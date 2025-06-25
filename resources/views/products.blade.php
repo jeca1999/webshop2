@@ -18,9 +18,9 @@
               </div>
           </header>
 
-          <nav class="w-full flex gap-2 flex-wrap justify-center mt-4 mb-8">
-              <a href="{{ route('seller.dashboard') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Dashboard</a>
-              <a href="{{ route('seller.products') }}" class="inline-block px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-red-500 hover:text-white transition">Products</a>
+          <nav class="w-full flex gap-4 flex-wrap justify-center mt-4 mb-8">
+              <a href="{{ route('seller.dashboard') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Dashboard</a>
+              <a href="{{ route('seller.products') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Products</a>
           </nav>
 
           <div class="py-6 sm:py-10 lg:py-12">
