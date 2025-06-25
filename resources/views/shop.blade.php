@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-2xl font-bold text-blue-600">Tailwind is working!</h1>
     <!-- Header -->
     <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black sticky top-0 z-20">
         <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
