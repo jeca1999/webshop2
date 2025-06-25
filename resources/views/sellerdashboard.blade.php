@@ -1,5 +1,5 @@
-<x-app-layout>
-    @section('content')
+
+        
     <!-- Header -->
     <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
         <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
@@ -169,5 +169,5 @@
       });
     </script>
     @endpush
-    @endsection
-</x-app-layout>
+   
+
