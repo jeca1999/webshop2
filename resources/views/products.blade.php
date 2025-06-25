@@ -2,7 +2,7 @@
       <div>
           <!-- Header -->
           <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
-              <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
+              <a href="{{ secure_url('/') }}" class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</a>
               <div class="relative">
                   <button id="profile-dropdown-toggle" class="flex items-center gap-2 px-5 py-1.5 border border-black dark:border-white text-black dark:text-white rounded-sm text-sm leading-normal hover:bg-blue-500 hover:text-white transition focus:outline-none">
                       <span>Account</span>
