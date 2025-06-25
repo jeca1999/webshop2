@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>3ELLLE - Shop</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endif
-    <style>
-      body { font-family: 'Instrument Sans', sans-serif; }
-      .hidden, [x-cloak] {
-        display: none !important;
-        pointer-events: none !important;
-        opacity: 0 !important;
-      }
-    </style>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col">
+@extends('layouts.app')
+
+@section('content')
     <!-- Header -->
     <header class="w-full px-2 sm:px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black sticky top-0 z-20">
         <h1 class="text-3xl font-bold text-center md:text-left text-black dark:text-white">3ELLLE</h1>
@@ -43,7 +24,6 @@
         <a href="{{route('prototype')}}" class="hover:text-red-500 transition">Prototypes</a>
         <a href="{{route('comission')}}" class="hover:text-red-500 transition">Commissions</a>
     </nav>
-    <h1 class="text-3xl font-bold text-red-500">Welcome to 3ELLLE</h1>
     <!-- Hero Section -->
     <section class="flex flex-col md:flex-row items-center justify-between py-6 sm:py-10 px-2 sm:px-4 bg-white dark:bg-black">
         <div class="flex-1 flex flex-col items-center md:items-start">
@@ -335,5 +315,4 @@
     </footer>
         
     <h2 class="dark:text-white text-center"> Copyright 3ELLLE 2025</h2>
-</body>
-</html>
+@endsection
