@@ -73,7 +73,13 @@ $maxWidth = [
     >
         <div style="width:100%;display:flex;justify-content:center;align-items:center;">
             <div style="max-width:100%;max-height:70vh;overflow:auto;">
-                {{ $slot }}
+                <style>
+                  .modal-img-fit { max-width: 350px; max-height: 60vh; width: 100%; height: auto; display: block; margin: 0 auto; object-fit: contain; }
+                </style>
+                <div class="modal-img-wrapper">
+                  <!-- To use: <img class='modal-img-fit' ... > -->
+                  {{ $slot }}
+                </div>
             </div>
         </div>
     </div>
