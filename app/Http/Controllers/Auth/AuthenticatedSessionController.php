@@ -50,6 +50,8 @@ class AuthenticatedSessionController extends Controller
                 $user = Auth::guard('web')->user();
                 if ($user && $user->two_factor_secret) {
                     session(['2fa_required' => true, 'login.id' => $user->getAuthIdentifier()]);
+                    // Ensure intended URL is set for post-2FA redirect
+                    session()->put('url.intended', route('dashboard'));
                     return redirect()->intended('/dashboard');
                 }
                 return redirect()->intended('/dashboard');
