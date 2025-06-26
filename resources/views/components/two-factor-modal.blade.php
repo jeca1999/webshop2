@@ -4,6 +4,11 @@
         <p class="text-center text-sm text-gray-600 dark:text-gray-300 mb-4">
             Please enter the 6-digit code from your authenticator app.
         </p>
+        @if($errors->any())
+            <div class="mb-4 p-2 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">
+                {{ $errors->first() }}
+            </div>
+        @endif
         <form method="POST" action="{{ url('/two-factor-challenge') }}">
             @csrf
             <div class="mb-4">
@@ -18,6 +23,14 @@
         </form>
         <div class="mt-4 text-center text-xs text-gray-500 dark:text-gray-400">
             If you have recovery codes, you can enter one instead.
+        </div>
+        <div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
+            {{-- Debug: Show session keys --}}
+            @php
+                $sessionKeys = session()->all();
+            @endphp
+            <strong>Session:</strong>
+            <pre>{{ print_r($sessionKeys, true) }}</pre>
         </div>
     </div>
 </div>
