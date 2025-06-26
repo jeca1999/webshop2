@@ -54,6 +54,15 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'disks' => [
+
+    'public' => [
+        'driver' => 'local',
+        'root' => public_path('products'), // ⬅️ store directly inside public/products
+        'url' => env('APP_URL') . '/products',
+        'visibility' => 'public',
+    ],
+    
     ],
 
     /*

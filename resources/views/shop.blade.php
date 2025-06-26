@@ -53,7 +53,7 @@
                         </div>
                         <div class="bg-gray-300 dark:bg-gray-700 flex items-center justify-center h-32 sm:h-64">
                             @if($product->image)
-                                <img src="{{ asset('storage/products/' . basename($product->image)) }}" alt="{{ $product->name }}" class="w-full h-full object-cover" />
+                                <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
                             @else
                                 <span class="text-4xl">🖼️</span>
                             @endif
@@ -86,7 +86,7 @@
               @if(!in_array($product->id, $shownIds))
                 <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
                   @if($product->image)
-                    <img src="{{ asset('storage/products/' . basename($product->image)) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
                   @else
                     <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
                       <span class="text-4xl">🖼️</span>
@@ -114,7 +114,7 @@
               @if(!in_array($product->id, $shownIds))
                 <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
                   @if($product->image)
-                    <img src="{{ asset('storage/products/' . basename($product->image)) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
                   @else
                     <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
                       <span class="text-4xl">🖼️</span>
@@ -142,7 +142,7 @@
               @if(!in_array($product->id, $shownIds))
                 <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
                   @if($product->image)
-                    <img src="{{ asset('storage/products/' . basename($product->image)) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
                   @else
                     <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
                       <span class="text-4xl">🖼️</span>

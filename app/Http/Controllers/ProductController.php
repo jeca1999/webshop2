@@ -43,9 +43,12 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png|max:2048',
         ]);
 
-        $imagePath = null;
+        $imageFilename = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('product/images', 'public');
+            $image = $request->file('image');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('products'), $filename); // Save to /public/products
+            $imageFilename = $filename; // Just store the filename
         }
 
         Product::create([
@@ -55,7 +58,7 @@ class ProductController extends Controller
             'size' => $request->size,
             'category' => $request->category,
             'subcategory' => $request->subcategory,
-            'image' => $imagePath, // Always set image field
+            'image' => $imageFilename, // Always set image field
             'seller_id' => auth('seller')->id(),
             'is_approved' => true, // Automatically approve products uploaded by sellers
         ]);
@@ -108,9 +111,15 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             // Delete old image
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                $oldPath = public_path('products/' . $product->image);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
             }
-            $data['image'] = $request->file('image')->store('product/images', 'public');
+            $image = $request->file('image');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('products'), $filename); // Save to /public/products
+            $data['image'] = $filename; // Just store the filename
         }
         $product->update($data);
         return redirect()->route('seller.products')->with('success', 'Product updated successfully!');
