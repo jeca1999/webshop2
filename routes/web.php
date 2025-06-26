@@ -199,3 +199,12 @@ Route::view('/policies/terms', 'policies.terms')->name('policies.terms');
 Route::get('/ping', function () {
     return 'pong';
 });
+Route::get('/product-image/{filename}', function ($filename) {
+    $path = storage_path('app/public/products/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+})->name('product.image');
