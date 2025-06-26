@@ -208,10 +208,3 @@ Route::get('/product-image/{filename}', function ($filename) {
 
     return response()->file($path);
 })->name('product.image');
-Route::get('/debug/files', function () {
-    return response()->json([
-        'files' => collect(\File::files(storage_path('app/public/products')))->map(function($file) {
-            return $file->getFilename();
-        }),
-    ]);
-});

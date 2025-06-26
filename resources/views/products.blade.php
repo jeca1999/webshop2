@@ -183,7 +183,8 @@
 
               <!-- Custom Modal for edits -->
               <div id="edit-product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70 overflow-auto">
-                <div class="bg-gray-900 text-white rounded-xl p-4 sm:p-8 w-full max-w-xs sm:max-w-md md:max-w-lg shadow-2xl relative animate-fade-in mx-auto my-auto max-h-screen overflow-y-auto">
+                <div class="bg-gray-900 text-white rounded-xl p-4 sm:p-8 w-full max-w-xs sm:max-w-md md:max-w-lg shadow-2xl relative animate-fade-in mx-auto my-auto"
+                  style="max-height: none; height: auto; overflow: visible;">
                   <button class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white focus:outline-none" id="close-edit-modal">&times;</button>
                   <h3 class="text-xl font-bold mb-6">Edit Product</h3>
                   <form id="edit-product-form" method="POST" action="{{ url('seller/products/update', [], true) }}" enctype="multipart/form-data" class="space-y-4">
