@@ -5,6 +5,7 @@
   "deploy": {
     "startCommand": "php -S 0.0.0.0:8000 -t public",
     "postDeployCommand": "php artisan storage:link && chmod -R 775 storage bootstrap/cache && chmod -R 755 public/storage"
+
   },
   "ports": [
     {
