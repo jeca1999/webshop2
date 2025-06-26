@@ -62,7 +62,7 @@ $maxWidth = [
     </div>
     <div
         x-show="show"
-        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-full max-w-md sm:mx-auto"
+        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-full max-w-2xl sm:mx-auto"
         style="max-height: 90vh; overflow-y: auto;"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -76,7 +76,7 @@ $maxWidth = [
                 <img 
                     src="{{ asset('storage/product/images/' . basename($product->image)) }}" 
                     alt="{{ $product->name }}"
-                    class="modal-product-image w-full max-w-xs max-h-[60vh] object-contain mx-auto rounded"
+                    class="modal-product-image w-full max-w-full max-h-[60vh] object-contain mx-auto rounded"
                 />
             @endisset
 
