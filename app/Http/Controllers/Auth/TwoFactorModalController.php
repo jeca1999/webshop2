@@ -11,10 +11,11 @@ class TwoFactorModalController extends FortifyTwoFactorController
 {
     public function store(TwoFactorLoginRequest $request): RedirectResponse
     {
-        // Use Fortify's logic to validate the code
         $response = parent::store($request);
-        // On success, clear the modal session flag
-        Session::forget('2fa_required');
+        // Only clear the session flag if the code was correct (redirect is NOT back)
+        if (method_exists($response, 'getTargetUrl') && !str_contains($response->getTargetUrl(), url('/two-factor-challenge'))) {
+            Session::forget('2fa_required');
+        }
         return $response;
     }
 }
