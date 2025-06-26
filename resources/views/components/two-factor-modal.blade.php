@@ -9,7 +9,7 @@
                 {{ $errors->first() }}
             </div>
         @endif
-        <form method="POST" action="{{ url('/two-factor-challenge') }}">
+        <form id="two-factor-form" method="POST" action="{{ url('/two-factor-challenge') }}">
             @csrf
             <div class="mb-4">
                 <label for="code" class="sr-only">Authentication Code</label>
@@ -34,4 +34,12 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('two-factor-form').addEventListener('submit', function(e) {
+        setTimeout(function() {
+            // After form submit, reload the page after a short delay
+            window.location.reload();
+        }, 1000);
+    });
+</script>
 <!-- Alpine.js required for x-data/x-show. Include in your layout if not already present. -->
