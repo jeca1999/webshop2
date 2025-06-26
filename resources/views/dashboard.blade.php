@@ -80,8 +80,9 @@
                         <ul class="space-y-2 mb-6">
                             <li><a href="{{ url('/support/find-order') }}" class="text-red-600 hover:underline">Find my order</a></li>
                             <li><a href="{{ url('/support/returns-refunds') }}" class="text-red-600 hover:underline">Returns and refunds</a></li>
-                            <li><a href="{{ url('/policies/privacy-policy') }}" class="text-red-600 hover:underline">Privacy Policy</a></li>
-                            <li><a href="{{ url('/policies/terms-of-service') }}" class="text-red-600 hover:underline">Terms of Service</a></li>
+                            <li><a href="{{ url('/policies/privacy') }}" class="text-red-600 hover:underline">Privacy Policy</a></li>
+                            <li><a href="{{ url('/policies/terms') }}" class="text-red-600 hover:underline">Terms of Service</a></li>
+
                         </ul>
                         <div class="mt-4" x-data="{ highlightX: false, highlightInstagram: false, highlightTumblr: false, highlightFacebook: false }">
                             <h4 class="font-semibold mb-2">Contact Support</h4>
