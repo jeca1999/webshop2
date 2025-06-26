@@ -1,3 +1,5 @@
+@props(['maxWidth' => 'max-w-lg'])
+
 <div
     x-show="show"
     class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-full {{ $maxWidth }} sm:mx-auto"
