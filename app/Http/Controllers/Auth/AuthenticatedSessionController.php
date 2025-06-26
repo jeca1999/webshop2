@@ -49,8 +49,9 @@ class AuthenticatedSessionController extends Controller
                 $request->session()->regenerate();
                 $user = Auth::guard('web')->user();
                 if ($user && $user->two_factor_secret) {
-                    session(['2fa_required' => true, 'login.id' => $user->getAuthIdentifier()]);
-                    // Ensure intended URL is set for post-2FA redirect
+                    // Set the session key exactly as Fortify expects
+                    session(['login.id' => $user->getAuthIdentifier()]);
+                    session(['2fa_required' => true]);
                     session()->put('url.intended', route('dashboard'));
                     return redirect()->intended('/dashboard');
                 }
