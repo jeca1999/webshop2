@@ -73,12 +73,12 @@ $maxWidth = [
         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     >
-        <div class="modal-img-wrapper w-full flex flex-col items-center p-4">
+        <div class="modal-img-wrapper w-full h-auto flex flex-col items-center p-4">
             @isset($product)
                 <img 
                     src="{{ asset('storage/product/images/' . basename($product->image)) }}" 
                     alt="{{ $product->name }}"
-                    class="modal-product-image  max-w-full object-contain mx-auto rounded"
+                    class="modal-product-image max-w-full h-auto object-contain mx-auto rounded"
                 />
             @endisset
 
