@@ -40,14 +40,20 @@ class AuthenticatedSessionController extends Controller
             if (Auth::guard('seller')->attempt($credentials, $remember)) {
                 Auth::guard('web')->logout();
                 $request->session()->regenerate();
-                // Let Fortify handle 2FA challenge for sellers
+                // Sellers do NOT get 2FA, redirect immediately
                 return redirect()->intended('/seller/dashboard');
             }
         } else {
             if (Auth::guard('web')->attempt($credentials, $remember)) {
                 Auth::guard('seller')->logout();
                 $request->session()->regenerate();
-                // Let Fortify handle 2FA challenge for users
+                // Check if user has 2FA enabled
+                $user = Auth::guard('web')->user();
+                if ($user && $user->two_factor_secret) {
+                    // Store login id in session for Fortify 2FA
+                    session(['login.id' => $user->getAuthIdentifier()]);
+                    return redirect('/two-factor-challenge');
+                }
                 return redirect()->intended('/dashboard');
             }
         }
