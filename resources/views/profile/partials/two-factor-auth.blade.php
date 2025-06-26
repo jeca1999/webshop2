@@ -15,7 +15,8 @@
             <p class="mt-2 dark:text-white">Scan this QR code with your authenticator app:</p>
             <div class="my-4">{!! auth()->user()->twoFactorQrCodeSvg() !!}</div>
             <div class="my-2 text-xs break-all bg-gray-100 p-2 rounded">
-                {{ auth()->user()->twoFactorQrCodeUrl() }}
+                <strong>key:</strong>
+                {{ strtoupper(decrypt(auth()->user()->two_factor_secret)) }}
             </div>
         @else
             <form method="POST" action="{{ url('user/two-factor-authentication', [], true) }}">
