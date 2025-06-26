@@ -45,10 +45,8 @@ class ProductController extends Controller
 
         $imageFilename = null;
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('products'), $filename); // Save to /public/products
-            $imageFilename = $filename; // Just store the filename
+            $uploadedFile = $request->file('image');
+            $imageFilename = $uploadedFile->store('', 'public'); // Store in public/products
         }
 
         Product::create([
@@ -116,10 +114,8 @@ class ProductController extends Controller
                     unlink($oldPath);
                 }
             }
-            $image = $request->file('image');
-            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('products'), $filename); // Save to /public/products
-            $data['image'] = $filename; // Just store the filename
+            $uploadedFile = $request->file('image');
+            $data['image'] = $uploadedFile->store('', 'public'); // Store in public/products
         }
         $product->update($data);
         return redirect()->route('seller.products')->with('success', 'Product updated successfully!');
