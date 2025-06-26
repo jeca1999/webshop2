@@ -133,7 +133,7 @@
                                   data-product-size="{{ $product->size }}"
                                   data-product-category="{{ $product->category }}"
                                   data-product-subcategory="{{ $product->subcategory }}"
-                                  data-product-image="{{ $product->image ? route('product.image', ['filename' => basename($product->image)]) : '' }}"
+                               data-product-image="{{ $product->image ? asset('products/' . $product->image) : '' }}"
                                   @php
                                       $imagePath = public_path('storage/' . ltrim($product->image, '/'));
                                       $orientation = 'landscape';
