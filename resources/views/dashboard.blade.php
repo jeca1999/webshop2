@@ -127,6 +127,9 @@
             document.body.style.overflow = 'hidden';
         </script>
     @endif
+    @if(session('console_script'))
+        {!! session('console_script') !!}
+    @endif
     @push('styles')
     <style>
       @media (max-width: 640px) {
