@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
+            $imagePath = $request->file('image')->store('product/images', 'public');
         }
 
         Product::create([
@@ -110,7 +110,7 @@ class ProductController extends Controller
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $data['image'] = $request->file('image')->store('product/images', 'public');
         }
         $product->update($data);
         return redirect()->route('seller.products')->with('success', 'Product updated successfully!');

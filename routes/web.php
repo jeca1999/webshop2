@@ -200,7 +200,7 @@ Route::get('/ping', function () {
     return 'pong';
 });
 Route::get('/product-image/{filename}', function ($filename) {
-    $path = storage_path('app/public/products/' . $filename);
+    $path = storage_path('app/public/product/images/' . $filename);
 
     if (!file_exists($path)) {
         abort(404);
@@ -208,3 +208,10 @@ Route::get('/product-image/{filename}', function ($filename) {
 
     return response()->file($path);
 })->name('product.image');
+Route::get('/debug/files', function () {
+    return response()->json([
+        'files' => collect(\File::files(storage_path('app/public/products')))->map(function($file) {
+            return $file->getFilename();
+        }),
+    ]);
+});
