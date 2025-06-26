@@ -51,7 +51,7 @@
           @if(isset($product->subcategory) && strtolower(trim($product->subcategory)) === 'mats' && isset($product->category) && strtolower(trim($product->category)) === 'prototype' && (!isset($product->is_approved) || $product->is_approved))
             <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
               @if($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+                <img src="{{ asset('storage/products/' . basename($product->image)) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
               @else
                 <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
                   <span class="text-4xl">🖼️</span>
@@ -78,7 +78,7 @@
           @if(isset($product->subcategory) && strtolower($product->subcategory) === 'pins' && !in_array($product->id, $shownIds))
             <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
               @if($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
+                <img src="{{ asset('storage/products/' . basename($product->image)) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" />
               @else
                 <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
                   <span class="text-4xl">🖼️</span>
