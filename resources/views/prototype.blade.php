@@ -123,7 +123,7 @@
       document.getElementById('product-modal').classList.remove('hidden');
       document.getElementById('product-modal').classList.add('flex');
       const modalImg = document.getElementById('modal-image');
-      modalImg.src = '/storage/' + product.image;
+      modalImg.src = '/products/' + product.image;
       modalImg.alt = product.name;
       // Reset classes and styles
       modalImg.className = 'object-contain rounded mb-4 max-w-full max-h-[80vh] mx-auto';

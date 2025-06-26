@@ -112,7 +112,7 @@
                                     <tr>
                                         <td class="py-2">
                                             @if($product->image)
-                                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-contain rounded">
+                                                <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-contain rounded">
                                             @endif
                                         </td>
                                         <td class="py-2 dark:text-white">{{ $product->name }}</td>
