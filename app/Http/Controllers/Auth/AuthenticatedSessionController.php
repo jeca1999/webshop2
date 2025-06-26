@@ -24,36 +24,38 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-{
-    $request->validate([
-        'email' => ['required', 'string', 'email'],
-        'password' => ['required', 'string'],
-    ]);
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-    $credentials = $request->only('email', 'password');
-    $remember = $request->boolean('remember');
+        $credentials = $request->only('email', 'password');
+        $remember = $request->boolean('remember');
 
-    // Check if email exists in sellers table
-    $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
+        // Check if email exists in sellers table
+        $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
 
-    if ($isSeller) {
-        if (Auth::guard('seller')->attempt($credentials, $remember)) {
-            Auth::guard('web')->logout();
-            $request->session()->regenerate();
-            return redirect('/seller/dashboard');
+        if ($isSeller) {
+            if (Auth::guard('seller')->attempt($credentials, $remember)) {
+                Auth::guard('web')->logout();
+                $request->session()->regenerate();
+                // Let Fortify handle 2FA challenge for sellers
+                return redirect()->intended('/seller/dashboard');
+            }
+        } else {
+            if (Auth::guard('web')->attempt($credentials, $remember)) {
+                Auth::guard('seller')->logout();
+                $request->session()->regenerate();
+                // Let Fortify handle 2FA challenge for users
+                return redirect()->intended('/dashboard');
+            }
         }
-    } else {
-        if (Auth::guard('web')->attempt($credentials, $remember)) {
-            Auth::guard('seller')->logout();
-            $request->session()->regenerate();
-            return redirect('/dashboard');
-        }
+
+        return back()->withErrors([
+            'email' => __('auth.failed'),
+        ]);
     }
-
-    return back()->withErrors([
-        'email' => __('auth.failed'),
-    ]);
-}
 
 
     /**
