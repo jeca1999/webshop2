@@ -218,3 +218,7 @@ Route::get('/storage/products/{filename}', function ($filename) {
 
     return Response::file($path);
 })->where('filename', '.*');
+
+Route::get('/home', function () {
+    return redirect('/dashboard');
+});
