@@ -62,8 +62,8 @@ $maxWidth = [
     </div>
     <div
         x-show="show"
-        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto flex flex-col items-center"
-        style="max-width: 100vw; max-height: 90vh; overflow: auto;"
+        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-auto max-w-md sm:mx-auto flex flex-col items-center"
+        style="max-width: 400px; max-height: 90vh; overflow: auto;"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -71,16 +71,12 @@ $maxWidth = [
         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     >
-        <div style="width:100%;display:flex;justify-content:center;align-items:center;">
-            <div style="max-width:100%;max-height:70vh;overflow:auto;">
-                <style>
-                  .modal-img-fit { max-width: 350px; max-height: 60vh; width: 100%; height: auto; display: block; margin: 0 auto; object-fit: contain; }
-                </style>
-                <div class="modal-img-wrapper">
-                  <!-- To use: <img class='modal-img-fit' ... > -->
-                  {{ $slot }}
-                </div>
-            </div>
+        <style>
+          .modal-img-fit { max-width: 320px; max-height: 50vh; width: 100%; height: auto; display: block; margin: 0 auto; object-fit: contain; }
+        </style>
+        <div class="modal-img-wrapper w-full flex flex-col items-center">
+          <!-- To use: <img class='modal-img-fit' ... > -->
+          {{ $slot }}
         </div>
     </div>
 </div>
