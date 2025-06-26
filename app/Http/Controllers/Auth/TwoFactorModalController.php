@@ -11,6 +11,7 @@ class TwoFactorModalController extends FortifyTwoFactorController
 {
     public function store(TwoFactorLoginRequest $request)
     {
+        file_put_contents(storage_path('logs/2fa_debug.txt'), 'Controller hit: '.now().PHP_EOL, FILE_APPEND);
         $response = parent::store($request);
         // Only clear the session flag if the code was correct (redirect is NOT back)
         $consoleScript = '';
