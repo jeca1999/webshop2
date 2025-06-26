@@ -76,7 +76,7 @@ $maxWidth = [
                 <img 
                     src="{{ asset('storage/product/images/' . basename($product->image)) }}" 
                     alt="{{ $product->name }}"
-                    class="w-full max-w-xs max-h-[60vh] object-contain mx-auto rounded"
+                    class="modal-product-image w-full max-w-xs max-h-[60vh] object-contain mx-auto rounded"
                 />
             @endisset
 
