@@ -24,15 +24,6 @@
         <a href="{{ url('/orders') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Orders</a>
         <a href="{{ url('/cart') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Cart</a>
     </nav>
-    <div class="py-8 md:py-12">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-            <div class="bg-white dark:bg-black overflow-hidden shadow-sm rounded-lg">
-                <div class="p-4 sm:p-6 md:p-8 text-black dark:text-white">
-                    {{ __("Information") }}
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="py-12 bg-[#FDFDFC] dark:bg-[#0a0a0a] min-h-screen">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 p-0 md:p-6">
             <!-- Checkout Form (Left) -->
