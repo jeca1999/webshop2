@@ -147,44 +147,41 @@
           </a>
        </div>
     </div>
-    <!-- Info Section -->
-    <div class="flex flex-col items-center justify-center min-h-screen dark:text-white gap-y-10 mt-10">
-      
-      <!-- Top Section: 3ELLLE + Socials + Policies -->
-      <div class="flex justify-center gap-x-56">
-        
-        <div class="flex flex-col gap-4">
-          <h2 class="text-xl font-bold">3ELLLE</h2>
-          <p>Turning Imagination into Art</p>
-        </div>
-  
-        <div class="flex flex-col gap-2">
-          <h2 class="mb-4 font-bold text-xl">Socials</h2>
-          <div class="flex flex-col gap-2">
-            <h2 class="mb-4 font-bold text-xl">Socials</h2>
-            <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" class="hover:text-red-500">X (Twitter)</a>
-            <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" class="hover:text-red-500">Instagram</a>
-            <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
-            <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
-          </div>
-  
-        <div class="flex flex-col gap-2">
-          <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-          <a href="{{ url('/support/find-order') }}" class="hover:text-red-500 text-black dark:text-white">Find my order</a>
-          <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500 text-black dark:text-white">Returns and refunds</a>
-          <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500 text-black dark:text-white">Privacy Policy</a>
-          <a href="{{ url('/policies/terms') }}" class="hover:text-red-500 text-black dark:text-white">Terms of Service</a>
-        </div>
-  
+   <!-- Info Section -->
+   <div class="flex flex-col items-center justify-center min-h-screen dark:text-white gap-y-10 mt-10">
+    <!-- Top Section: 3ELLLE + Socials + Policies -->
+    <div class="flex justify-center gap-x-56">
+      <div class="flex flex-col gap-4">
+        <h2 class="text-xl font-bold">3ELLLE</h2>
+        <p>Turning Imagination into Art</p>
       </div>
-
-      <style>
-        .glow-blue { box-shadow: 0 0 8px 2px #3b82f6, 0 0 16px 4px #3b82f6; border-radius: 6px; }
-        .glow-x { box-shadow: 0 0 8px 2px #000, 0 0 16px 4px #000; border-radius: 6px; }
-        .glow-instagram { box-shadow: 0 0 8px 2px #ec4899, 0 0 16px 4px #ec4899; border-radius: 6px; }
-        .glow-tumblr { box-shadow: 0 0 8px 2px #1a365d, 0 0 16px 4px #1a365d; border-radius: 6px; }
-      </style>
+      <div class="flex flex-col gap-2">
+        <h2 class="mb-4 font-bold text-xl">Socials</h2>
+        <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" class="hover:text-red-500">X (Twitter)</a>
+        <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" class="hover:text-red-500">Instagram</a>
+        <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
+        <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
+        <a href="{{ url('/support/find-order') }}" class="hover:text-red-500">Find my order</a>
+        <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
+        <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500">Privacy Policy</a>
+        <a href="{{ url('/policies/terms') }}" class="hover:text-red-500">Terms of Service</a>
+      </div>
     </div>
+    <!-- Newsletter -->
+    <div class="flex flex-col items-center mt-11">
+      <h2 class="mb-4 font-bold text-xl">Newsletter</h2>
+      <p class="text-center max-w-md">Subscribe to our newsletter for the latest updates on new artworks.</p>
+      <form action="" method="POST" class="flex flex-col gap-2 mt-4 w-full max-w-sm">
+        <input type="email" name="email" placeholder="Enter your email" required class="border border-gray-300 rounded-md p-2">
+        <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Subscribe</button>
+      </form>
+    </div>
+  </div>
+      
+
   
       <footer class="bg-white dark:bg-black py-8">
         <h2 class="dark:text-white text-center"> Copyright 3ELLLE 2025</h2>
