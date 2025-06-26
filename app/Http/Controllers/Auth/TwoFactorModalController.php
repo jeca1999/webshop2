@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticatedSessionController as FortifyTwoFactorController;
 use Laravel\Fortify\Http\Requests\TwoFactorLoginRequest;
 
@@ -14,6 +15,17 @@ class TwoFactorModalController extends FortifyTwoFactorController
         // Only clear the session flag if the code was correct (redirect is NOT back)
         if (method_exists($response, 'getTargetUrl') && !str_contains($response->getTargetUrl(), url('/two-factor-challenge'))) {
             Session::forget('2fa_required');
+            Log::info('2FA cleared', [
+                'user_id' => auth()->id(),
+                'session' => session()->all(),
+                'redirect' => $response->getTargetUrl(),
+            ]);
+        } else {
+            Log::info('2FA NOT cleared', [
+                'user_id' => auth()->id(),
+                'session' => session()->all(),
+                'redirect' => method_exists($response, 'getTargetUrl') ? $response->getTargetUrl() : null,
+            ]);
         }
         return $response;
     }
