@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\Auth\TwoFactorModalController;
 
 
 //returns to index page
@@ -39,6 +40,12 @@ Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
 Route::get('/prototype', [ProductController::class, 'prototype'])->name('prototype');
 Route::get('/comission', function () {  return view('comission');})->name('comission');
 require __DIR__.'/auth.php';
+
+
+// Custom 2FA challenge route to override Fortify's default
+Route::post('/two-factor-challenge', [TwoFactorModalController::class, 'store'])
+    ->middleware(['web', 'guest'])
+    ->name('two-factor.login');
 
 
 Route::get('/seller/dashboard', function () {
