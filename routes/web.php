@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 
 //returns to index page
@@ -208,3 +209,12 @@ Route::get('/product-image/{filename}', function ($filename) {
 
     return response()->file($path);
 })->name('product.image');
+Route::get('/storage/products/{filename}', function ($filename) {
+    $path = storage_path('app/public/products/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return Response::file($path);
+})->where('filename', '.*');
