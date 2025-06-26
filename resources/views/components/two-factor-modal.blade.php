@@ -31,7 +31,18 @@
             @endphp
             <strong>Session:</strong>
             <pre>{{ print_r($sessionKeys, true) }}</pre>
+            <strong>2FA Required:</strong> {{ session('2fa_required') ? 'YES' : 'NO' }}
         </div>
     </div>
 </div>
+<script>
+// Ensure modal closes and page reloads after successful 2FA (if not handled by redirect)
+document.getElementById('two-factor-form').addEventListener('submit', function() {
+    setTimeout(function() {
+        if (!{{ session('2fa_required') ? 'true' : 'false' }}) {
+            window.location.reload();
+        }
+    }, 1000);
+});
+</script>
 <!-- Alpine.js required for x-data/x-show. Include in your layout if not already present. -->
