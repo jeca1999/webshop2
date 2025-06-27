@@ -1,3 +1,5 @@
+{{-- 2FA Dashboard Section Disabled --}}
+{{--
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::twoFactorAuthentication()))
     <div class="mt-8">
         <h3 class="text-lg font-bold mb-2 dark:text-white">Two-Factor Authentication</h3>
@@ -56,3 +58,4 @@
         @endif
     </div>
 @endif
+--}}
