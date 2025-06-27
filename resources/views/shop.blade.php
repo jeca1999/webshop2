@@ -77,27 +77,23 @@
     <div class="relative h-screen py-10 dark:text-white flex flex-col justify-between overflow-hidden">
       <h2 class="text-2xl font-bold text-center mb-6 mt-10">Paintings</h2>
       <div class="flex flex-wrap justify-center gap-8">
-        @foreach($products as $groupedProducts)
-          @php
-            $first = $groupedProducts[0] ?? null;
-          @endphp
-          @if($first && $first->category === 'shop' && $first->subcategory === 'paintings')
-            @foreach($groupedProducts as $product)
-              @if(!in_array($product->id, $shownIds))
-                <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-                  @if($product->image)
-                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-                  @else
-                    <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                      <span class="text-4xl">🖼️</span>
-                    </div>
-                  @endif
-                </div>
-                @php $shownIds[] = $product->id; @endphp
-              @endif
-            @endforeach
-          @endif
-        @endforeach
+        @php $paintingKey = 'shop|paintings'; @endphp
+        @if(isset($products[$paintingKey]))
+          @foreach($products[$paintingKey] as $product)
+            @if(!in_array($product->id, $shownIds))
+              <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
+                @if($product->image)
+                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                @else
+                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                    <span class="text-4xl">🖼️</span>
+                  </div>
+                @endif
+              </div>
+              @php $shownIds[] = $product->id; @endphp
+            @endif
+          @endforeach
+        @endif
       </div>
     </div>
 
@@ -105,27 +101,23 @@
     <div class="relative h-screen py-10 dark:text-white flex flex-col justify-between overflow-hidden">
       <h2 class="text-2xl font-bold text-center mb-6 mt-10">Sketches</h2>
       <div class="flex flex-wrap justify-center gap-8">
-        @foreach($products as $groupedProducts)
-          @php
-            $first = $groupedProducts[0] ?? null;
-          @endphp
-          @if($first && $first->category === 'shop' && $first->subcategory === 'sketches')
-            @foreach($groupedProducts as $product)
-              @if(!in_array($product->id, $shownIds))
-                <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-                  @if($product->image)
-                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-                  @else
-                    <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                      <span class="text-4xl">🖼️</span>
-                    </div>
-                  @endif
-                </div>
-                @php $shownIds[] = $product->id; @endphp
-              @endif
-            @endforeach
-          @endif
-        @endforeach
+        @php $sketchKey = 'shop|sketches'; @endphp
+        @if(isset($products[$sketchKey]))
+          @foreach($products[$sketchKey] as $product)
+            @if(!in_array($product->id, $shownIds))
+              <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
+                @if($product->image)
+                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                @else
+                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                    <span class="text-4xl">🖼️</span>
+                  </div>
+                @endif
+              </div>
+              @php $shownIds[] = $product->id; @endphp
+            @endif
+          @endforeach
+        @endif
       </div>
     </div>
 
@@ -133,27 +125,23 @@
     <div class="relative h-screen py-10 dark:text-white flex flex-col justify-between overflow-hidden">
       <h2 class="text-2xl font-bold text-center mb-6 mt-10">Digital Arts</h2>
       <div class="flex flex-wrap justify-center gap-8">
-        @foreach($products as $groupedProducts)
-          @php
-            $first = $groupedProducts[0] ?? null;
-          @endphp
-          @if($first && $first->category === 'shop' && $first->subcategory === 'digital arts')
-            @foreach($groupedProducts as $product)
-              @if(!in_array($product->id, $shownIds))
-                <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-                  @if($product->image)
-                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-                  @else
-                    <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                      <span class="text-4xl">🖼️</span>
-                    </div>
-                  @endif
-                </div>
-                @php $shownIds[] = $product->id; @endphp
-              @endif
-            @endforeach
-          @endif
-        @endforeach
+        @php $digitalKey = 'shop|digital arts'; @endphp
+        @if(isset($products[$digitalKey]))
+          @foreach($products[$digitalKey] as $product)
+            @if(!in_array($product->id, $shownIds))
+              <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
+                @if($product->image)
+                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                @else
+                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                    <span class="text-4xl">🖼️</span>
+                  </div>
+                @endif
+              </div>
+              @php $shownIds[] = $product->id; @endphp
+            @endif
+          @endforeach
+        @endif
       </div>
     </div>
 

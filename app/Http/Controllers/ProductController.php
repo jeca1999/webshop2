@@ -150,10 +150,7 @@ class ProductController extends Controller
 
         // Group for display as before
         $grouped = $products->groupBy(function ($product) {
-            return [
-                'category' => $product->category,
-                'subcategory' => $product->subcategory ?? 'Uncategorized',
-            ];
+            return $product->category . '|' . ($product->subcategory ?? 'Uncategorized');
         });
 
         return view('shop', ['products' => $grouped]);
