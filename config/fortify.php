@@ -148,6 +148,6 @@ return [
         // Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
-        // 2FA is now fully disabled
+        Features::twoFactorAuthentication(), // <-- 2FA enabled
     ],
 ];
