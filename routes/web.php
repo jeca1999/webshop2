@@ -43,9 +43,10 @@ require __DIR__.'/auth.php';
 
 
 // Custom 2FA challenge route to override Fortify's default
-Route::post('/two-factor-challenge', [TwoFactorModalController::class, 'store'])
-    ->middleware(['web', 'guest'])
-    ->name('two-factor.login');
+// Route::post('/two-factor-challenge', [TwoFactorModalController::class, 'store'])
+//     ->middleware(['web', 'guest'])
+//     ->name('two-factor.login');
+// 2FA challenge is now only required for sensitive actions like password change, not at login.
 
 
 Route::get('/seller/dashboard', function () {
