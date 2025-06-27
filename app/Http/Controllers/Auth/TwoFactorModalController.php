@@ -18,6 +18,7 @@ class TwoFactorModalController extends FortifyTwoFactorController
         if (method_exists($response, 'getTargetUrl') && !str_contains($response->getTargetUrl(), url('/two-factor-challenge'))) {
             Session::forget('2fa_required');
             Session::save(); // Ensure session is written before redirect
+            Session::regenerate(); // Regenerate session ID to ensure fresh session
             Log::info('2FA cleared', [
                 'user_id' => auth()->id(),
                 'session' => session()->all(),
