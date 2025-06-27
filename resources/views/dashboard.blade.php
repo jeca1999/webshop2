@@ -121,15 +121,6 @@
             </div>
         </div>
     </div>
-    @if(session('2fa_required'))
-        @include('components.two-factor-modal')
-        <script>
-            document.body.style.overflow = 'hidden';
-        </script>
-    @endif
-    @if(session('console_script'))
-        {!! session('console_script') !!}
-    @endif
     @push('styles')
     <style>
       @media (max-width: 640px) {
