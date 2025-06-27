@@ -1,4 +1,4 @@
-{{-- 2FA Modal Disabled --}}
+{{-- 2FA Modal Fully Disabled --}}
 {{--
 <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg w-full max-w-md p-6 relative">
