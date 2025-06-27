@@ -1,3 +1,5 @@
+{{-- 2FA Modal Disabled --}}
+{{--
 <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg w-full max-w-md p-6 relative">
         <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-2">Two-Factor Authentication</h2>
@@ -45,4 +47,4 @@ document.getElementById('two-factor-form').addEventListener('submit', function()
     }, 1000);
 });
 </script>
-<!-- Alpine.js required for x-data/x-show. Include in your layout if not already present. -->
+--}}

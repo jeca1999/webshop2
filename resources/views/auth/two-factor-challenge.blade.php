@@ -1,3 +1,5 @@
+{{-- 2FA Challenge View Disabled --}}
+{{--
 @extends('layouts.app')
 
 @section('content')
@@ -33,3 +35,4 @@
     </div>
 </div>
 @endsection
+--}}
