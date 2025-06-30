@@ -227,7 +227,10 @@
                       <input type="file" name="image" id="edit-product-image" accept="image/png, image/jpeg" class="w-full text-gray-300" />
                     </div>
                     <div class="flex flex-col items-center">
-                      <img id="modal-product-image" class="block mx-auto rounded mb-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 object-contain" style="max-height:80vh; max-width:90vw; width:auto; height:auto; display:none;" />
+                      <!-- Image preview inside modal -->
+                      <img id="modal-product-image"
+                           class="block mx-auto rounded mb-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 object-contain w-full max-w-xs h-auto aspect-square"
+                           style="max-height:40vh; max-width:90vw; width:auto; height:auto; display:none;" />
                     </div>
                     <div class="flex justify-end gap-3 pt-2">
                       <button type="button" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 text-white" id="cancel-edit-modal">Cancel</button>
