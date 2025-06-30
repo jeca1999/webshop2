@@ -9,32 +9,28 @@ class SellerOrderController extends Controller
 {
     public function notifications()
     {
-        // Get all orders for products owned by this seller
+        // Get all orders and filter in PHP for products owned by this seller
         $sellerId = auth('seller')->id();
-        $orders = Order::whereJsonContains('products', [['seller_id' => $sellerId]])
-            ->orWhere(function($q) use ($sellerId) {
-                $q->whereHas('products', function($query) use ($sellerId) {
-                    $query->where('seller_id', $sellerId);
-                });
-            })
-            ->latest()->get();
-        // Fallback: get all orders and filter in PHP if above fails
-        if ($orders->isEmpty()) {
-            $orders = Order::all()->filter(function($order) use ($sellerId) {
-                foreach ($order->products as $p) {
+        $orders = Order::all()->filter(function($order) use ($sellerId) {
+            if (!is_array($order->products)) return false;
+            foreach ($order->products as $p) {
+                if (isset($p['id'])) {
                     $prod = Product::find($p['id']);
                     if ($prod && $prod->seller_id == $sellerId) return true;
                 }
-                return false;
-            });
-        }
+            }
+            return false;
+        });
         // Attach product and user for each order (first product for this seller)
         $orders = $orders->map(function($order) use ($sellerId) {
+            if (!is_array($order->products)) return $order;
             foreach ($order->products as $p) {
-                $prod = Product::find($p['id']);
-                if ($prod && $prod->seller_id == $sellerId) {
-                    $order->product = $prod;
-                    break;
+                if (isset($p['id'])) {
+                    $prod = Product::find($p['id']);
+                    if ($prod && $prod->seller_id == $sellerId) {
+                        $order->product = $prod;
+                        break;
+                    }
                 }
             }
             $order->user = $order->user;
