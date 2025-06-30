@@ -76,8 +76,8 @@ Route::get('/cart', function () {
 
 Route::get('/orders', function () {
     $orders = [];
-    if (auth()->check()) {
-        $orders = \App\Models\Order::where('user_id', auth()->id())->latest()->get();
+    if (Auth::check()) {
+        $orders = \App\Models\Order::where('user_id', Auth::id())->latest()->get();
     }
     return view('orders', compact('orders'));
 })->name('orders');
