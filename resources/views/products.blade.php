@@ -183,7 +183,7 @@
 
               <!-- Custom Modal for edits -->
               <div id="edit-product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70 overflow-auto">
-                <div class="bg-gray-900 text-white rounded-xl p-4 sm:p-8 w-full max-w-xs sm:max-w-md md:max-w-lg shadow-2xl relative animate-fade-in mx-auto my-auto"
+                <div class="bg-gray-900 text-white rounded-xl p-4 sm:p-8 w-full max-w-md sm:max-w-lg md:max-w-2xl shadow-2xl relative animate-fade-in mx-auto my-auto"
                   style="max-height: none; height: auto; overflow: visible;">
                   <button class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white focus:outline-none" id="close-edit-modal">&times;</button>
                   <h3 class="text-xl font-bold mb-6">Edit Product</h3>
@@ -228,9 +228,11 @@
                     </div>
                     <div class="flex flex-col items-center w-full">
                       <!-- Image preview inside modal -->
-                      <img id="modal-product-image"
-                           class="block mx-auto rounded mb-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 object-contain w-full max-w-md h-auto"
-                           style="max-height:50vh; width:100%; display:none;" />
+                      <div style="width:100%; overflow:auto;">
+                        <img id="modal-product-image"
+                             class="block mx-auto rounded mb-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 object-contain"
+                             style="max-width:100% !important; max-height:50vh !important; width:auto !important; height:auto !important; display:none; margin-left:auto; margin-right:auto;" />
+                      </div>
                     </div>
                     <div class="flex justify-end gap-3 pt-2">
                       <button type="button" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 text-white" id="cancel-edit-modal">Cancel</button>
@@ -241,6 +243,19 @@
               </div>
 
           <style>
+          #edit-product-modal .modal-content {
+            max-width: 100%;
+            overflow: auto;
+          }
+          #modal-product-image {
+            max-width: 100% !important;
+            max-height: 50vh !important;
+            width: auto !important;
+            height: auto !important;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+          }
           @media (max-width: 400px) {
             .product-card { min-width: 90vw !important; }
           }
