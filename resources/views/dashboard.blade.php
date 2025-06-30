@@ -81,10 +81,10 @@
                     <div class="p-4 sm:p-6 md:p-8 text-black dark:text-white">
                         <h3 class="text-xl font-bold mb-4">Need Help?</h3>
                         <div class="flex flex-col gap-2 sm:gap-3 w-full">
-                          <a href="{{ url('/support/find-order') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Find my order</a>
-                          <a href="{{ url('/support/returns-refunds') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Returns and refunds</a>
-                          <a href="{{ url('/policies/privacy') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Privacy Policy</a>
-                          <a href="{{ url('/policies/terms') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Terms of Service</a>
+                          <a href="{{ url('/support/find-order') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Find my order</a>
+                          <a href="{{ url('/support/returns-refunds') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Returns and refunds</a>
+                          <a href="{{ url('/policies/privacy') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Privacy Policy</a>
+                          <a href="{{ url('/policies/terms') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Terms of Service</a>
                         </div>
                         <div class="mt-4" x-data="{ highlightX: false, highlightInstagram: false, highlightTumblr: false, highlightFacebook: false }">
                             <h4 class="font-semibold mb-2">Contact Support</h4>

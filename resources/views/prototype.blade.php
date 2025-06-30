@@ -227,10 +227,10 @@
         </div>
         <div class="flex flex-col gap-2 sm:gap-3 mt-8 sm:mt-0">
           <h2 class="mb-2 sm:mb-4 font-bold text-xl text-black dark:text-white">Support & Policies</h2>
-          <a href="{{ url('/support/find-order') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Find my order</a>
-          <a href="{{ url('/support/returns-refunds') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Returns and refunds</a>
-          <a href="{{ url('/policies/privacy') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Privacy Policy</a>
-          <a href="{{ url('/policies/terms') }}" class="text-black dark:text-white hover:text-red-600 underline transition text-center text-base sm:text-sm">Terms of Service</a>
+          <a href="{{ url('/support/find-order') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Find my order</a>
+          <a href="{{ url('/support/returns-refunds') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Returns and refunds</a>
+          <a href="{{ url('/policies/privacy') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Privacy Policy</a>
+          <a href="{{ url('/policies/terms') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm">Terms of Service</a>
         </div>
       </div>
       <!-- Newsletter -->
