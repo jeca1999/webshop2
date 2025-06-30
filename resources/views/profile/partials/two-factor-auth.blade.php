@@ -49,9 +49,9 @@
                 </script>
             @endif
         @else
-            <form method="POST" action="#" onsubmit="return false;" style="display:inline;">
+            <form method="POST" action="{{ url('user/two-factor-authentication', [], true) }}" style="display:inline;">
                 @csrf
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed" disabled>Enable 2FA (coming soon)</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enable 2FA</button>
             </form>
         @endif
     </div>
