@@ -53,9 +53,13 @@
                                             <span class="text-xs text-gray-500 dark:text-gray-400">{{ $order->created_at->format('Y-m-d H:i') }}</span>
                                         </div>
                                         <div class="text-sm text-black dark:text-white mt-1 flex flex-wrap gap-x-2">
-                                            @foreach($order->products as $product)
-                                                <span>{{ $product['name'] ?? 'Product' }} x{{ $product['qty'] ?? 1 }}</span>@if(!$loop->last), @endif
-                                            @endforeach
+                                            @if($order->products && count($order->products))
+                                                @foreach($order->products as $product)
+                                                    <span>{{ is_array($product) ? ($product['name'] ?? 'Product') : ($product->name ?? 'Product') }} x{{ is_array($product) ? ($product['qty'] ?? 1) : ($product->qty ?? 1) }}</span>@if(!$loop->last), @endif
+                                                @endforeach
+                                            @else
+                                                <span>No products found for this order.</span>
+                                            @endif
                                         </div>
                                         <div class="text-xs mt-1">
                                             <span class="font-semibold">Status:</span>
