@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
                 Auth::guard('web')->logout();
                 $request->session()->regenerate();
                 // Sellers do NOT get 2FA, redirect immediately
-                return redirect()->intended('/seller/dashboard');
+                return redirect()->intended(route('seller.dashboard'));
             }
         } else {
             if (Auth::guard('web')->attempt($credentials, $remember)) {
