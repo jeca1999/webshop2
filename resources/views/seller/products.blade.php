@@ -8,28 +8,28 @@
     @else
         <div class="space-y-6">
             @foreach($products as $product)
-                <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <div class="flex items-center gap-4 w-full">
+                <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col gap-4">
+                    <div class="modal-content w-full max-w-lg mx-auto flex flex-col items-center">
                         @if($product->image ?? false)
-                            <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}" class="w-24 h-24 object-cover rounded border border-gray-200 dark:border-gray-700 bg-white" />
+                            <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full max-w-xs h-auto aspect-square object-contain rounded border border-gray-200 dark:border-gray-700 bg-white mb-4" />
                         @else
-                            <div class="w-24 h-24 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-gray-400">No Image</div>
+                            <div class="w-full max-w-xs aspect-square flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-gray-400 text-2xl mb-4">No Image</div>
                         @endif
-                        <div class="flex-1 min-w-0">
-                            <div class="font-semibold truncate">{{ $product->name }}</div>
-                            <div>Current Stock: {{ $product->stock ?? 'N/A' }}</div>
-                            <div>Status: <span class="font-bold">{{ ucfirst($product->stock_status ?? 'available') }}</span></div>
+                        <div class="w-full">
+                            <div class="font-semibold text-lg text-center mb-2">{{ $product->name }}</div>
+                            <div class="text-center mb-2">Current Stock: {{ $product->stock ?? 'N/A' }}</div>
+                            <div class="text-center mb-4">Status: <span class="font-bold">{{ ucfirst($product->stock_status ?? 'available') }}</span></div>
+                            <form method="POST" action="{{ route('seller.products.updateStock', $product->id) }}" class="flex flex-col md:flex-row gap-2 items-center justify-center">
+                                @csrf
+                                @method('PATCH')
+                                <select name="stock_status" class="border rounded p-2">
+                                    <option value="available" @if(($product->stock_status ?? 'available')=='available') selected @endif>Available</option>
+                                    <option value="low" @if(($product->stock_status ?? '')=='low') selected @endif>Low on Stock</option>
+                                    <option value="sold_out" @if(($product->stock_status ?? '')=='sold_out') selected @endif>Sold Out</option>
+                                </select>
+                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+                            </form>
                         </div>
-                        <form method="POST" action="{{ route('seller.products.updateStock', $product->id) }}" class="flex gap-2 items-center">
-                            @csrf
-                            @method('PATCH')
-                            <select name="stock_status" class="border rounded p-2">
-                                <option value="available" @if(($product->stock_status ?? 'available')=='available') selected @endif>Available</option>
-                                <option value="low" @if(($product->stock_status ?? '')=='low') selected @endif>Low on Stock</option>
-                                <option value="sold_out" @if(($product->stock_status ?? '')=='sold_out') selected @endif>Sold Out</option>
-                            </select>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
-                        </form>
                     </div>
                 </div>
             @endforeach
