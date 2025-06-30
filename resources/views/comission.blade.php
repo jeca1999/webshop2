@@ -162,12 +162,12 @@
         <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
         <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
       </div>
-      <div class="flex flex-col gap-2">
-        <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-        <a href="{{ url('/support/find-order') }}" class="hover:text-red-500">Find my order</a>
-        <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
-        <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500">Privacy Policy</a>
-        <a href="{{ url('/policies/terms') }}" class="hover:text-red-500">Terms of Service</a>
+      <div class="flex flex-col gap-2 sm:gap-3 mt-8 sm:mt-0">
+        <h2 class="mb-2 sm:mb-4 font-bold text-xl text-black dark:text-white">Support & Policies</h2>
+        <a href="{{ url('/support/find-order') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Find my order</a>
+        <a href="{{ url('/support/returns-refunds') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Returns and refunds</a>
+        <a href="{{ url('/policies/privacy') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Privacy Policy</a>
+        <a href="{{ url('/policies/terms') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Terms of Service</a>
       </div>
     </div>
     <!-- Newsletter -->

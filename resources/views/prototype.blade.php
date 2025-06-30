@@ -50,13 +50,20 @@
           @php if (in_array($product->id, $shownIds)) continue; @endphp
           @if(isset($product->subcategory) && strtolower(trim($product->subcategory)) === 'mats' && isset($product->category) && strtolower(trim($product->category)) === 'prototype' && (!isset($product->is_approved) || $product->is_approved))
             <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-              @if($product->image)
-                <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-              @else
-                <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                  <span class="text-4xl">🖼️</span>
-                </div>
-              @endif
+              <div class="relative">
+                @if($product->image)
+                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                  @if($product->stock_status === 'sold_out')
+                    <div class="absolute top-4 -left-8 -rotate-45 bg-red-700 text-white text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">SOLD OUT</div>
+                  @elseif($product->stock_status === 'low')
+                    <div class="absolute top-4 -left-8 -rotate-45 bg-yellow-400 text-black text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">LOW ON STOCK</div>
+                  @endif
+                @else
+                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                    <span class="text-4xl">🖼️</span>
+                  </div>
+                @endif
+              </div>
             </div>
             @php $shownIds[] = $product->id; @endphp
           @endif
@@ -77,13 +84,20 @@
         @foreach($flatProducts as $product)
           @if(isset($product->subcategory) && strtolower($product->subcategory) === 'pins' && !in_array($product->id, $shownIds))
             <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-              @if($product->image)
-                <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-              @else
-                <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                  <span class="text-4xl">🖼️</span>
-                </div>
-              @endif
+              <div class="relative">
+                @if($product->image)
+                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                  @if($product->stock_status === 'sold_out')
+                    <div class="absolute top-4 -left-8 -rotate-45 bg-red-700 text-white text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">SOLD OUT</div>
+                  @elseif($product->stock_status === 'low')
+                    <div class="absolute top-4 -left-8 -rotate-45 bg-yellow-400 text-black text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">LOW ON STOCK</div>
+                  @endif
+                @else
+                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                    <span class="text-4xl">🖼️</span>
+                  </div>
+                @endif
+              </div>
             </div>
             @php $shownIds[] = $product->id; @endphp
           @endif
@@ -211,12 +225,12 @@
           <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
           <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
         </div>
-        <div class="flex flex-col gap-2">
-          <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-          <a href="{{ url('/support/find-order') }}" class="hover:text-red-500">Find my order</a>
-          <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
-          <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500">Privacy Policy</a>
-          <a href="{{ url('/policies/terms') }}" class="hover:text-red-500">Terms of Service</a>
+        <div class="flex flex-col gap-2 sm:gap-3 mt-8 sm:mt-0">
+          <h2 class="mb-2 sm:mb-4 font-bold text-xl text-black dark:text-white">Support & Policies</h2>
+          <a href="{{ url('/support/find-order') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Find my order</a>
+          <a href="{{ url('/support/returns-refunds') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Returns and refunds</a>
+          <a href="{{ url('/policies/privacy') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Privacy Policy</a>
+          <a href="{{ url('/policies/terms') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Terms of Service</a>
         </div>
       </div>
       <!-- Newsletter -->

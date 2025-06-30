@@ -1,0 +1,54 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Product;
+
+class SellerOrderController extends Controller
+{
+    public function notifications()
+    {
+        // Get all orders for products owned by this seller
+        $sellerId = auth('seller')->id();
+        $orders = Order::whereJsonContains('products', [['seller_id' => $sellerId]])
+            ->orWhere(function($q) use ($sellerId) {
+                $q->whereHas('products', function($query) use ($sellerId) {
+                    $query->where('seller_id', $sellerId);
+                });
+            })
+            ->latest()->get();
+        // Fallback: get all orders and filter in PHP if above fails
+        if ($orders->isEmpty()) {
+            $orders = Order::all()->filter(function($order) use ($sellerId) {
+                foreach ($order->products as $p) {
+                    $prod = Product::find($p['id']);
+                    if ($prod && $prod->seller_id == $sellerId) return true;
+                }
+                return false;
+            });
+        }
+        // Attach product and user for each order (first product for this seller)
+        $orders = $orders->map(function($order) use ($sellerId) {
+            foreach ($order->products as $p) {
+                $prod = Product::find($p['id']);
+                if ($prod && $prod->seller_id == $sellerId) {
+                    $order->product = $prod;
+                    break;
+                }
+            }
+            $order->user = $order->user;
+            return $order;
+        });
+        return view('seller.notifications', compact('orders'));
+    }
+
+    public function updateStatus(Request $request, $orderId)
+    {
+        $request->validate(['status' => 'required|in:received,shipped']);
+        $order = Order::findOrFail($orderId);
+        $order->status = $request->status;
+        $order->save();
+        return back()->with('success', 'Order status updated!');
+    }
+}

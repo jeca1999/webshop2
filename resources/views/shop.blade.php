@@ -51,9 +51,14 @@
                         <div class="p-2 sm:p-4">
                             <h3 class="text-base sm:text-lg font-semibold text-black dark:text-white text-center">{{ $product->name }}</h3>
                         </div>
-                        <div class="bg-gray-300 dark:bg-gray-700 flex items-center justify-center h-32 sm:h-64">
+                        <div class="bg-gray-300 dark:bg-gray-700 flex items-center justify-center h-32 sm:h-64 relative">
                             @if($product->image)
                                 <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                                @if($product->stock_status === 'sold_out')
+                                    <div class="absolute top-4 -left-8 -rotate-45 bg-red-700 text-white text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">SOLD OUT</div>
+                                @elseif($product->stock_status === 'low')
+                                    <div class="absolute top-4 -left-8 -rotate-45 bg-yellow-400 text-black text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">LOW ON STOCK</div>
+                                @endif
                             @else
                                 <span class="text-4xl">🖼️</span>
                             @endif
@@ -82,13 +87,20 @@
           @foreach($products[$paintingKey] as $product)
             @if(!in_array($product->id, $shownIds))
               <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-                @if($product->image)
-                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-                @else
-                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                    <span class="text-4xl">🖼️</span>
-                  </div>
-                @endif
+                <div class="relative">
+                  @if($product->image)
+                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                    @if($product->stock_status === 'sold_out')
+                      <div class="absolute top-4 -left-8 -rotate-45 bg-red-700 text-white text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">SOLD OUT</div>
+                    @elseif($product->stock_status === 'low')
+                      <div class="absolute top-4 -left-8 -rotate-45 bg-yellow-400 text-black text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">LOW ON STOCK</div>
+                    @endif
+                  @else
+                    <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                      <span class="text-4xl">🖼️</span>
+                    </div>
+                  @endif
+                </div>
               </div>
               @php $shownIds[] = $product->id; @endphp
             @endif
@@ -106,13 +118,20 @@
           @foreach($products[$sketchKey] as $product)
             @if(!in_array($product->id, $shownIds))
               <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-                @if($product->image)
-                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-                @else
-                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                    <span class="text-4xl">🖼️</span>
-                  </div>
-                @endif
+                <div class="relative">
+                  @if($product->image)
+                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                    @if($product->stock_status === 'sold_out')
+                      <div class="absolute top-4 -left-8 -rotate-45 bg-red-700 text-white text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">SOLD OUT</div>
+                    @elseif($product->stock_status === 'low')
+                      <div class="absolute top-4 -left-8 -rotate-45 bg-yellow-400 text-black text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">LOW ON STOCK</div>
+                    @endif
+                  @else
+                    <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                      <span class="text-4xl">🖼️</span>
+                    </div>
+                  @endif
+                </div>
               </div>
               @php $shownIds[] = $product->id; @endphp
             @endif
@@ -130,13 +149,20 @@
           @foreach($products[$digitalKey] as $product)
             @if(!in_array($product->id, $shownIds))
               <div class="w-64 cursor-pointer product-card" data-product='@json($product)'>
-                @if($product->image)
-                  <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
-                @else
-                  <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                    <span class="text-4xl">🖼️</span>
-                  </div>
-                @endif
+                <div class="relative">
+                  @if($product->image)
+                    <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto" />
+                    @if($product->stock_status === 'sold_out')
+                      <div class="absolute top-4 -left-8 -rotate-45 bg-red-700 text-white text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">SOLD OUT</div>
+                    @elseif($product->stock_status === 'low')
+                      <div class="absolute top-4 -left-8 -rotate-45 bg-yellow-400 text-black text-xs font-bold px-8 py-1 shadow-lg opacity-90 select-none pointer-events-none" style="z-index:10;">LOW ON STOCK</div>
+                    @endif
+                  @else
+                    <div class="w-full h-64 flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                      <span class="text-4xl">🖼️</span>
+                    </div>
+                  @endif
+                </div>
               </div>
               @php $shownIds[] = $product->id; @endphp
             @endif
@@ -263,29 +289,25 @@
     <div class="flex flex-col items-center justify-center min-h-screen dark:text-white gap-y-10 mt-10">
       
       <!-- Top Section: 3ELLLE + Socials + Policies -->
-      <div class="flex justify-center gap-x-56">
-        
-        <div class="flex flex-col gap-4">
+      <div class="flex flex-col md:flex-row flex-wrap justify-center gap-y-8 md:gap-y-0 gap-x-10 md:gap-x-20 w-full items-center md:items-start">
+        <div class="flex flex-col gap-4 min-w-[180px]">
           <h2 class="text-xl font-bold">3ELLLE</h2>
           <p>Turning Imagination into Art</p>
         </div>
-
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2 min-w-[180px]">
           <h2 class="mb-4 font-bold text-xl">Socials</h2>
-          <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" class="hover:text-red-500">X (Twitter)</a>
-          <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" class="hover:text-red-500">Instagram</a>
-          <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500">Tumblr</a>
-          <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500">Facebook</a>
+          <a href="https://x.com/straw_zellieace?t=S2p6w7ZRz0nzI_ZuMtaVZg&s=09" target="_blank" class="hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md transition text-base sm:text-sm py-2 px-2">X (Twitter)</a>
+          <a href="https://www.instagram.com/strawzellieace?igsh=MTQxb3RqeXZvOHd5Nw==" target="_blank" class="hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md transition text-base sm:text-sm py-2 px-2">Instagram</a>
+          <a href="https://www.tumblr.com/strawzellieace?source=share" target="_blank" class="hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md transition text-base sm:text-sm py-2 px-2">Tumblr</a>
+          <a href="https://www.facebook.com/share/1B2KpFju7d/" target="_blank" class="hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md transition text-base sm:text-sm py-2 px-2">Facebook</a>
         </div>
-
-        <div class="flex flex-col gap-2">
-          <h2 class="mb-4 font-bold text-xl">Support/Policies</h2>
-          <a href="{{ url('/support/find-order') }}" class="hover:text-red-500">Find my order</a>
-          <a href="{{ url('/support/returns-refunds') }}" class="hover:text-red-500">Returns and refunds</a>
-          <a href="{{ url('/policies/privacy') }}" class="hover:text-red-500">Privacy Policy</a>
-          <a href="{{ url('/policies/terms') }}" class="hover:text-red-500">Terms of Service</a>
+        <div class="flex flex-col gap-2 sm:gap-3 mt-8 sm:mt-0 min-w-[180px]">
+          <h2 class="mb-2 sm:mb-4 font-bold text-xl text-black dark:text-white">Support & Policies</h2>
+          <a href="{{ url('/support/find-order') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Find my order</a>
+          <a href="{{ url('/support/returns-refunds') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Returns and refunds</a>
+          <a href="{{ url('/policies/privacy') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Privacy Policy</a>
+          <a href="{{ url('/policies/terms') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Terms of Service</a>
         </div>
-
       </div>
 
       <!-- Newsletter -->

@@ -80,13 +80,12 @@
                 <div class="bg-white dark:bg-black overflow-hidden shadow-sm rounded-lg h-full flex flex-col justify-between">
                     <div class="p-4 sm:p-6 md:p-8 text-black dark:text-white">
                         <h3 class="text-xl font-bold mb-4">Need Help?</h3>
-                        <ul class="space-y-2 mb-6">
-                            <li><a href="{{ url('/support/find-order') }}" class="text-red-600 hover:underline">Find my order</a></li>
-                            <li><a href="{{ url('/support/returns-refunds') }}" class="text-red-600 hover:underline">Returns and refunds</a></li>
-                            <li><a href="{{ url('/policies/privacy') }}" class="text-red-600 hover:underline">Privacy Policy</a></li>
-                            <li><a href="{{ url('/policies/terms') }}" class="text-red-600 hover:underline">Terms of Service</a></li>
-
-                        </ul>
+                        <div class="flex flex-col gap-2 sm:gap-3 w-full">
+                          <a href="{{ url('/support/find-order') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Find my order</a>
+                          <a href="{{ url('/support/returns-refunds') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Returns and refunds</a>
+                          <a href="{{ url('/policies/privacy') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Privacy Policy</a>
+                          <a href="{{ url('/policies/terms') }}" class="block py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-400">Terms of Service</a>
+                        </div>
                         <div class="mt-4" x-data="{ highlightX: false, highlightInstagram: false, highlightTumblr: false, highlightFacebook: false }">
                             <h4 class="font-semibold mb-2">Contact Support</h4>
                             <div class="flex gap-4">

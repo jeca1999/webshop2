@@ -35,6 +35,13 @@ class ConfirmablePasswordController extends Controller
 
         $request->session()->put('auth.password_confirmed_at', time());
 
+        // If user has 2FA enabled, redirect to 2FA challenge
+        $user = $request->user();
+        if (method_exists($user, 'two_factor_secret') && $user->two_factor_secret) {
+            // Fortify default route for 2FA challenge
+            return redirect()->route('two-factor.login');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 }

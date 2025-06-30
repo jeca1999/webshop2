@@ -32,6 +32,14 @@ Route::middleware('auth:seller')->prefix('seller')->name('seller.')->group(funct
     Route::get('/profile', [SellerProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [SellerProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [SellerProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Seller notifications (order status)
+    Route::get('/notifications', [\App\Http\Controllers\SellerOrderController::class, 'notifications'])->name('orders.notifications');
+    Route::patch('/orders/{order}/status', [\App\Http\Controllers\SellerOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+    // Seller product stock management
+    Route::get('/products/manage', [\App\Http\Controllers\SellerProductController::class, 'manage'])->name('products.manage');
+    Route::patch('/products/{product}/stock', [\App\Http\Controllers\SellerProductController::class, 'updateStock'])->name('products.updateStock');
 });
 
 //page connectors for navlinks
