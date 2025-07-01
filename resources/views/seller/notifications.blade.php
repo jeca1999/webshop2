@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <div>
         <!-- Header -->
@@ -44,6 +43,7 @@
 
         <nav class="w-full flex gap-4 flex-wrap justify-center mt-4 mb-8">
             <a href="{{ route('seller.dashboard') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Dashboard</a>
+            <a href="{{ route('seller.products.manage') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Manage Stock</a>
             <a href="{{ route('seller.products') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Products</a>
             <a href="{{ route('seller.orders.notifications') }}" class="inline-block px-8 py-3 text-lg font-semibold text-black dark:text-white rounded-md leading-normal transition hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] focus:outline-none">Orders</a>
         </nav>
@@ -56,24 +56,32 @@
                 @else
                     <div class="space-y-6 w-full">
                         @foreach($orders as $order)
-                            <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between border border-gray-100 dark:border-gray-800">
-                                <div class="mb-2 md:mb-0">
-                                    <div class="font-semibold">Client: {{ $order->user->name }}</div>
-                                    <div>Product: {{ $order->product->name }}</div>
-                                    <div>Status: <span class="font-bold">{{ ucfirst($order->status) }}</span></div>
+                            <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between border border-gray-100 dark:border-gray-800 gap-4">
+                                <div class="flex-1 flex flex-col gap-1 min-w-0">
+                                    <div class="font-semibold truncate"><span class="text-gray-500">Client:</span> {{ $order->user->name }}</div>
+                                    <div class="truncate"><span class="text-gray-500">Product:</span> {{ $order->product->name }}</div>
+                                    <div><span class="text-gray-500">Status:</span> <span class="font-bold">{{ ucfirst($order->status) }}</span></div>
                                 </div>
-                                <form method="POST" action="{{ route('seller.orders.updateStatus', $order->id) }}" class="mt-4 md:mt-0 flex gap-2">
+                                <form method="POST" action="{{ route('seller.orders.updateStatus', $order->id) }}" class="flex flex-row gap-2 items-center w-full md:w-auto">
                                     @csrf
                                     @method('PATCH')
-                                    <select name="status" class="border rounded p-2">
-                                        <option value="received" @if($order->status=='received') selected @endif>Received</option>
-                                        <option value="shipped" @if($order->status=='shipped') selected @endif>Shipped</option>
+                                    <select name="status" class="border rounded p-2 min-w-[120px] bg-white text-black dark:bg-gray-800 dark:text-white focus:bg-gray-100 dark:focus:bg-gray-900 transition-colors" style="appearance:auto;">
+                                        <option value="received" @if($order->status=='received') selected @endif class="bg-white text-black dark:bg-gray-800 dark:text-white">Received</option>
+                                        <option value="shipped" @if($order->status=='shipped') selected @endif class="bg-white text-black dark:bg-gray-800 dark:text-white">Shipped</option>
                                     </select>
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Update</button>
                                 </form>
                             </div>
                         @endforeach
                     </div>
+                    <style>
+                    /* Responsive layout for order notification cards */
+                    @media (max-width: 600px) {
+                        .min-w-[120px] { min-width: 100px !important; }
+                        .flex-row.gap-2 > select, .flex-row.gap-2 > button { width: 100%; margin-bottom: 0.5rem; }
+                        .flex-row.gap-2 { flex-direction: column !important; align-items: stretch !important; }
+                    }
+                    </style>
                 @endif
             </div>
         </div>
