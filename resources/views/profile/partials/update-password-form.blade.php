@@ -9,6 +9,18 @@
         </p>
     </header>
 
+    @if (session('status') === 'password-updated')
+        <div class="mb-4 text-green-600">
+            {{ __('Your password was updated successfully.') }}
+        </div>
+    @endif
+
+    @if ($errors->updatePassword->any())
+        <div class="mb-4 text-red-600">
+            {{ __('There was a problem updating your password. Please check the fields below.') }}
+        </div>
+    @endif
+
     <form method="post" action="{{ route('password.update', [], true) }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
