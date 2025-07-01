@@ -240,8 +240,4 @@ Route::get('/home', function () {
     return redirect('/dashboard');
 });
 
-Route::get('/migrate-now', function () {
-    abort_unless(request('key') === env('DEPLOY_KEY'), 403);
-    Artisan::call('migrate', ['--force' => true]);
-    return '✅ Migrations ran.';
-});
+
