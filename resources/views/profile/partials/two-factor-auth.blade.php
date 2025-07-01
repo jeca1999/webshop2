@@ -13,7 +13,13 @@
             </form>
             <p class="mt-2 text-green-600">2FA is enabled.</p>
             <p class="mt-2 dark:text-white">Scan this QR code with your authenticator app:</p>
-            <div class="my-4">{!! auth()->user()->twoFactorQrCodeSvg() !!}</div>
+            <div class="my-4 flex justify-center">
+                <div style="background:#fff;padding:16px;display:inline-block;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);min-width:220px;min-height:220px;">
+                    <div style="width:220px;height:220px;display:flex;align-items:center;justify-content:center;">
+                        {!! auth()->user()->twoFactorQrCodeSvg() !!}
+                    </div>
+                </div>
+            </div>
             <div class="my-2 text-xs break-all bg-gray-100 dark:bg-gray-800 p-2 rounded">
                 <strong>key:</strong>
                 {{ strtoupper(decrypt(auth()->user()->two_factor_secret)) }}
