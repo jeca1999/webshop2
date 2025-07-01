@@ -38,5 +38,5 @@ ENV APP_DEBUG=false
 # Expose Laravel default dev server port
 EXPOSE 8000
 
-# Start Laravel development server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Run migrations and then start Laravel development server
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
