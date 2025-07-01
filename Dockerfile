@@ -1,10 +1,11 @@
 # Use PHP base image with dependencies
 FROM php:8.2-cli
 
-# Install system dependencies
+# Install system dependencies and upgrade packages for security
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
     nodejs npm \
+    && apt-get upgrade -y \
     && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
 
 # Install Composer
@@ -13,9 +14,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
+
 # Copy composer files first to leverage Docker cache
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+# Show PHP and Composer version, then run Composer with verbose output for debugging
+RUN php -v && composer -V && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress -vvv
 
 # Now copy the rest of the application
 COPY . .
