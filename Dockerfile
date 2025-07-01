@@ -15,13 +15,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 
+
 # Copy composer files first to leverage Docker cache
 COPY composer.json composer.lock ./
-# Show PHP and Composer version, then run Composer with verbose output for debugging
-RUN php -v && composer -V && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress -vvv
 
 # Now copy the rest of the application
 COPY . .
+
+# Show PHP and Composer version, then run Composer with verbose output for debugging
+RUN php -v && composer -V && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress -vvv
 
 # Build frontend assets
 RUN npm install && npm run build
