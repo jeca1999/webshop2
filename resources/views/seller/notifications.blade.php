@@ -81,6 +81,31 @@
                         .flex-row.gap-2 > select, .flex-row.gap-2 > button { width: 100%; margin-bottom: 0.5rem; }
                         .flex-row.gap-2 { flex-direction: column !important; align-items: stretch !important; }
                     }
+
+                    /* Remove extra dropdown arrow on the left for select elements */
+                    select[name="status"] {
+                      background-position: right 0.5rem center !important;
+                      padding-right: 2.5rem !important;
+                      background-repeat: no-repeat;
+                    }
+                    /* Hide default arrow for Chrome/Safari/Edge */
+                    select[name="status"]::-webkit-inner-spin-button,
+                    select[name="status"]::-webkit-outer-spin-button,
+                    select[name="status"]::-webkit-search-decoration,
+                    select[name="status"]::-webkit-search-cancel-button,
+                    select[name="status"]::-webkit-search-results-button,
+                    select[name="status"]::-webkit-search-results-decoration {
+                      display: none !important;
+                    }
+                    select[name="status"]::-ms-expand {
+                      display: none;
+                    }
+                    /* Hide default arrow for Firefox */
+                    select[name="status"] {
+                      -moz-appearance: none;
+                      -webkit-appearance: none;
+                      appearance: none;
+                    }
                     </style>
                 @endif
             </div>
