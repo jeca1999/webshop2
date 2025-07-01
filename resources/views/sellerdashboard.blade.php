@@ -60,8 +60,6 @@
                         @php
                             $sellerId = auth('seller')->id();
                             $products = \App\Models\Product::where('seller_id', $sellerId)->get();
-
-                            // Calculate total units sold for each product (all time)
                             $productIds = $products->pluck('id');
                             $orders = \App\Models\Order::whereNotNull('products')->get();
                             $unitsSoldMap = [];
@@ -107,7 +105,15 @@
                             }
                             if (!isset($chartLabels)) $chartLabels = [];
                             if (!isset($chartData)) $chartData = [];
-                            $totalOrders = \App\Models\Order::whereJsonContains('products', [['id' => $products->pluck('id')->toArray()]])->count();
+                            // Fix: count orders that contain any of the seller's products
+                            $totalOrders = 0;
+                            if (count($productIds)) {
+                                $orderQuery = \App\Models\Order::query();
+                                foreach ($productIds as $pid) {
+                                    $orderQuery->orWhereJsonContains('products', ['id' => $pid]);
+                                }
+                                $totalOrders = $orderQuery->count();
+                            }
                         @endphp
                         <div class="col-span-1 flex flex-col gap-4">
                             <div class="bg-red-100 dark:bg-red-900 p-4 rounded shadow text-center">
