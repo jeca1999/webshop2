@@ -9,6 +9,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Auth\TwoFactorModalController;
+use Illuminate\Support\Facades\Artisan;
 
 
 //returns to index page
@@ -237,4 +238,13 @@ Route::get('/storage/products/{filename}', function ($filename) {
 
 Route::get('/home', function () {
     return redirect('/dashboard');
+});
+
+Route::get('/run-migrations', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return '✅ Migrations ran successfully on production.';
+    } catch (\Exception $e) {
+        return '❌ Error: ' . $e->getMessage();
+    }
 });
