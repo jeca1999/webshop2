@@ -240,11 +240,4 @@ Route::get('/home', function () {
     return redirect('/dashboard');
 });
 
-Route::get('/run-migrations', function () {
-    try {
-        Artisan::call('migrate', ['--force' => true]);
-        return '✅ Migrations ran successfully on production.';
-    } catch (\Exception $e) {
-        return '❌ Error: ' . $e->getMessage();
-    }
-});
+
