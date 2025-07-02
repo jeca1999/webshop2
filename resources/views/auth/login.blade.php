@@ -32,11 +32,17 @@
                             if (seconds <= 0) {
                                 clearInterval(interval);
                                 message.textContent = 'You can now try logging in again.';
+                                // Optionally reload the page to allow login again
+                                window.location.reload();
                             }
                         }, 1000);
                     }
                 })();
             </script>
+        @else
+            <div class="mb-4 p-3 rounded bg-red-100 border border-red-400 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200 text-center font-semibold">
+                {{ $errorMsg }}
+            </div>
         @endif
     @endif
 
