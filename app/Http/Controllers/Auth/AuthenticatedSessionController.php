@@ -25,43 +25,54 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
-        ]);
+        try {
+            $request->validate([
+                'email' => ['required', 'string', 'email'],
+                'password' => ['required', 'string'],
+            ]);
 
-        $credentials = $request->only('email', 'password');
-        $remember = $request->boolean('remember');
+            $credentials = $request->only('email', 'password');
+            $remember = $request->boolean('remember');
 
-        // Check if email exists in sellers table
-        $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
+            // Check if email exists in sellers table
+            $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
 
-        if ($isSeller) {
-            if (Auth::guard('seller')->attempt($credentials, $remember)) {
-                Auth::guard('web')->logout();
-                $request->session()->regenerate();
-                // Sellers do NOT get 2FA, always redirect to dashboard
-                return redirect(route('seller.dashboard'));
-            }
-        } else {
-            if (Auth::guard('web')->attempt($credentials, $remember)) {
-                Auth::guard('seller')->logout();
-                $request->session()->regenerate();
-                $user = Auth::guard('web')->user();
-                if ($user && $user->two_factor_secret) {
-                    // Set the session key as an array for Fortify compatibility
-                    session()->put('login', ['id' => $user->getAuthIdentifier()]);
-                    session(['2fa_required' => true]);
-                    session()->put('url.intended', route('dashboard'));
+            if ($isSeller) {
+                if (Auth::guard('seller')->attempt($credentials, $remember)) {
+                    Auth::guard('web')->logout();
+                    $request->session()->regenerate();
+                    // Sellers do NOT get 2FA, always redirect to dashboard
+                    return redirect(route('seller.dashboard'));
+                }
+            } else {
+                if (Auth::guard('web')->attempt($credentials, $remember)) {
+                    Auth::guard('seller')->logout();
+                    $request->session()->regenerate();
+                    $user = Auth::guard('web')->user();
+                    if ($user && $user->two_factor_secret) {
+                        // Set the session key as an array for Fortify compatibility
+                        session()->put('login', ['id' => $user->getAuthIdentifier()]);
+                        session(['2fa_required' => true]);
+                        session()->put('url.intended', route('dashboard'));
+                        return redirect()->intended('/dashboard');
+                    }
                     return redirect()->intended('/dashboard');
                 }
-                return redirect()->intended('/dashboard');
             }
-        }
 
-        return back()->withErrors([
-            'email' => __('auth.failed'),
-        ]);
+            return back()->withErrors([
+                'email' => __('auth.failed'),
+            ]);
+        } catch (\Illuminate\Http\Exceptions\ThrottleRequestsException $e) {
+            // Extract seconds from the exception message if possible
+            $seconds = 60;
+            if (preg_match('/(\d+)/', $e->getMessage(), $matches)) {
+                $seconds = (int) $matches[1];
+            }
+            return back()->withErrors([
+                'email' => __('auth.throttle', ['seconds' => $seconds]),
+            ]);
+        }
     }
 
 
