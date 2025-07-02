@@ -71,9 +71,10 @@ class AuthenticatedSessionController extends Controller
             if ($seconds === 60 && preg_match('/(\d+)/', $e->getMessage(), $matches)) {
                 $seconds = (int) $matches[1];
             }
+            // Set a custom status code to avoid Laravel's default 429 response
             return back()->withErrors([
                 'email' => __('auth.throttle', ['seconds' => $seconds]),
-            ])->withInput();
+            ])->withInput()->with('lockout', true);
         }
 
         // If login failed but not throttled

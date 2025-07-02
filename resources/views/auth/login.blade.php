@@ -9,7 +9,7 @@
         $errorMsg = $errors->first('email');
         $seconds = null;
         $isLockout = false;
-        if ($errorMsg && (Str::contains($errorMsg, 'Too many login attempts') || Str::contains($errorMsg, '429'))) {
+        if ((session('lockout') || ($errorMsg && (Str::contains($errorMsg, 'Too many login attempts') || Str::contains($errorMsg, '429'))))) {
             preg_match('/in (\\d+) seconds?/', $errorMsg, $matches);
             $seconds = isset($matches[1]) ? (int)$matches[1] : 60;
             $isLockout = true;
