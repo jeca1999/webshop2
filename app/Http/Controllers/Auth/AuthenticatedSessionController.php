@@ -25,18 +25,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $remember = $request->boolean('remember');
+
+        // Check if email exists in sellers table
+        $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
+
         try {
-            $request->validate([
-                'email' => ['required', 'string', 'email'],
-                'password' => ['required', 'string'],
-            ]);
-
-            $credentials = $request->only('email', 'password');
-            $remember = $request->boolean('remember');
-
-            // Check if email exists in sellers table
-            $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
-
             if ($isSeller) {
                 if (Auth::guard('seller')->attempt($credentials, $remember)) {
                     Auth::guard('web')->logout();
@@ -59,20 +59,27 @@ class AuthenticatedSessionController extends Controller
                     return redirect()->intended('/dashboard');
                 }
             }
-
-            return back()->withErrors([
-                'email' => __('auth.failed'),
-            ]);
         } catch (\Illuminate\Http\Exceptions\ThrottleRequestsException $e) {
-            // Extract seconds from the exception message if possible
+            // Always show a user-friendly message and timer, never a raw 429
             $seconds = 60;
-            if (preg_match('/(\d+)/', $e->getMessage(), $matches)) {
+            if (method_exists($e, 'getHeaders')) {
+                $headers = $e->getHeaders();
+                if (isset($headers['Retry-After'])) {
+                    $seconds = (int) $headers['Retry-After'];
+                }
+            }
+            if ($seconds === 60 && preg_match('/(\d+)/', $e->getMessage(), $matches)) {
                 $seconds = (int) $matches[1];
             }
             return back()->withErrors([
                 'email' => __('auth.throttle', ['seconds' => $seconds]),
-            ]);
+            ])->withInput();
         }
+
+        // If login failed but not throttled
+        return back()->withErrors([
+            'email' => __('auth.failed'),
+        ])->withInput();
     }
 
 
