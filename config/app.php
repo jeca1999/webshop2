@@ -134,10 +134,7 @@ return [
     */
 
     'providers' => [
-        // ...existing Laravel providers...
         App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // ...other providers...
         App\Providers\FortifyServiceProvider::class,
     ],
 ];
