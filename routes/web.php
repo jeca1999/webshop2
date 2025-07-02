@@ -88,6 +88,10 @@ Route::middleware(['auth'])->group(function () {
         $cart = session('cart', []);
         $productId = $request->input('product_id');
         if ($productId) {
+            $product = \App\Models\Product::find($productId);
+            if (!$product || $product->stock_status === 'sold_out') {
+                return response()->json(['success' => false, 'message' => 'Product is sold out.'], 400);
+            }
             $cart[$productId] = ($cart[$productId] ?? 0) + 1;
             session(['cart' => $cart]);
             return response()->json(['success' => true]);
@@ -132,6 +136,15 @@ Route::middleware(['auth'])->group(function () {
         $products = [];
         if (!empty($selectedCart)) {
             $products = Product::whereIn('id', array_keys($selectedCart))->get();
+        }
+
+        // Check for sold out products
+        $soldOutProducts = $products->filter(function ($product) {
+            return $product->stock_status === 'sold_out';
+        });
+        if ($soldOutProducts->count() > 0) {
+            $names = $soldOutProducts->pluck('name')->implode(', ');
+            return back()->withErrors(['One or more selected products are sold out: ' . $names]);
         }
 
         // Format products for order storage

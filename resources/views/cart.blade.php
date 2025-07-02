@@ -40,16 +40,21 @@
                             </thead>
                             <tbody>
                                 @foreach($products as $product)
-                                    <tr>
+                                    <tr @if($product->stock_status === 'sold_out') class="bg-red-100 dark:bg-red-900" @endif>
                                         <td class="py-2">
-                                            <input type="checkbox" class="product-checkbox" name="selected[]" value="{{ $product->id }}" data-price="{{ $product->price }}" data-qty="{{ $cart[$product->id] }}">
+                                            <input type="checkbox" class="product-checkbox" name="selected[]" value="{{ $product->id }}" data-price="{{ $product->price }}" data-qty="{{ $cart[$product->id] }}" @if($product->stock_status === 'sold_out') disabled @endif>
                                         </td>
                                         <td class="py-2">
                                             @if($product->image)
                                                 <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-contain rounded">
                                             @endif
                                         </td>
-                                        <td class="py-2">{{ $product->name }}</td>
+                                        <td class="py-2">
+                                            {{ $product->name }}
+                                            @if($product->stock_status === 'sold_out')
+                                                <span class="ml-2 px-2 py-1 bg-red-500 text-white text-xs rounded">Sold Out</span>
+                                            @endif
+                                        </td>
                                         <td class="py-2">{{ $cart[$product->id] }}</td>
                                         <td class="py-2">{{ $product->price }} €</td>
                                     </tr>

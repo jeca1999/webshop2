@@ -4,6 +4,42 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     
+
+    @if ($errors->has('email'))
+        @php
+            $errorMsg = $errors->first('email');
+            $seconds = null;
+            if (Str::contains($errorMsg, 'Too many login attempts')) {
+                preg_match('/in (\\d+) seconds?/', $errorMsg, $matches);
+                $seconds = isset($matches[1]) ? (int)$matches[1] : 60;
+            }
+        @endphp
+        @if (Str::contains($errorMsg, 'Too many login attempts'))
+            <div class="mb-4 p-3 rounded bg-yellow-100 border border-yellow-400 text-yellow-800 dark:bg-yellow-900 dark:border-yellow-700 dark:text-yellow-200 text-center font-semibold">
+                <svg class="inline w-5 h-5 mr-1 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" /></svg>
+                Your account is temporarily locked due to too many failed login attempts.<br>
+                <span id="lockout-message">You cannot log in to any account from this device for <span id="lockout-timer">{{ $seconds ?? 60 }}</span> seconds.</span>
+            </div>
+            <script>
+                (function() {
+                    var seconds = {{ $seconds ?? 60 }};
+                    var timerSpan = document.getElementById('lockout-timer');
+                    var message = document.getElementById('lockout-message');
+                    if (timerSpan && seconds > 0) {
+                        var interval = setInterval(function() {
+                            seconds--;
+                            timerSpan.textContent = seconds;
+                            if (seconds <= 0) {
+                                clearInterval(interval);
+                                message.textContent = 'You can now try logging in again.';
+                            }
+                        }, 1000);
+                    }
+                })();
+            </script>
+        @endif
+    @endif
+
     <form method="POST" action="{{ secure_url('login') }}">
         @csrf
 
