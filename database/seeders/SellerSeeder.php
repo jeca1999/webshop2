@@ -15,12 +15,13 @@ class SellerSeeder extends Seeder
      */
     public function run(): void
     {
-        // Truncate the sellers table for a clean state
-        DB::table('sellers')->truncate();
+        // Delete all sellers for a clean state (avoids foreign key issues)
+        DB::table('sellers')->delete();
         Seller::create([
             'email' => '3ELLLEFRITZ@gmail.com',
             'password' => Hash::make('Fritzelle'),
             'role' => 'seller',
+            'created_at' => now(),
             'updated_at' => now(),
         ]);
     }
