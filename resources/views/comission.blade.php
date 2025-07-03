@@ -33,8 +33,8 @@
     <!-- Sliders -->
     <section class="flex flex-col gap-8 w-full max-w-5xl mx-auto px-2 md:px-0">
         <!-- Portrait Slider 1 -->
-        <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/gala.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
+        <div class="flex items-center justify-center min-h-[60vh] mb-16">
+            <div x-data="carousel(['/image/jen_gala.jpg','/image/gala.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -52,8 +52,8 @@
             </div>
         </div>
         <!-- Portrait Slider 2 -->
-        <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/girl2.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
+        <div class="flex items-center justify-center min-h-[60vh] mb-16">
+            <div x-data="carousel(['/image/jen_front view.jpg','/image/girl2.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -71,8 +71,8 @@
             </div>
         </div>
         <!-- Portrait Slider 3 -->
-        <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/dude1.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
+        <div class="flex items-center justify-center min-h-[60vh] mb-16">
+            <div x-data="carousel(['/image/rards_nakatayo.jpg','/image/dude1.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -90,8 +90,8 @@
             </div>
         </div>
         <!-- Landscape Slider -->
-        <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/dude2.webp'])" class="relative w-full max-w-2xl overflow-hidden">
+        <div class="flex items-center justify-center min-h-[60vh] mb-16">
+            <div x-data="carousel(['/image/rards_nakaupo.jpg','/image/dude2.webp'])" class="relative w-full max-w-2xl overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
