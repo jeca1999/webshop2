@@ -14,8 +14,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy environment file
-COPY .env .env
+
 
 # Copy composer files first (better Docker cache usage)
 COPY composer.json composer.lock ./
