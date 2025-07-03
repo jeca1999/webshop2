@@ -9,22 +9,22 @@ RUN apt-get update && apt-get install -y \
     && apt-get upgrade -y \
     && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl intl
 
-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY .env .env
-
-# Set working directory
+# Set working directory first
 WORKDIR /var/www
 
-# Copy composer files first (for Docker cache)
+# ✅ Now copy .env into the Laravel root
+COPY .env .env
+
+# Copy composer files for dependency cache
 COPY composer.json composer.lock ./
 
-# Copy the full application
+# Copy full application
 COPY . .
 
-# Show PHP & Composer versions and install Laravel dependencies
+# Install Laravel dependencies
 RUN php -v && composer -V \
     && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress -vvv
 
@@ -45,5 +45,4 @@ EXPOSE 8000
 CMD php artisan config:clear \
     && php artisan cache:clear \
     && php artisan migrate --force \
-    && php artisan db:seed --class=SellerSeeder --force \
-    && php artisan serve --host=0.0.0.0 --port=8000
+    && p
