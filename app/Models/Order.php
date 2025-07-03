@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function notification()
+    {
+        return $this->hasOne(\App\Models\OrderNotification::class, 'order_id', 'id');
+    }
 }

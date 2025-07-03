@@ -72,6 +72,14 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="mt-4 flex justify-end">
+                                @if(strtolower($order->status) !== 'cancelled')
+                                    <form method="POST" action="{{ route('orders.cancel', $order->id) }}" onsubmit="return confirm('Are you sure you want to cancel this order? This action cannot be undone.');">
+                                        @csrf
+                                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Cancel Order</button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                 @else

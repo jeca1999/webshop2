@@ -153,8 +153,8 @@
         </div>
         <footer class="text-center text-sm text-gray-500 mt-10">
             © 2025 3ELLLE. All rights reserved. |
-            <a href="#" class="text-blue-500 hover:underline">Privacy Policy</a> |
-            <a href="#" class="text-blue-500 hover:underline">Terms of Service</a>
+            <a href="{{ url('/policies/privacy') }}" class="text-blue-500 hover:underline">Privacy Policy</a> |
+            <a href="{{ url('/policies/terms') }}" class="text-blue-500 hover:underline">Terms of Service</a>
         </footer>
     </div>
     <style>

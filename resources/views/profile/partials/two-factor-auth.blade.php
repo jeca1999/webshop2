@@ -1,6 +1,9 @@
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::twoFactorAuthentication()))
     <div class="mt-8">
-        <h3 class="text-lg font-bold mb-2 dark:text-white">Two-Factor Authentication</h3>
+        <h3 class="text-lg font-bold mb-2 dark:text-white">
+            Two-Factor Authentication
+            <span class="ml-2 text-xs font-normal text-red-600 dark:text-red-400 align-middle">(Required for enhanced security)</span>
+        </h3>
         @if (auth()->user()->two_factor_secret)
             <form method="POST" action="{{ url('user/two-factor-authentication', [], true) }}" style="display:inline;">
                 @csrf

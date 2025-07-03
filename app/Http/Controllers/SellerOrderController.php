@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\OrderNotification;
 
 class SellerOrderController extends Controller
 {
@@ -46,5 +47,12 @@ class SellerOrderController extends Controller
         $order->status = $request->status;
         $order->save();
         return back()->with('success', 'Order status updated!');
+    }
+
+    public function removeNotification($notificationId)
+    {
+        $notification = OrderNotification::findOrFail($notificationId);
+        $notification->delete();
+        return back()->with('success', 'Notification removed.');
     }
 }

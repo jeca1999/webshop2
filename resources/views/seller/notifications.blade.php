@@ -58,9 +58,21 @@
                         @foreach($orders as $order)
                             <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between border border-gray-100 dark:border-gray-800 gap-4">
                                 <div class="flex-1 flex flex-col gap-1 min-w-0">
-                                    <div class="font-semibold truncate"><span class="text-gray-500">Client:</span> {{ $order->user->name }}</div>
                                     <div class="truncate"><span class="text-gray-500">Product:</span> {{ $order->product->name }}</div>
                                     <div><span class="text-gray-500">Status:</span> <span class="font-bold">{{ ucfirst($order->status) }}</span></div>
+                                    <div class="font-semibold truncate"><span class="text-gray-500">Client:</span> {{ $order->user->name ?? '-' }}</div>
+                                    <div class="truncate"><span class="text-gray-500">Product:</span> {{ $order->product->name ?? '-' }}</div>
+                                    <div><span class="text-gray-500">Status:</span> <span class="font-bold">{{ ucfirst($order->status) }}</span></div>
+                                    @if(isset($order->notification) && $order->notification->type === 'cancelled')
+                                        <div class="mt-2">
+                                            <span class="text-red-500 font-semibold">Order Cancelled by Client</span>
+                                            <form method="POST" action="{{ route('seller.notifications.remove', $order->notification->id) }}" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="ml-2 bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 transition">Remove</button>
+                                            </form>
+                                        </div>
+                                    @endif
                                 </div>
                                 <form method="POST" action="{{ route('seller.orders.updateStatus', $order->id) }}" class="flex flex-row gap-2 items-center w-full md:w-auto">
                                     @csrf

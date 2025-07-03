@@ -37,6 +37,7 @@ Route::middleware('auth:seller')->prefix('seller')->name('seller.')->group(funct
     // Seller notifications (order status)
     Route::get('/notifications', [\App\Http\Controllers\SellerOrderController::class, 'notifications'])->name('orders.notifications');
     Route::patch('/orders/{order}/status', [\App\Http\Controllers\SellerOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+    Route::delete('/notifications/{notification}', [\App\Http\Controllers\SellerOrderController::class, 'removeNotification'])->name('notifications.remove');
 
     // Seller product stock management
     Route::get('/products/manage', [\App\Http\Controllers\SellerProductController::class, 'manage'])->name('products.manage');
@@ -75,13 +76,11 @@ Route::get('/cart', function () {
     return view('cart', compact('cart', 'products'));
 })->name('cart');
 
-Route::get('/orders', function () {
-    $orders = [];
-    if (Auth::check()) {
-        $orders = \App\Models\Order::where('user_id', Auth::id())->latest()->get();
-    }
-    return view('orders', compact('orders'));
-})->name('orders');
+
+use App\Http\Controllers\OrderController;
+
+Route::get('/orders', [OrderController::class, 'index'])->middleware(['auth'])->name('orders');
+Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel'])->middleware(['auth'])->name('orders.cancel');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart/add', function (\Illuminate\Http\Request $request) {
