@@ -10,15 +10,17 @@ class SellerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * php artisan db:seed --class=SellerSeeder
+     * This will reset or create the default seller account.
      */
     public function run(): void
     {
         Seller::updateOrCreate(
-            ['email' => '3ELLLEFRITZ@gmail.com'], 
+            ['email' => '3ELLLEFRITZ@gmail.com'],
             [
+                'name' => 'Default Seller',
                 'password' => Hash::make('Fritzelle'),
                 'role' => 'seller',
+                'updated_at' => now(),
             ]
         );
     }
