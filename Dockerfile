@@ -15,8 +15,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory first
 WORKDIR /var/www
 
-# ✅ Now copy .env into the Laravel root
-COPY .env .env
+# # ✅ Now copy .env into the Laravel root
+# COPY .env .env
 
 # Copy composer files for dependency cache
 COPY composer.json composer.lock ./
