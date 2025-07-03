@@ -10,6 +10,10 @@ return new class extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->id(); // BIGINT UNSIGNED
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('role')->default('seller');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
