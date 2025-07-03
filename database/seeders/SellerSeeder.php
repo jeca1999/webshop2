@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Seller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class SellerSeeder extends Seeder
@@ -19,7 +18,7 @@ class SellerSeeder extends Seeder
         DB::table('sellers')->delete();
         Seller::create([
             'email' => '3ELLLEFRITZ@gmail.com',
-            'password' => Hash::make('Fritzelle'),
+            'password' => 'Fritzelle', // Let the model mutator hash this
             'role' => 'seller',
             'created_at' => now(),
             'updated_at' => now(),
