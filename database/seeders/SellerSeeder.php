@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class SellerSeeder extends Seeder
 {
@@ -14,14 +15,14 @@ class SellerSeeder extends Seeder
      */
     public function run(): void
     {
-        Seller::updateOrCreate(
-            ['email' => '3ELLLEFRITZ@gmail.com'],
-            [
-                'name' => 'Default Seller',
-                'password' => Hash::make('Fritzelle'),
-                'role' => 'seller',
-                'updated_at' => now(),
-            ]
-        );
+        // Truncate the sellers table for a clean state
+        DB::table('sellers')->truncate();
+        Seller::create([
+            'name' => 'Default Seller',
+            'email' => '3ELLLEFRITZ@gmail.com',
+            'password' => Hash::make('Fritzelle'),
+            'role' => 'seller',
+            'updated_at' => now(),
+        ]);
     }
 }
