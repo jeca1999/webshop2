@@ -41,12 +41,25 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        $credentials = $this->only('email', 'password');
+        $remember = $this->boolean('remember');
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
+        // Check if the email exists in the sellers table
+        $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
+        if ($isSeller) {
+            if (! Auth::guard('seller')->attempt($credentials, $remember)) {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages([
+                    'email' => trans('auth.failed'),
+                ]);
+            }
+        } else {
+            if (! Auth::attempt($credentials, $remember)) {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages([
+                    'email' => trans('auth.failed'),
+                ]);
+            }
         }
 
         RateLimiter::clear($this->throttleKey());
