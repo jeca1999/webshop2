@@ -18,7 +18,6 @@ class SellerSeeder extends Seeder
         // Truncate the sellers table for a clean state
         DB::table('sellers')->truncate();
         Seller::create([
-            'name' => 'Default Seller',
             'email' => '3ELLLEFRITZ@gmail.com',
             'password' => Hash::make('Fritzelle'),
             'role' => 'seller',
