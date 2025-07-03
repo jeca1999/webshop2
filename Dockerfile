@@ -17,7 +17,7 @@ WORKDIR /var/www
 # Copy composer files first (for Docker cache)
 COPY composer.json composer.lock ./
 
-# Copy the full app
+# Copy the full application
 COPY . .
 
 # Show PHP & Composer versions and install Laravel dependencies
@@ -30,9 +30,6 @@ RUN npm install && npm run build
 # Set Laravel folder permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Clear cache to prevent stale config
-RUN php artisan config:clear && php artisan cache:clear
-
 # Set Laravel environment
 ENV APP_ENV=production
 ENV APP_DEBUG=false
@@ -40,7 +37,9 @@ ENV APP_DEBUG=false
 # Expose Laravel port
 EXPOSE 8000
 
-# Migrate and seed seller, then serve the app
-CMD php artisan migrate --force \
+# Run migrations and seed seller on startup
+CMD php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan migrate --force \
     && php artisan db:seed --class=SellerSeeder --force \
     && php artisan serve --host=0.0.0.0 --port=8000
