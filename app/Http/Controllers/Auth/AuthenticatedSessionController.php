@@ -53,9 +53,13 @@ class AuthenticatedSessionController extends Controller
 
         if ($isSeller) {
             Auth::guard('web')->logout();
-            Auth::guard('seller')->attempt($credentials, $remember);
-            $request->session()->regenerate();
-            return redirect(route('seller.dashboard'));
+            $loginSuccess = Auth::guard('seller')->attempt($credentials, $remember);
+            if ($loginSuccess) {
+                $request->session()->regenerate();
+                return redirect(route('seller.dashboard'));
+            } else {
+                dd('Seller login failed', $credentials, \App\Models\Seller::where('email', $credentials['email'])->first());
+            }
         } else {
             Auth::guard('seller')->logout();
             Auth::guard('web')->attempt($credentials, $remember);
