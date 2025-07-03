@@ -34,7 +34,7 @@
     <section class="flex flex-col gap-8 w-full max-w-5xl mx-auto px-2 md:px-0">
         <!-- Portrait Slider 1 -->
         <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/jen_gala.jpg','/image/jenart_gala.png'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
+            <div x-data="carousel(['/image/gala.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -53,7 +53,7 @@
         </div>
         <!-- Portrait Slider 2 -->
         <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/jen_front view.jpg','/image/jenart_frtview.png'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
+            <div x-data="carousel(['/image/girl2.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -72,7 +72,7 @@
         </div>
         <!-- Portrait Slider 3 -->
         <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/rards_nakatayo.jpg','/image/rardsart_tayo.png'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
+            <div x-data="carousel(['/image/dude1.webp'])" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -91,7 +91,7 @@
         </div>
         <!-- Landscape Slider -->
         <div class="flex items-center justify-center min-h-[60vh]">
-            <div x-data="carousel(['/image/rards_nakaupo.jpg','/image/rardsart_upo.png'])" class="relative w-full max-w-2xl overflow-hidden">
+            <div x-data="carousel(['/image/dude2.webp'])" class="relative w-full max-w-2xl overflow-hidden">
                 <div class="relative h-64 sm:h-[400px] md:h-[600px]">
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0 flex items-center justify-center">
@@ -164,10 +164,10 @@
       </div>
       <div class="flex flex-col gap-2 sm:gap-3 mt-8 sm:mt-0">
         <h2 class="mb-2 sm:mb-4 font-bold text-xl text-black dark:text-white">Support & Policies</h2>
-        <a href="{{ url('/support/find-order') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Find my order</a>
-        <a href="{{ url('/support/returns-refunds') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Returns and refunds</a>
-        <a href="{{ url('/policies/privacy') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Privacy Policy</a>
-        <a href="{{ url('/policies/terms') }}" class="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-red-100 hover:text-red-600 transition text-center text-base sm:text-sm">Terms of Service</a>
+        <a href="{{ url('/support/find-order') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm no-underline hover:no-underline">Find my order</a>
+        <a href="{{ url('/support/returns-refunds') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm no-underline hover:no-underline">Returns and refunds</a>
+        <a href="{{ url('/policies/privacy') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm no-underline hover:no-underline">Privacy Policy</a>
+        <a href="{{ url('/policies/terms') }}" class="text-black dark:text-white hover:text-red-600 transition text-center text-base sm:text-sm no-underline hover:no-underline">Terms of Service</a>
       </div>
     </div>
     <!-- Newsletter -->

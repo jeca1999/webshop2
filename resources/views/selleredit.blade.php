@@ -25,7 +25,7 @@
                 @method('PATCH')
                 <div>
                     <label>Email</label>
-                    <input type="email" name="email" value="{{ old('email', $user->email) }}" required class="block w-full mt-1 rounded" />
+                    <input type="email" name="email" value="{{ old('email', $user->email) }}" required class="block w-full mt-1 rounded" disabled />
                     @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mt-4">
