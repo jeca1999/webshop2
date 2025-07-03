@@ -1,7 +1,7 @@
 # Use PHP base image with dependencies
 FROM php:8.2-cli
 
-# Install system dependencies and upgrade packages for security
+# Install system dependencies and upgrade packages
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
     nodejs npm \
@@ -14,29 +14,33 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
+# Copy environment file
+COPY .env .env
 
-
-# Copy composer files first to leverage Docker cache
+# Copy composer files first (better Docker cache usage)
 COPY composer.json composer.lock ./
 
-# Now copy the rest of the application
+# Copy application files
 COPY . .
 
-# Show PHP and Composer version, then run Composer with verbose output for debugging
-RUN php -v && composer -V && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress -vvv
+# Show versions and install PHP dependencies
+RUN php -v && composer -V \
+    && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress -vvv
 
 # Build frontend assets
 RUN npm install && npm run build
 
-# Set permissions for Laravel
+# Set Laravel folder permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Set Laravel environment to production
+# Set Laravel environment
 ENV APP_ENV=production
 ENV APP_DEBUG=false
 
-# Expose Laravel default dev server port
+# Expose Laravel port
 EXPOSE 8000
 
-# Run migrations on deploy, then start Laravel development server
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
+# Safe: Run migrations and seed only SellerSeeder, then start app
+CMD php artisan migrate --force \
+    && php artisan db:seed --class=SellerSeeder --force \
+    && php artisan serve --host=0.0.0.0 --port=8000
