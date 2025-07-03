@@ -49,7 +49,11 @@ class AuthenticatedSessionController extends Controller
         // After successful authentication, handle seller/user logic
         $credentials = $request->only('email', 'password');
         $isSeller = \App\Models\Seller::where('email', $credentials['email'])->exists();
-        dd($credentials, $isSeller);
+        // Pass debug info to the view for console logging
+        $request->session()->flash('debug_console', [
+            'credentials' => $credentials,
+            'isSeller' => $isSeller
+        ]);
         $remember = $request->boolean('remember');
 
         if ($isSeller) {

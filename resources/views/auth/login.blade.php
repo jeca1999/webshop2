@@ -46,6 +46,13 @@
         </div>
     @endif
 
+    @if (session('debug_console'))
+        <script>
+            const debug = @json(session('debug_console'));
+            console.log('Credentials:', debug.credentials, 'isSeller:', debug.isSeller);
+        </script>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
